@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.9",
         "tomatophp/filament-accounts": "^2.3",
         "tomatophp/filament-cms": "^1.0",
+        "tomatophp/filament-media-manager": "^1.1",
         "tomatophp/filament-settings-hub": "^2.0"
     },
     "require-dev": {

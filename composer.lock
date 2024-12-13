@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "271fcb5f68708029b7fab7d71543e490",
+    "content-hash": "e363e32dad22ec6c6bb481e6857b1b7b",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -9355,6 +9355,73 @@
                 }
             ],
             "time": "2024-11-27T17:44:57+00:00"
+        },
+        {
+            "name": "tomatophp/filament-media-manager",
+            "version": "v1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tomatophp/filament-media-manager.git",
+                "reference": "357de7e0ee1beaf11a7b591232114b68f716db76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tomatophp/filament-media-manager/zipball/357de7e0ee1beaf11a7b591232114b68f716db76",
+                "reference": "357de7e0ee1beaf11a7b591232114b68f716db76",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^v3.0.0",
+                "filament/spatie-laravel-media-library-plugin": "^v3.0.0",
+                "php": "^8.1|^8.2",
+                "spatie/laravel-medialibrary": "^10.0|^11.0",
+                "tomatophp/console-helpers": "^1.1",
+                "tomatophp/filament-icons": "^v1.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TomatoPHP\\FilamentMediaManager\\FilamentMediaManagerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TomatoPHP\\FilamentMediaManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fady Mondy",
+                    "email": "info@3x1.io"
+                }
+            ],
+            "description": "Manage your media files using spatie media library with easy to use GUI for FilamentPHP",
+            "keywords": [
+                "filament",
+                "laravel",
+                "manager",
+                "media",
+                "media-library",
+                "php",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/tomatophp/filament-media-manager/issues",
+                "source": "https://github.com/tomatophp/filament-media-manager/tree/v1.1.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/3x1io",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-09-17T16:51:09+00:00"
         },
         {
             "name": "tomatophp/filament-settings-hub",

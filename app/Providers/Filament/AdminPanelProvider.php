@@ -61,7 +61,8 @@ class AdminPanelProvider extends PanelProvider
                         ->allowImport(),
                     \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
                         ->allowSiteSettings()
-                        ->allowSocialMenuSettings()
+                        ->allowSocialMenuSettings(),
+                    \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make()
                 ]);
     }
 }
