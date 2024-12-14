@@ -1,0 +1,27 @@
+{
+    "name": "Main",
+    "alias": "main",
+    "description": {
+        "ar": "No description",
+        "en": "No description",
+        "gr": "No description",
+        "sp": "No description"
+    },
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Main\\Providers\\MainServiceProvider"
+    ],
+    "files": [],
+    "title": {
+        "ar": "Main",
+        "en": "Main",
+        "gr": "Main",
+        "sp": "Main"
+    },
+    "placeholder": "placeholder.webp",
+    "type": "theme",
+    "color": "#F01E19",
+    "icon": "heroicon-s-swatch",
+    "version": "v1.0.0"
+}

@@ -57,6 +57,8 @@ class AdminPanelProvider extends PanelProvider
                     \TomatoPHP\FilamentCms\FilamentCMSPlugin::make()
                         ->useCategory()
                         ->usePost()
+                        ->useThemeManager()
+                        ->usePageBuilder()
                         ->allowExport()
                         ->allowImport(),
                     \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
