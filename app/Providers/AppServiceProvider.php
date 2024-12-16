@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use App\Filament\PageBuilder\PageBuilderSection;
 use Illuminate\Support\ServiceProvider;
 
-use TomatoPHP\FilamentCms\Services\Contracts\Section;
 use TomatoPHP\FilamentCms\Facades\FilamentCMS;
 use Filament\Forms\Components\TextInput;
 
@@ -26,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         FilamentCMS::themes()->register([
-            Section::make('hero')
+            PageBuilderSection::make('hero')
                 ->label('Hero Section')
-                ->view('sections.pages.hero')
+                ->view('hero')
                 ->color('blue')
                 ->form([
                     TextInput::make('title')

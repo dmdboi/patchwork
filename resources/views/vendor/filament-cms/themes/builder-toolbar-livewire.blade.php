@@ -9,13 +9,11 @@
 
     @if($this->preview)
         @if($this->page->meta('sections') && count($this->page->meta('sections')))
-            <p>Previewing</p>
-
             @foreach($this->page->meta('sections') as $section)
                 @php $getSection = section($section['type']) @endphp
 
                 @if($getSection)
-                    @include($getSection->view, ['section' => $section])
+                    {!! $getSection->getView($section['data']) !!}
                 @endif
             @endforeach
         @else

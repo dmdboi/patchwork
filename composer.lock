@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7b9940b30373d61057aa078c8ba9b82",
+    "content-hash": "aeca114ce34034ecd323dcc530811f2c",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -986,6 +986,77 @@
                 }
             ],
             "time": "2024-02-05T11:56:58+00:00"
+        },
+        {
+            "name": "dotswan/filament-code-editor",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dotswan/filament-code-editor.git",
+                "reference": "79c380436bae6ec27fbb0932e3eb56595bd5c6ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dotswan/filament-code-editor/zipball/79c380436bae6ec27fbb0932e3eb56595bd5c6ed",
+                "reference": "79c380436bae6ec27fbb0932e3eb56595bd5c6ed",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0",
+                "illuminate/contracts": "^10.0 || ^11.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dotswan\\FilamentCodeEditor\\FilamentCodeEditorServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentCodeEditor": "Dotswan\\FilamentCodeEditor\\Facades\\FilamentCodeEditor"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dotswan\\FilamentCodeEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dotswan",
+                    "email": "tech@dotswan.com",
+                    "role": "Developer"
+                }
+            ],
+            "homepage": "https://github.com/dotswan/filament-code-editor",
+            "keywords": [
+                "dotswan",
+                "filament-code-editor",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/dotswan/filament-code-editor/issues",
+                "source": "https://github.com/dotswan/filament-code-editor"
+            },
+            "time": "2024-05-21T13:41:25+00:00"
         },
         {
             "name": "dragonmantank/cron-expression",
@@ -9308,6 +9379,72 @@
                 }
             ],
             "time": "2024-11-04T10:52:46+00:00"
+        },
+        {
+            "name": "tomatophp/filament-api",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tomatophp/filament-api.git",
+                "reference": "d65c65881bf9a1a41321ea998b906ae039fc50ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tomatophp/filament-api/zipball/d65c65881bf9a1a41321ea998b906ae039fc50ee",
+                "reference": "d65c65881bf9a1a41321ea998b906ae039fc50ee",
+                "shasum": ""
+            },
+            "require": {
+                "calebporzio/sushi": "*",
+                "filament/filament": "^3.0.0",
+                "php": "^8.1|^8.2",
+                "tomatophp/console-helpers": "^1.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TomatoPHP\\FilamentApi\\FilamentApiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TomatoPHP\\FilamentApi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fady Mondy",
+                    "email": "info@3x1.io"
+                }
+            ],
+            "description": "Generate APIs from your filament resource using single line of code",
+            "keywords": [
+                "api",
+                "filament-plugin",
+                "filamentphp",
+                "generator",
+                "laravel",
+                "php",
+                "rest",
+                "tomatophp"
+            ],
+            "support": {
+                "issues": "https://github.com/tomatophp/filament-api/issues",
+                "source": "https://github.com/tomatophp/filament-api/tree/v1.0.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/3x1io",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-09-23T15:37:54+00:00"
         },
         {
             "name": "tomatophp/filament-cms",
