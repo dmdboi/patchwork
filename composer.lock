@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aeca114ce34034ecd323dcc530811f2c",
+    "content-hash": "c49b7103f494cf7e5faf433015002178",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -9448,17 +9448,11 @@
         },
         {
             "name": "tomatophp/filament-cms",
-            "version": "v1.0.30",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tomatophp/filament-cms.git",
-                "reference": "6b9232cc5bdc3bb9aee202dd9c48186670bd0071"
-            },
+            "version": "dev-master",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tomatophp/filament-cms/zipball/6b9232cc5bdc3bb9aee202dd9c48186670bd0071",
-                "reference": "6b9232cc5bdc3bb9aee202dd9c48186670bd0071",
-                "shasum": ""
+                "type": "path",
+                "url": "./packages/tomatophp/filament-cms",
+                "reference": "6b9232cc5bdc3bb9aee202dd9c48186670bd0071"
             },
             "require": {
                 "filament/filament": "^3.0.0",
@@ -9483,7 +9477,11 @@
                     "TomatoPHP\\FilamentCms\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -9505,17 +9503,10 @@
                 "services",
                 "tomatophp"
             ],
-            "support": {
-                "issues": "https://github.com/tomatophp/filament-cms/issues",
-                "source": "https://github.com/tomatophp/filament-cms/tree/v1.0.30"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/3x1io",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-11-27T12:42:25+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "tomatophp/filament-icons",
@@ -13290,7 +13281,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "tomatophp/filament-cms": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

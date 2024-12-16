@@ -10,12 +10,35 @@ return [
         "category" => true,
         "posts" => true,
         "comments" => false,
-        "theme-manager" => true,
-        "forms" => false,
-        "form_requests" => false,
+        "theme-manager" => false,
+        "forms" => true,
+        "form_requests" => true,
         "tickets" => false,
         "apis" => false,
     ],
+
+    "types" => [
+        "post",
+        "page"
+    ],
+
+    "editor" => [
+        "options" => [
+            'attachFiles',
+            'blockquote',
+            'bold',
+            'bulletList',
+            'codeBlock',
+            'heading',
+            'italic',
+            'link',
+            'orderedList',
+            'redo',
+            'strike',
+            'table',
+            'undo',
+        ]
+        ],
 
     /*
      * ---------------------------------------------------

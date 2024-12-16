@@ -57,17 +57,14 @@ class AdminPanelProvider extends PanelProvider
                     \TomatoPHP\FilamentCms\FilamentCMSPlugin::make()
                         ->useCategory()
                         ->usePost()
-                        ->useThemeManager()
                         ->usePageBuilder()
-                        ->allowExport()
-                        ->allowImport(),
+                        ->useFormBuilder(),
                     \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
                         ->allowSiteSettings()
                         ->allowSocialMenuSettings(),
                     \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make(),
                     \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en']),
-                    \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make(),
-                    \TomatoPHP\FilamentApi\FilamentAPIPlugin::make()
+                    \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make()
                 ]);
     }
 }
