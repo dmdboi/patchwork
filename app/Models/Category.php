@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Models;
+namespace App\Models;
 
 use App\Models\Team;
 use Illuminate\Database\Eloquent\Model;
@@ -71,7 +71,7 @@ class Category extends Model implements HasMedia
 
     public function children()
     {
-        return $this->hasMany('TomatoPHP\FilamentCms\Models\Category', 'parent_id');
+        return $this->hasMany('App\Models\Category', 'parent_id');
     }
 
     /**
@@ -79,7 +79,7 @@ class Category extends Model implements HasMedia
      */
     public function parent()
     {
-        return $this->belongsTo('TomatoPHP\FilamentCms\Models\Category', 'parent_id');
+        return $this->belongsTo('App\Models\Category', 'parent_id');
     }
 
     /**
@@ -87,7 +87,7 @@ class Category extends Model implements HasMedia
      */
     public function categoriesMetas()
     {
-        return $this->hasMany('TomatoPHP\FilamentCms\Models\CategoriesMeta');
+        return $this->hasMany('App\Models\CategoriesMeta');
     }
 
     public function posts()

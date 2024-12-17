@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Transformers;
+namespace App\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

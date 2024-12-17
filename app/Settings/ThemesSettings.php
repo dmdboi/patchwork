@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Settings;
+namespace App\Settings;
 
 use Spatie\LaravelSettings\Settings;
 

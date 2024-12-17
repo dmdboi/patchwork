@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Services\Contracts;
+namespace App\Services\Contracts;
 
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\View\View;

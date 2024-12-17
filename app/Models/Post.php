@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Models;
+namespace App\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
-use TomatoPHP\FilamentCms\Models\Category;
+use App\Models\Category;
 
 /**
  * @property integer $id
@@ -118,7 +118,7 @@ class Post extends Model implements HasMedia
 
     public function postMeta()
     {
-        return $this->hasMany('TomatoPHP\FilamentCms\Models\PostMeta');
+        return $this->hasMany('App\Models\PostMeta');
     }
 
     /**

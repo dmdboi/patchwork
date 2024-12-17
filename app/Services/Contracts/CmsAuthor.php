@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Services\Contracts;
+namespace App\Services\Contracts;
 
 class CmsAuthor
 {

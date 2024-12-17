@@ -69,9 +69,9 @@
     @livewireStyles
 </head>
 <body class="min-h-screen antialiased font-normal fi-body fi-panel-admin bg-gray-50 text-gray-950 dark:bg-gray-950 dark:text-white">
-    @livewire(\TomatoPHP\FilamentCms\Livewire\BuilderToolbar::class, ['page'=>$page])
+    @livewire(\App\Livewire\BuilderToolbar::class, ['page'=>$page])
 @else
-    @livewire(\TomatoPHP\FilamentCms\Livewire\BuilderToolbar::class, ['page'=>$page])
+    @livewire(\App\Livewire\BuilderToolbar::class, ['page'=>$page])
 @endif
 
 @if($allowLayout)
@@ -94,5 +94,5 @@
     </body>
     </html>
 @else
-    @livewire(\TomatoPHP\FilamentCms\Livewire\BuilderToolbar::class, ['page'=>$page])
+    @livewire(\App\Livewire\BuilderToolbar::class, ['page'=>$page])
 @endif

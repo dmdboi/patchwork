@@ -1,9 +1,9 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Services;
+namespace App\Services;
 
 use Illuminate\Support\Str;
-use TomatoPHP\FilamentCms\Services\Contracts\CmsType;
+use App\Services\Contracts\CmsType;
 
 class FilamentCMSTypes
 {

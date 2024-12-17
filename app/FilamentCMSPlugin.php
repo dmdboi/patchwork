@@ -1,16 +1,16 @@
 <?php
 
-namespace TomatoPHP\FilamentCms;
+namespace App;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\SpatieLaravelTranslatablePlugin;
 use Nwidart\Modules\Module;
-use TomatoPHP\FilamentCms\Filament\Pages\Themes;
-use TomatoPHP\FilamentCms\Filament\Resources\CategoryResource;
-use TomatoPHP\FilamentCms\Filament\Resources\FormResource;
-use TomatoPHP\FilamentCms\Filament\Resources\PostResource;
-use TomatoPHP\FilamentCms\Livewire\BuilderToolbar;
+use App\Filament\Pages\Themes;
+use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\FormResource;
+use App\Filament\Resources\PostResource;
+use App\Livewire\BuilderToolbar;
 
 
 class FilamentCMSPlugin implements Plugin

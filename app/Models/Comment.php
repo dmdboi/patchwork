@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Models;
+namespace App\Models;
 
 
 use TomatoPHP\TomatoCrm\Models\Account;

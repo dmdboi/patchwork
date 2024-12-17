@@ -54,7 +54,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])->plugins([
-                    \TomatoPHP\FilamentCms\FilamentCMSPlugin::make()
+                    \App\FilamentCMSPlugin::make()
                         ->useCategory()
                         ->usePost()
                         ->usePageBuilder()

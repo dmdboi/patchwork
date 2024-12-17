@@ -1,8 +1,8 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Filament\Resources\FormOptionResource\Pages;
+namespace App\Filament\Resources\FormOptionResource\Pages;
 
-use TomatoPHP\FilamentCms\Filament\Resources\FormOptionResource;
+use App\Filament\Resources\FormOptionResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 

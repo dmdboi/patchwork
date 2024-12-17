@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\File;
-use TomatoPHP\FilamentCms\Models\Post;
-use TomatoPHP\TomatoThemes\Models\Section;
+use App\Models\Post;
 
 if(!function_exists('theme_assets')) {
     /**
@@ -33,7 +32,7 @@ if(!function_exists('theme_setting')) {
             return $info->settings->{$key}->value;
         }
 
-        $settingClass = new \TomatoPHP\FilamentCms\Settings\ThemesSettings();
+        $settingClass = new \App\Settings\ThemesSettings();
 
         if(isset($settingClass->{'theme_'.$key})){
             return $settingClass->{'theme_'.$key};
@@ -71,9 +70,9 @@ if(!function_exists('load_page')){
 }
 
 if(!function_exists('section')){
-    function section($key): ?\TomatoPHP\FilamentCms\Services\Contracts\Section
+    function section($key): ?\App\Services\Contracts\Section
     {
-        $section = \TomatoPHP\FilamentCms\Facades\FilamentCMS::themes()->getSections()->where('key', $key)->first();
+        $section = \App\Facades\FilamentCMS::themes()->getSections()->where('key', $key)->first();
 
         return $section ?? null;
     }

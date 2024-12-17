@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Filament\Forms\Components\TextInput;
-use TomatoPHP\FilamentCms\Services\Contracts\Section;
 
+use App\Facades\FilamentCMS;
+use App\Services\Contracts\Section;
+
+use Filament\Forms\Components\TextInput;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Move this to App/Views
-        themes()->register([
+        FilamentCMS::themes()->register([
             Section::make('hero')
                 ->label('Hero Section')
                 ->view('hero')

@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Infolists\Components;
+namespace App\Infolists\Components;
 
 use Filament\Infolists\Components\Entry;
 use Filament\Infolists\Components\TextEntry;

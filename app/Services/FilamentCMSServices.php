@@ -1,10 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Services;
-
-use TomatoPHP\FilamentCms\Services\Contracts\Page;
-use TomatoPHP\FilamentCms\Services\Contracts\Section;
-use TomatoPHP\FilamentCms\Models\Form;
+namespace App\Services;
 
 class FilamentCMSServices
 {

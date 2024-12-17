@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Livewire;
+namespace App\Livewire;
 
 
 use Filament\Actions\Action;
@@ -15,9 +15,9 @@ use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use TomatoPHP\FilamentCms\Facades\FilamentCMS;
-use TomatoPHP\FilamentCms\Filament\Resources\PostResource\Pages\EditPost;
-use TomatoPHP\FilamentCms\Models\Post;
+use App\Facades\FilamentCMS;
+use App\Filament\Resources\PostResource\Pages\EditPost;
+use App\Models\Post;
 use Filament\Forms\Components\Builder;
 
 class BuilderToolbar extends Component  implements HasForms, HasActions

@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms;
+namespace App\Providers;
 
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\ColorPicker;
@@ -20,17 +20,18 @@ use Filament\Forms\Components\Toggle;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use ProtoneMedia\Splade\Http\SpladeMiddleware;
-use TomatoPHP\FilamentCms\Facades\FilamentCMS;
-use TomatoPHP\FilamentCms\Livewire\BuilderToolbar;
-use TomatoPHP\FilamentCms\Livewire\BuilderToolbarForm;
-use TomatoPHP\FilamentCms\Livewire\BuilderToolbarHeader;
-use TomatoPHP\FilamentCms\Sections\TomatoAboutFeaturesSection;
-use TomatoPHP\FilamentCms\Services\Contracts\CmsFormFieldType;
-use TomatoPHP\FilamentCms\Services\Contracts\CmsType;
-use TomatoPHP\FilamentCms\Services\Contracts\Section;
-use TomatoPHP\FilamentCms\Services\FilamentCMSFormFields;
-use TomatoPHP\FilamentCms\Services\FilamentCMSServices;
-use TomatoPHP\FilamentCms\Services\FilamentCMSTypes;
+
+use App\Facades\FilamentCMS;
+use App\Livewire\BuilderToolbar;
+use App\Livewire\BuilderToolbarForm;
+use App\Livewire\BuilderToolbarHeader;
+use App\Sections\TomatoAboutFeaturesSection;
+use App\Services\Contracts\CmsFormFieldType;
+use App\Services\Contracts\CmsType;
+use App\Services\Contracts\Section;
+use App\Services\FilamentCMSFormFields;
+use App\Services\FilamentCMSServices;
+use App\Services\FilamentCMSTypes;
 use TomatoPHP\FilamentIcons\Components\IconPicker;
 
 require_once  __DIR__ .'/helpers.php';
@@ -80,7 +81,7 @@ class FilamentCmsServiceProvider extends ServiceProvider
         });
 
         $this->loadViewComponentsAs('tomato', [
-            \TomatoPHP\FilamentCms\Views\BuilderToolbar::class,
+            \App\Views\BuilderToolbar::class,
         ]);
 
     }

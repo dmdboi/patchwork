@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,6 +27,6 @@ class CategoriesMeta extends Model
      */
     public function category()
     {
-        return $this->belongsTo('TomatoPHP\FilamentCms\Models\Category');
+        return $this->belongsTo('App\Models\Category');
     }
 }

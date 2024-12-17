@@ -1,13 +1,13 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Traits;
+namespace App\Traits;
 
-use TomatoPHP\FilamentCms\Services\FilamentPostAuthors;
+use App\Services\FilamentPostAuthors;
 
 trait HasPosts
 {
     public function posts()
     {
-        return $this->morphMany(\TomatoPHP\FilamentCms\Models\Post::class, 'authorable');
+        return $this->morphMany(\App\Models\Post::class, 'authorable');
     }
 }

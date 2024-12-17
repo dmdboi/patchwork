@@ -1,8 +1,8 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Services;
+namespace App\Services;
 
-use TomatoPHP\FilamentCms\Services\Contracts\Form;
+use App\Services\Contracts\Form;
 
 class FilamentFormsServices
 {
@@ -20,9 +20,9 @@ class FilamentFormsServices
     public function build(): void
     {
         foreach ($this->forms as $form){
-            $checkIfFormExists = \TomatoPHP\FilamentCms\Models\Form::where('key', $form->key)->first();
+            $checkIfFormExists = \App\Models\Form::where('key', $form->key)->first();
             if(!$checkIfFormExists){
-                $newForm = \TomatoPHP\FilamentCms\Models\Form::create($form->toArray());
+                $newForm = \App\Models\Form::create($form->toArray());
                 $newForm->fields()->createMany($form->inputs);
             }
         }

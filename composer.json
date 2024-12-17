@@ -17,7 +17,6 @@
         "laravel/tinker": "^2.9",
         "tomatophp/filament-accounts": "^2.3",
         "tomatophp/filament-api": "^1.0",
-        "tomatophp/filament-cms": "dev-master",
         "tomatophp/filament-media-manager": "^1.1",
         "tomatophp/filament-menus": "^1.0",
         "tomatophp/filament-plugins": "^1.1",
@@ -37,8 +36,7 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/",
-            "Modules\\": "Modules/"
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
@@ -71,11 +69,6 @@
     "extra": {
         "laravel": {
             "dont-discover": []
-        },
-        "merge-plugin": {
-            "include": [
-                "Modules/*/composer.json"
-            ]
         }
     },
     "config": {
@@ -89,14 +82,5 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./packages/tomatophp/filament-cms",
-            "options": {
-                "symlink": true
-            }
-        }
-    ]
+    "prefer-stable": true
 }

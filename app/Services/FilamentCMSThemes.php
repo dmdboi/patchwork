@@ -1,12 +1,12 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Services;
+namespace App\Services;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use TomatoPHP\FilamentCms\Models\Form;
-use TomatoPHP\FilamentCms\Services\Contracts\Section;
+use App\Models\Form;
+use App\Services\Contracts\Section;
 
 class FilamentCMSThemes
 {

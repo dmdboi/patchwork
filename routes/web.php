@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use TomatoPHP\FilamentCms\Models\Post;
+use App\Models\Post;
 
 Route::get('/admin/editor/{slug}', function () {
 
@@ -16,10 +16,10 @@ Route::get('/admin/editor/{slug}', function () {
 });
 
 Route::middleware(['web', 'auth', \ProtoneMedia\Splade\Http\SpladeMiddleware::class])->name('admin.')->group(function () {
-    Route::get('admin/pages/{model}/builder', [\TomatoPHP\FilamentCms\Http\Controllers\BuilderController::class, 'builder'])->name('pages.builder');
-    Route::post('admin/pages/{model}/sections', [\TomatoPHP\FilamentCms\Http\Controllers\BuilderController::class, 'sections'])->name('pages.sections');
-    Route::post('admin/pages/{model}/sections/remove', [\TomatoPHP\FilamentCms\Http\Controllers\BuilderController::class, 'remove'])->name('pages.remove');
-    Route::get('admin/pages/{model}/meta', [\TomatoPHP\FilamentCms\Http\Controllers\BuilderController::class, 'meta'])->name('pages.meta');
-    Route::post('admin/pages/{model}/meta', [\TomatoPHP\FilamentCms\Http\Controllers\BuilderController::class, 'metaStore'])->name('pages.meta.store');
-    Route::post('admin/pages/{model}/clear', [\TomatoPHP\FilamentCms\Http\Controllers\BuilderController::class, 'clear'])->name('pages.clear');
+    Route::get('admin/pages/{model}/builder', [\App\Http\Controllers\BuilderController::class, 'builder'])->name('pages.builder');
+    Route::post('admin/pages/{model}/sections', [\App\Http\Controllers\BuilderController::class, 'sections'])->name('pages.sections');
+    Route::post('admin/pages/{model}/sections/remove', [\App\Http\Controllers\BuilderController::class, 'remove'])->name('pages.remove');
+    Route::get('admin/pages/{model}/meta', [\App\Http\Controllers\BuilderController::class, 'meta'])->name('pages.meta');
+    Route::post('admin/pages/{model}/meta', [\App\Http\Controllers\BuilderController::class, 'metaStore'])->name('pages.meta.store');
+    Route::post('admin/pages/{model}/clear', [\App\Http\Controllers\BuilderController::class, 'clear'])->name('pages.clear');
 });

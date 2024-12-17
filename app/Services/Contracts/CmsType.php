@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Services\Contracts;
+namespace App\Services\Contracts;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cookie;
@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 /**
  *
  * Class CmsType
- * @package TomatoPHP\FilamentCms\Services\Contracts
+ * @package App\Services\Contracts
  * @property string $key
  * @property string $label
  * @property string $icon

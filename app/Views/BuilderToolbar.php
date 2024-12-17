@@ -1,10 +1,10 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Views;
+namespace App\Views;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
-use TomatoPHP\FilamentCms\Models\Post;
+use App\Models\Post;
 use TomatoPHP\TomatoThemes\Services\Abstract\Section;
 
 class BuilderToolbar extends Component

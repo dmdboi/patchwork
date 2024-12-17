@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,6 +30,6 @@ class PostMeta extends Model
      */
     public function post()
     {
-        return $this->belongsTo('TomatoPHP\FilamentCms\Models\Post');
+        return $this->belongsTo('App\Models\Post');
     }
 }

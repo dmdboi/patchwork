@@ -324,7 +324,7 @@ class PostResource extends Resource
                 Tables\Columns\TextColumn::make('published_at')
                     ->toggleable()
                     ->label(trans('filament-cms::messages.content.posts.sections.status.columns.published_at'))
-                    ->description(fn(Post $post) => $post->published_at?->diffForHumans())
+                    ->description(fn(Post $post) => $post->published_at->diffForHumans())
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('views')

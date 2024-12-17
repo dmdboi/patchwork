@@ -1,12 +1,12 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Console;
+namespace App\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use TomatoPHP\ConsoleHelpers\Traits\HandleStub;
-use TomatoPHP\FilamentCms\Models\Field;
-use TomatoPHP\FilamentCms\Models\Form;
+use App\Models\Field;
+use App\Models\Form;
 
 class FilamentFormGenerator extends Command
 {

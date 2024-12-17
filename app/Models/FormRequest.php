@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -53,7 +53,7 @@ class FormRequest extends Model implements HasMedia
      */
     public function form()
     {
-        return $this->belongsTo('TomatoPHP\FilamentCms\Models\Form');
+        return $this->belongsTo('App\Models\Form');
     }
 
     public function formRequestsMetas(){

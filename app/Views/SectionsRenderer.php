@@ -1,10 +1,10 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Views;
+namespace App\Views;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
-use TomatoPHP\FilamentCms\Models\Post;
+use App\Models\Post;
 
 class SectionsRenderer extends Component
 {

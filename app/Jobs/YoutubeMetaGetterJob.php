@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Jobs;
+namespace App\Jobs;
 
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
@@ -12,8 +12,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use TomatoPHP\FilamentCms\Events\PostCreated;
-use TomatoPHP\FilamentCms\Models\Post;
+use App\Events\PostCreated;
+use App\Models\Post;
 
 class YoutubeMetaGetterJob implements ShouldQueue
 {

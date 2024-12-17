@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use ProtoneMedia\Splade\Facades\Toast;
-use TomatoPHP\FilamentCms\Models\Post;
+use App\Models\Post;
 use TomatoPHP\TomatoThemes\Facades\TomatoThemes;
 
 class BuilderController extends Controller
@@ -31,13 +31,13 @@ class BuilderController extends Controller
         return redirect()->back();
     }
 
-    public function builder(Request $request, \TomatoPHP\FilamentCms\Models\Post $model): View|JsonResponse
+    public function builder(Request $request, \App\Models\Post $model): View|JsonResponse
     {
-        $sections = \TomatoPHP\FilamentCms\Facades\FilamentCms::themes()->getSections()->groupBy('group');
+        $sections = \App\Facades\FilamentCms::themes()->getSections()->groupBy('group');
         return view('filament-themes::pages.builder', compact('model', 'sections'));
     }
 
-    public function meta(Request $request,\TomatoPHP\FilamentCms\Models\Post $model){
+    public function meta(Request $request,\App\Models\Post $model){
         $request->validate([
             "section" => "required|string"
         ]);
@@ -60,7 +60,7 @@ class BuilderController extends Controller
 
     }
 
-    public function metaStore(Request $request, \TomatoPHP\FilamentCms\Models\Post $model){
+    public function metaStore(Request $request, \App\Models\Post $model){
         $request->validate([
             "section" => "required|string"
         ]);
@@ -97,7 +97,7 @@ class BuilderController extends Controller
 
     }
 
-    public function remove(Request $request, \TomatoPHP\FilamentCms\Models\Post $model){
+    public function remove(Request $request, \App\Models\Post $model){
         $request->validate([
             "section" => "required|string"
         ]);
@@ -113,7 +113,7 @@ class BuilderController extends Controller
         return redirect()->back();
     }
 
-    public function sections(Request $request, \TomatoPHP\FilamentCms\Models\Post $model){
+    public function sections(Request $request, \App\Models\Post $model){
         $request->validate([
             "section" => "required|string"
         ]);
@@ -138,7 +138,7 @@ class BuilderController extends Controller
 
     }
 
-    public function clear(\TomatoPHP\FilamentCms\Models\Post $model){
+    public function clear(\App\Models\Post $model){
         $model->meta('sections', []);
 
         Toast::success(__('Sections cleared successfully'))->autoDismiss(2);

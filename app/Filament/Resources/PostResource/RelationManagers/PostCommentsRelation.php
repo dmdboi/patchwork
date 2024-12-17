@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentCms\Filament\Resources\PostResource\RelationManagers;
+namespace App\Filament\Resources\PostResource\RelationManagers;
 
 use App\Models\User;
 use Filament\Forms\Form;
@@ -10,9 +10,8 @@ use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use TomatoPHP\FilamentCms\Models\Comment;
-use TomatoPHP\FilamentCms\Models\Post;
-use TomatoPHP\FilamentCms\Services\FilamentCMSAuthors;
+use App\Models\Comment;
+use App\Services\FilamentCMSAuthors;
 
 class PostCommentsRelation extends RelationManager
 {
