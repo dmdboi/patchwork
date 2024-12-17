@@ -1,48 +1,34 @@
-<div>
-    @if(auth()->user())
-    <div class="flex justify-between px-6 py-6 border-b dark:border-gray-700">
-        <div class="flex justify-start gap-4">
-            {{ $this->editPageAction }}
-            {{ $this->previewPageAction }}
-        </div>
+<div class="bg-gray-100">
+
+    <!-- Toolbar -->
+    <div class="flex justify-between px-6 py-6 bg-white border-b dark:border-gray-700">
+        @if (auth()->user())
+            <div class="flex justify-start gap-4">
+                {{ $this->editPageAction }}
+                {{ $this->previewPageAction }}
+            </div>
+        @endif
     </div>
 
-    @if($this->preview)
-        @if($this->page->meta('sections') && count($this->page->meta('sections')))
-            @foreach($this->page->meta('sections') as $section)
-                @php $getSection = section($section['type']) @endphp
+    <!-- Preview -->
+    @if ($this->preview)
+        <x-filament-cms::sections-renderer />
+    @endif
 
-                @if($getSection)
-                    {!! $getSection->getView($section['data']) !!}
-                @endif
-            @endforeach
-        @else
-            {{ $this->page->body }}
-        @endif
-    @else
-        <div class="p-4">
-            <form wire:submit="saveSections" id="{{$this->page->id}}">
+    <!-- Editor -->
+    @if (!$this->preview)
+        <div class="w-full p-4 mx-auto md:max-w-3xl">
+            <form wire:submit="saveSections" id="{{ $this->page->Eid }}">
+                <div class="flex justify-end w-full mb-4">
+                    <x-filament::button wire:click="saveSections" color="success">
+                        Save Changes
+                    </x-filament::button>
+                </div>
+
                 {{ $this->form }}
-
-                <x-filament::button wire:click="saveSections">
-                    Save Sections
-                </x-filament::button>
             </form>
         </div>
     @endif
 
     <x-filament-actions::modals />
-    @else
-        @if($this->page->meta('sections') && count($this->page->meta('sections')))
-            @foreach($this->page->meta('sections') as $section)
-                @php $getSection = section($section['type']) @endphp
-
-                @if($getSection)
-                    @include($getSection->view)
-                @endif
-            @endforeach
-        @else
-            {{ $this->page->body }}
-        @endif
-    @endif
 </div>

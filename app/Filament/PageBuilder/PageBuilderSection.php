@@ -18,7 +18,6 @@ class PageBuilderSection extends Section
     public ?string $color = null;
     public ?string $icon = null;
     public ?bool $lock = false;
-    public ?string $databaseKey = null;
 
     public static function make(string $key): self
     {
@@ -68,7 +67,7 @@ class PageBuilderSection extends Section
 
     public function view(string $view): static
     {
-        $this->databaseKey = $view;
+        $this->view = 'themes.' . config('filament-cms.theme') . '.' . $view;
         return $this;
     }
 
@@ -92,26 +91,11 @@ class PageBuilderSection extends Section
 
     public function getView(array $data = []): string
     {
-        if ($this->databaseKey) {
-            $bladeContent = $this->fetchBladeContent($this->databaseKey);
-
-            if ($bladeContent) {
-                return Blade::render($bladeContent, $data);
-            }
-
-            throw new \Exception("Blade content not found for key: {$this->databaseKey}");
-        }
-
         // Fallback: If no database key, return the static view name
         if ($this->view && view()->exists($this->view)) {
-            return view($this->view)->render();
+            return view($this->view, $data)->render();
         }
 
         throw new \Exception("View not found or not set.");
-    }
-
-    private function fetchBladeContent(string $key): string
-    {
-        return DB::table('blade_views')->where('key', $key)->value('content');
     }
 }

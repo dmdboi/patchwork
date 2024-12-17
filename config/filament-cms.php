@@ -17,6 +17,8 @@ return [
         "apis" => false,
     ],
 
+    "theme"=> "egon",
+
     "types" => [
         "post",
         "page"

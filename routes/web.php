@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use TomatoPHP\FilamentCms\Models\Post;
 
-Route::get('/{slug}', function () {
+Route::get('/admin/editor/{slug}', function () {
 
     $page = Post::query()
     ->withTrashed()
-    ->where('type', 'builder')
+    ->where('type', 'page')
     ->where('slug', request()->slug)
     ->with('postMeta')
     ->first();
