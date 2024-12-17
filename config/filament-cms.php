@@ -17,7 +17,7 @@ return [
         "apis" => false,
     ],
 
-    "theme"=> "egon",
+    "theme" => "egon",
 
     "types" => [
         "post",
@@ -40,7 +40,7 @@ return [
             'table',
             'undo',
         ]
-        ],
+    ],
 
     /*
      * ---------------------------------------------------
