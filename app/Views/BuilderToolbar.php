@@ -20,6 +20,6 @@ class BuilderToolbar extends Component
 
     public function render(): View
     {
-       return view('filament-cms::themes.builder-toolbar');
+       return view('cms.builder-toolbar');
     }
 }

@@ -1,7 +1,7 @@
-@if ($this->page->meta('sections') && count($this->page->meta('sections')))
-    
+@props(['page'])
 
-    @foreach ($this->page->meta('sections') as $section)
+@if ($page->meta('sections') && count($page->meta('sections')))
+    @foreach ($page->meta('sections') as $section)
         @php $getSection = section($section['type']) @endphp
 
         @if ($getSection)
@@ -9,5 +9,5 @@
         @endif
     @endforeach
 @else
-    {{ $this->page->body }}
+    {{ $page->body }}
 @endif

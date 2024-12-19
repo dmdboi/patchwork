@@ -29,7 +29,7 @@ class EditPost extends EditRecord
                 ->label('Preview')
                 ->icon('heroicon-o-eye')
                 ->color('primary')
-                ->action(fn() => redirect()->to('/admin/editor/' . $this->getRecord()->slug)),
+                ->action(fn() => redirect()->to('/preview/' . $this->getRecord()->slug)),
             Actions\DeleteAction::make()
         ];
     }

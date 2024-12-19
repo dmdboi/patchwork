@@ -3,11 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
 use App\Facades\FilamentCMS;
-use App\Services\Contracts\Section;
-
-use Filament\Forms\Components\TextInput;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,23 +20,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        // Fetch theme name from config
+        $theme = config('filament-cms.theme');
+
+        // Get the theme's sections from Views/Themes/{theme}.php
+        $sections = require app_path("Views/Themes/{$theme}.php");
+
         // Move this to App/Views
-        FilamentCMS::themes()->register([
-            Section::make('hero')
-                ->label('Hero Section')
-                ->view('hero')
-                ->color('blue')
-                ->form([
-                    TextInput::make('title')
-                        ->label('title'),
-                    TextInput::make('description')
-                        ->label('description'),
-                    TextInput::make('url')
-                        ->url()
-                        ->label('url'),
-                    TextInput::make('button')
-                        ->label('button'),
-                ])
-        ]);
+        FilamentCMS::themes()->register($sections);
     }
 }

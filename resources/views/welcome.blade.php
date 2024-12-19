@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<x-layout>
+    <div class="flex items-center justify-center m-6">
+        <div class="p-4 border border-black">
+            <h1 class="text-2xl font-bold">Welcome to Patchwork</h1>
+            <p class="mt-2">Patchwork is a flexible and powerful CMS built on Laravel.</p>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body class="font-sans antialiased">
-    <x-tomato-builder-toolbar :page="$page" allow-layout />
-</body>
-
-</html>
+            <div class="mt-4">
+                <p>Get started by logging in:</p>
+                <a href="/admin/login" class="block py-2 text-blue-500 underline">Login</a>
+            </div>
+        </div>
+    </div>
+</x-layout>

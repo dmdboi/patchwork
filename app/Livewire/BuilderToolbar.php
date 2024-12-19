@@ -53,9 +53,24 @@ class BuilderToolbar extends Component  implements HasForms, HasActions
     {
         $page = $this->page;
         return Action::make('editPage')
-            ->label('Edit Page')
+            ->label('Back to Admin')
+            ->icon('heroicon-o-arrow-left')
+            ->color('info')
             ->action(function (array $data) use ($page){
                 return redirect()->to(EditPost::getUrl([$page->id]));
+            });
+    }
+
+    public function savePageAction()
+    {
+        $page = $this->page;
+        return Action::make('savePage')
+            ->label('Save Page')
+            ->icon('heroicon-o-lifebuoy')
+            ->color('success')
+            ->action(function (array $data) use ($page){
+                $this->saveSections();
+                $page->save();
             });
     }
 
@@ -64,6 +79,8 @@ class BuilderToolbar extends Component  implements HasForms, HasActions
         $page = $this->page;
         return Action::make('previewPage')
             ->label($this->preview ? 'Show Builder' : 'Preview Page')
+            ->icon($this->preview ? 'heroicon-o-eye' : 'heroicon-o-pencil')
+            ->color('info')
             ->action(function () use ($page){
                 $this->preview = !$this->preview;
                 session()->put('preview_' . $page->id, $this->preview);
@@ -116,6 +133,6 @@ class BuilderToolbar extends Component  implements HasForms, HasActions
 
     public function render(): View
     {
-        return view('filament-cms::themes.builder-toolbar-livewire');
+        return view('cms.builder-toolbar-livewire');
     }
 }

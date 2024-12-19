@@ -1,18 +1,21 @@
 <?php
 
+use App\Http\Controllers\PatchworkController;
+use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
-use App\Models\Post;
 
-Route::get('/admin/editor/{slug}', function () {
+Route::get('/', function () {
+    return view('welcome');
+});
 
-    $page = Post::query()
-    ->withTrashed()
-    ->where('type', 'page')
-    ->where('slug', request()->slug)
-    ->with('postMeta')
-    ->first();
+Route::get('/{slug}', [PatchworkController::class, 'page'] );
 
-    return view('welcome', compact('page'));
+// Admin Routes
+Route::middleware(['web', Admin::class])->name('admin.')->group(function () {
+    Route::get('/preview/{slug}', [PatchworkController::class, 'preview'])->name('preview');
+    Route::get('/admin/editor/{slug}', [PatchworkController::class, 'editor'])->name('editor');
+
+    Route::get('/preview/blog/{slug}', [PatchworkController::class, 'blogPreview'])->name('blog-preview');
 });
 
 Route::middleware(['web', 'auth', \ProtoneMedia\Splade\Http\SpladeMiddleware::class])->name('admin.')->group(function () {

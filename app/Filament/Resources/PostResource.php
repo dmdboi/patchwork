@@ -97,7 +97,16 @@ class PostResource extends Resource
                                             Forms\Components\TextInput::make('title')
                                                 ->label(trans('filament-cms::messages.content.posts.sections.post.columns.title'))
                                                 ->afterStateUpdated(function (Forms\Get $get, Forms\Set $set) {
-                                                    $set('slug', Str::of($get('title'))->replace(' ', '-')->lower()->toString());
+
+                                                    $titleSlug = Str::of($get('title'))->replace(' ', '-')->lower()->toString();
+
+                                                    if($get('type') === 'page') {
+                                                        $set('slug', $titleSlug);
+                                                    }
+
+                                                    if($get('type') === 'post') {
+                                                        $set('slug', 'blog/' . $titleSlug);
+                                                    }
                                                 })
                                                 ->lazy()
                                                 ->required(),
