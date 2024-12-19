@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Form;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -60,5 +61,18 @@ class PatchworkController extends Controller
             ->first();
 
         return view('cms/blog-preview', compact('post'));
+    }
+
+    // Form Preview
+    public function formPreview(Request $request)
+    {
+
+        $id = request()->slug;
+
+        $form = Form::query()
+            ->where('id', $id)
+            ->first();
+
+        return view('cms/form-preview', compact('form'));
     }
 }

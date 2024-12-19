@@ -3,6 +3,5 @@
         <a href="/admin/posts/{{ $page->id }}/edit" class="block py-2 text-blue-500 underline">Back to Admin</a>
     </div>
 
-
     <x-sections-renderer :page="$page" />
 </x-layout>

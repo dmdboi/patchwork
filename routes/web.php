@@ -16,6 +16,7 @@ Route::middleware(['web', Admin::class])->name('admin.')->group(function () {
     Route::get('/admin/editor/{slug}', [PatchworkController::class, 'editor'])->name('editor');
 
     Route::get('/preview/blog/{slug}', [PatchworkController::class, 'blogPreview'])->name('blog-preview');
+    Route::get('/preview/forms/{slug}', [PatchworkController::class, 'formPreview'])->name('form-preview');
 });
 
 Route::middleware(['web', 'auth', \ProtoneMedia\Splade\Http\SpladeMiddleware::class])->name('admin.')->group(function () {
