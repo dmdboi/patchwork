@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c49b7103f494cf7e5faf433015002178",
+    "content-hash": "93932a6a0e55d308b361e0cf41aaa906",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -9447,68 +9447,6 @@
             "time": "2024-09-23T15:37:54+00:00"
         },
         {
-            "name": "tomatophp/filament-cms",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "./packages/tomatophp/filament-cms",
-                "reference": "6b9232cc5bdc3bb9aee202dd9c48186670bd0071"
-            },
-            "require": {
-                "filament/filament": "^3.0.0",
-                "filament/spatie-laravel-media-library-plugin": "^3.0.0",
-                "filament/spatie-laravel-settings-plugin": "^3.0.0",
-                "filament/spatie-laravel-translatable-plugin": "^3.0.0",
-                "php": "^8.1|^8.2",
-                "tomatophp/console-helpers": "^1.1",
-                "tomatophp/filament-icons": "^1.0",
-                "tomatophp/filament-translation-component": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "TomatoPHP\\FilamentCms\\FilamentCmsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "TomatoPHP\\FilamentCms\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fady Mondy",
-                    "email": "info@3x1.io"
-                }
-            ],
-            "description": "Full CMS System with easy to use page builder & theme manager for FilamentPHP",
-            "keywords": [
-                "blog",
-                "cms",
-                "filamentphp",
-                "laravel",
-                "page builder",
-                "pages",
-                "php",
-                "services",
-                "tomatophp"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
             "name": "tomatophp/filament-icons",
             "version": "v1.1.2",
             "source": {
@@ -13281,9 +13219,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "tomatophp/filament-cms": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

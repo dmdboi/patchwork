@@ -78,3 +78,16 @@ if(!function_exists('section')){
     }
 }
 
+if(!function_exists('menu')){
+    function menu($key){
+        $menu = App\Models\Menu::where('key', $key)->first();
+
+        if($menu){
+            return collect($menu->menuItems);
+
+        }
+        else {
+            return collect([]);
+        }
+    }
+}
