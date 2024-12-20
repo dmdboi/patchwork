@@ -507,4 +507,9 @@ class PostResource extends Resource
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
+
+    public static function viewAny(User $user): bool
+    {
+        return $user->hasAccess('view', 'posts');
+    }
 }

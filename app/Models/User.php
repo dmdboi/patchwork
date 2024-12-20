@@ -55,4 +55,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->email === env('FILAMENT_ADMIN_EMAIL');
     }
+
+    public function hasAccess($action, $resource): bool
+    {
+        return $this->can("full_access:{$resource}") || $this->can("{$action}:{$resource}");
+    }
 }

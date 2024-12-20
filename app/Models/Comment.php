@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-
-use TomatoPHP\TomatoCrm\Models\Account;
 use Illuminate\Database\Eloquent\Model;
 
 /**

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -34,5 +35,9 @@ class RolesAndPermissionsSeeder extends Seeder
         // Assign permissions to roles
         $adminRole->givePermissionTo(Permission::all());
         $editorRole->givePermissionTo(['view:posts', 'create:posts', 'edit:posts', 'delete:posts']);
+
+        // Assign roles to users
+        $admin = User::where('email', env('FILAMENT_ADMIN_EMAIL'))->first();
+        $admin->assignRole($adminRole);
     }
 }

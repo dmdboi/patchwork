@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Team;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
-use TomatoPHP\FilamentEcommerce\Models\Product;
 
 /**
  * @property integer $id
@@ -64,11 +62,6 @@ class Category extends Model implements HasMedia
         'show_in_menu' => 'boolean',
     ];
 
-    public function team()
-    {
-        return $this->belongsTo(Team::class);
-    }
-
     public function children()
     {
         return $this->hasMany('App\Models\Category', 'parent_id');
@@ -93,10 +86,5 @@ class Category extends Model implements HasMedia
     public function posts()
     {
         return $this->belongsToMany(Post::class, 'posts_has_category', 'category_id', 'post_id');
-    }
-
-    public function products()
-    {
-        return $this->hasMany(Product::class);
     }
 }
