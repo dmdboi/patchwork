@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Facades\FilamentCMS;
-use App\Filament\Resources\PostResource\Pages\EditPost;
 use App\Models\Post;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -59,7 +58,7 @@ class BuilderToolbar extends Component implements HasActions, HasForms
             ->icon('heroicon-o-arrow-left')
             ->color('info')
             ->action(function (array $data) use ($page) {
-                if($page->type == 'post') {
+                if ($page->type == 'post') {
                     return redirect()->to('/admin/posts/'.$page->id.'/edit');
                 }
 

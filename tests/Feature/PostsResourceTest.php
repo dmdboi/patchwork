@@ -3,14 +3,13 @@
 use App\Filament\Resources\PostResource;
 use App\Models\Post;
 use App\Models\User;
-
 use Illuminate\Support\Str;
 
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
-    $this->artisan("migrate:fresh --seed");
-    $this->artisan("db:seed --class=RolesAndPermissionsSeeder");
+    $this->artisan('migrate:fresh --seed');
+    $this->artisan('db:seed --class=RolesAndPermissionsSeeder');
 
     $this->actingAs(User::query()->where('email', 'admin@example.com')->first());
 });

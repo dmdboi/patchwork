@@ -17,7 +17,7 @@ class Admin
     {
 
         // Check if the user is logged in
-        if(!auth()->check()) {
+        if (! auth()->check()) {
             return redirect()->to('/admin/login');
         }
 

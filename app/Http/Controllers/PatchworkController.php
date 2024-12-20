@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class PatchworkController extends Controller
 {
-
     public function index(Request $request)
     {
         $page = Post::query()
@@ -18,7 +17,7 @@ class PatchworkController extends Controller
             ->with('postMeta')
             ->first();
 
-        if (!$page) {
+        if (! $page) {
             return view('welcome');
         }
 
@@ -36,7 +35,7 @@ class PatchworkController extends Controller
             ->with('postMeta')
             ->first();
 
-        if (!$page) {
+        if (! $page) {
             abort(404);
         }
 
@@ -51,7 +50,7 @@ class PatchworkController extends Controller
             ->with('postMeta')
             ->first();
 
-        if (!$page) {
+        if (! $page) {
             abort(404);
         }
 
@@ -81,7 +80,7 @@ class PatchworkController extends Controller
             ->with('postMeta')
             ->first();
 
-        if (!$post) {
+        if (! $post) {
             abort(404);
         }
 

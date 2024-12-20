@@ -14,14 +14,14 @@ class EditPage extends EditRecord
     {
         return [
             Actions\Action::make('editor-button')
-            ->label('Editor')
-            ->icon('heroicon-o-pencil')
-            ->action(fn () => redirect()->to('/admin/editor/'.$this->getRecord()->slug)),
-        Actions\Action::make('preview-button')
-            ->label('Preview')
-            ->icon('heroicon-o-eye')
-            ->color('primary')
-            ->action(fn () => redirect()->to('/preview/'.$this->getRecord()->slug)),
+                ->label('Editor')
+                ->icon('heroicon-o-pencil')
+                ->action(fn () => redirect()->to('/admin/editor/'.$this->getRecord()->slug)),
+            Actions\Action::make('preview-button')
+                ->label('Preview')
+                ->icon('heroicon-o-eye')
+                ->color('primary')
+                ->action(fn () => redirect()->to('/preview/'.$this->getRecord()->slug)),
             Actions\DeleteAction::make(),
         ];
     }

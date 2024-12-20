@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         // Get the theme's sections from Views/Themes/{theme}.php
         $sections = require app_path("Views/Themes/{$theme}.php");
 
-        // Move this to App/Views
+        // Register the theme's sections
         FilamentCMS::themes()->register($sections);
     }
 }
