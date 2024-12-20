@@ -39,7 +39,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $guestRole->givePermissionTo('view:posts');
 
         // Assign roles to users
-        $admin = User::where('email', env('FILAMENT_ADMIN_EMAIL'))->first();
+        $admin = User::where('email', 'admin@example.com')->first();
         $admin->assignRole($adminRole);
     }
 }
