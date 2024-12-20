@@ -16,6 +16,11 @@ class Admin
     public function handle(Request $request, Closure $next): Response
     {
 
+        // Check if the user is logged in
+        if(!auth()->check()) {
+            return redirect()->to('/admin/login');
+        }
+
         // Check if the user is an admin
         if (! auth()->user()->canAccessPanel('admin')) {
             abort(403);

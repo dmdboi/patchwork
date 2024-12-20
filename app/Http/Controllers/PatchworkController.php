@@ -8,6 +8,23 @@ use Illuminate\Http\Request;
 
 class PatchworkController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        $page = Post::query()
+            ->where('type', 'page')
+            ->where('is_published', true)
+            ->where('slug', 'home')
+            ->with('postMeta')
+            ->first();
+
+        if (!$page) {
+            return view('welcome');
+        }
+
+        return view('cms/page', compact('page'));
+    }
+
     // Page Endpoint
     public function page(Request $request)
     {

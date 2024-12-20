@@ -4,10 +4,7 @@ use App\Http\Controllers\PatchworkController;
 use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [PatchworkController::class, 'index']);
 Route::get('/{slug}', [PatchworkController::class, 'page']);
 
 // Admin Routes
