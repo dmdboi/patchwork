@@ -3,9 +3,9 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Widgets\StatsOverview;
-use App\Models\User;
 use Filament\Pages\Page;
 
+use Filament\Actions;
 
 class Dashboard extends Page
 {
@@ -23,6 +23,16 @@ class Dashboard extends Page
         return [
             //
             StatsOverview::class,
+        ];
+    }
+
+    public function getHeaderActions(): array
+    {
+        return [
+            //
+            Actions\Action::make('Create Post')
+                ->icon('heroicon-o-plus')
+                ->url('/admin/posts/create'),
         ];
     }
 
