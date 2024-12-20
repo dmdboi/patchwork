@@ -59,7 +59,11 @@ class BuilderToolbar extends Component implements HasActions, HasForms
             ->icon('heroicon-o-arrow-left')
             ->color('info')
             ->action(function (array $data) use ($page) {
-                return redirect()->to(EditPost::getUrl([$page->id]));
+                if($page->type == 'post') {
+                    return redirect()->to('/admin/posts/'.$page->id.'/edit');
+                }
+
+                return redirect()->to('/admin/pages/'.$page->id.'/edit');
             });
     }
 
