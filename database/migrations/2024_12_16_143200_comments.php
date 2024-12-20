@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,30 +12,29 @@ return new class extends Migration
      */
     public function up()
     {
-        if (config('filament-cms.features.comments')) {
-            Schema::create('comments', function (Blueprint $table) {
-                $table->id();
 
-                $table->unsignedBigInteger('parent_id')->nullable();
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
 
-                //Link User
-                $table->unsignedBigInteger('user_id');
-                $table->string('user_type');
+            $table->unsignedBigInteger('parent_id')->nullable();
 
-                //Link Content
-                $table->unsignedBigInteger('content_id');
-                $table->string('content_type');
+            //Link User
+            $table->unsignedBigInteger('user_id');
+            $table->string('user_type');
 
-                //Body
-                $table->longText('comment');
-                $table->float('rate')->default(0)->nullable();
+            //Link Content
+            $table->unsignedBigInteger('content_id');
+            $table->string('content_type');
 
-                //Options
-                $table->boolean('is_active')->default(1)->nullable();
+            //Body
+            $table->longText('comment');
+            $table->float('rate')->default(0)->nullable();
 
-                $table->timestamps();
-            });
-        }
+            //Options
+            $table->boolean('is_active')->default(1)->nullable();
+
+            $table->timestamps();
+        });
     }
 
     /**
