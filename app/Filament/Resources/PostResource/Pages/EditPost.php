@@ -14,7 +14,6 @@ use App\Jobs\YoutubeMetaGetterJob;
 
 class EditPost extends EditRecord
 {
-    use EditRecord\Concerns\Translatable;
 
     protected static string $resource = PostResource::class;
 

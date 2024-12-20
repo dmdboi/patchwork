@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use Filament\Resources\Concerns\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class MenuItem extends Model
 {
     use HasFactory;
-    use Translatable;
 
     public array $translatable = [
         'title'

@@ -30,7 +30,6 @@ use App\Services\FilamentCMSTypes;
 
 class PostResource extends Resource
 {
-    use Translatable;
 
     protected static ?string $model = Post::class;
 

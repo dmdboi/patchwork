@@ -64,11 +64,7 @@ class AdminPanelProvider extends PanelProvider
                         ->usePost()
                         ->usePageBuilder()
                         ->useFormBuilder(),
-                    \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
-                        ->allowSiteSettings()
-                        ->allowSocialMenuSettings(),
                     \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make(),
-                    \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en']),
                     \Mvenghaus\FilamentScheduleMonitor\FilamentPlugin::make()
                 ]);
     }

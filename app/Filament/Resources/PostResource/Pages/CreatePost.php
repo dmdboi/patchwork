@@ -13,7 +13,6 @@ use App\Models\Post;
 
 class CreatePost extends CreateRecord
 {
-    use CreateRecord\Concerns\Translatable;
 
     protected static string $resource = PostResource::class;
 

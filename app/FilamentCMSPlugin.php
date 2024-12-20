@@ -4,7 +4,6 @@ namespace App;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Filament\SpatieLaravelTranslatablePlugin;
 use Nwidart\Modules\Module;
 use App\Filament\Pages\Themes;
 use App\Filament\Resources\CategoryResource;
@@ -73,8 +72,6 @@ class FilamentCMSPlugin implements Plugin
                     BuilderToolbar::class,
                 ]);
             }
-
-            $panel->plugin(SpatieLaravelTranslatablePlugin::make()->defaultLocales(self::$defaultLocales));
         }
     }
 

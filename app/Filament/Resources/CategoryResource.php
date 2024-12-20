@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Resources\Concerns\Translatable;
 use Illuminate\Support\Str;
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
@@ -21,7 +20,6 @@ use TomatoPHP\FilamentIcons\Components\IconPicker;
 
 class CategoryResource extends Resource
 {
-    use Translatable;
 
     protected static ?string $model = Category::class;
 

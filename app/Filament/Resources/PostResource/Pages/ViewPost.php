@@ -13,7 +13,6 @@ use App\Models\Post;
 
 class ViewPost extends ViewRecord
 {
-    use ViewRecord\Concerns\Translatable;
 
     protected static string $resource = PostResource::class;
 

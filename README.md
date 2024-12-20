@@ -5,11 +5,19 @@ A filamentPHP-based content management system for the web.
 ## Installation
 
 ```bash
-composer install
+composer install && npm install
 
 php artisan migrate
 
 php artisan db:seed
+
+php artisan db:seed --class=RolesAndPermissionsSeeder
+```
+
+Copy the `.env.example` file to `.env` and generate a new application key:
+
+```bash
+php artisan key:generate
 ```
 
 ## Usage

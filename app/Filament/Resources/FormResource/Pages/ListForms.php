@@ -9,7 +9,6 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListForms extends ManageRecords
 {
-    use ManageRecords\Concerns\Translatable;
 
     protected static string $resource = FormResource::class;
 

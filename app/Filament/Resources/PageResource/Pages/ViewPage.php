@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Event;
 
 class ViewPage extends ViewRecord
 {
-    use ViewRecord\Concerns\Translatable;
 
     protected static string $resource = PageResource::class;
 

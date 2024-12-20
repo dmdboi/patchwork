@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Translatable\HasTranslations;
 use App\Models\Category;
 
 /**
@@ -37,15 +36,7 @@ use App\Models\Category;
 class Post extends Model implements HasMedia
 {
     use InteractsWithMedia;
-    use HasTranslations;
     use SoftDeletes;
-
-    public $translatable = [
-        'title',
-        'short_description',
-        'keywords',
-        'body'
-    ];
 
     protected $casts = [
         'is_published' => 'boolean',

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Resources\Concerns\Translatable;
 use Illuminate\Support\Str;
 use App\Filament\Resources\FormResource\Pages;
 use App\Filament\Resources\FormResource\RelationManagers;
@@ -17,7 +16,6 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class FormResource extends Resource
 {
-    use Translatable;
 
     protected static ?string $model = FormModel::class;
 
