@@ -53,7 +53,7 @@ class User extends Authenticatable implements FilamentUser
      */
     public function canAccessPanel($panel): bool
     {
-        return $this->email === env('FILAMENT_ADMIN_EMAIL');
+        return $this->hasAnyRole(['admin', 'editor']);
     }
 
     public function hasAccess($action, $resource): bool

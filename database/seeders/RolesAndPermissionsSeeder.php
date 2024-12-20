@@ -31,10 +31,12 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $editorRole = Role::firstOrCreate(['name' => 'editor']);
+        $guestRole = Role::firstOrCreate(['name' => 'guest']);
 
         // Assign permissions to roles
         $adminRole->givePermissionTo(Permission::all());
         $editorRole->givePermissionTo(['view:posts', 'create:posts', 'edit:posts', 'delete:posts']);
+        $guestRole->givePermissionTo('view:posts');
 
         // Assign roles to users
         $admin = User::where('email', env('FILAMENT_ADMIN_EMAIL'))->first();
