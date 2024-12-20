@@ -21,7 +21,7 @@ class ViewPost extends ViewRecord
                 ->label('Preview')
                 ->icon('heroicon-o-eye')
                 ->color('primary')
-                ->action(fn () => redirect()->to('/preview/'.$this->getRecord()->slug)),
+                ->action(fn () => redirect()->to('/preview/blog/'.$this->getRecord()->slug)),
             Actions\DeleteAction::make()->before(fn (Post $record) => Event::dispatch(new PostDeleted($record->toArray()))),
         ];
     }

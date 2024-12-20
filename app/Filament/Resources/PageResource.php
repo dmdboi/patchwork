@@ -70,18 +70,6 @@ class PageResource extends Resource
                     'lg' => 12,
                 ])
                     ->schema([
-                        Forms\Components\Select::make('type')
-                            ->label(trans('filament-cms::messages.content.posts.sections.type.columns.type'))
-                            ->live()
-                            ->options(
-                                FilamentCMSTypes::getOptions()
-                                    ->whereIn('key', config('filament-cms.types'))
-                                    ->pluck('label', 'key')->toArray()
-                            )
-                            ->default(config('filament-cms.types')[0])
-                            ->columnSpanFull()
-                            ->required()
-                            ->selectablePlaceholder(false),
                         Forms\Components\Grid::make()
                             ->schema(
                                 [
@@ -90,18 +78,6 @@ class PageResource extends Resource
                                         ->schema([
                                             Forms\Components\TextInput::make('title')
                                                 ->label(trans('filament-cms::messages.content.posts.sections.post.columns.title'))
-                                                ->afterStateUpdated(function (Forms\Get $get, Forms\Set $set) {
-
-                                                    $titleSlug = Str::of($get('title'))->replace(' ', '-')->lower()->toString();
-
-                                                    if ($get('type') === 'page') {
-                                                        $set('slug', $titleSlug);
-                                                    }
-
-                                                    if ($get('type') === 'post') {
-                                                        $set('slug', 'blog/'.$titleSlug);
-                                                    }
-                                                })
                                                 ->lazy()
                                                 ->required(),
                                             Forms\Components\TextInput::make('slug')
@@ -236,7 +212,7 @@ class PageResource extends Resource
                             ]),
                     ]),
 
-            ]);
+                ]);
     }
 
     public static function infolist(Infolist $infolist): Infolist

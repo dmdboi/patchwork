@@ -6,35 +6,6 @@ use Illuminate\Support\Facades\Schema;
 uses(RefreshDatabase::class);
 
 it('creates required tables with migrations', function () {
-    $tables = [
-        'users',
-        'password_reset_tokens',
-        'sessions',
-        'cache',
-        'cache_locks',
-        'jobs',
-        'job_batches',
-        'failed_jobs',
-        'categories',
-        'categories_metas',
-        'posts',
-        'post_metas',
-        'posts_has_tags',
-        'posts_has_category',
-        'forms',
-        'form_options',
-        'form_requests',
-        'form_request_metas',
-        'comments',
-        'menus',
-        'menu_items',
-        'roles',
-        'permissions',
-        'role_has_permissions',
-        'model_has_permissions',
-        'model_has_roles',
-    ];
-
     // Run the migrations
     $this->artisan('migrate');
 
@@ -65,6 +36,7 @@ it('creates required tables with migrations', function () {
     expect(Schema::hasTable('role_has_permissions'))->toBeTrue();
     expect(Schema::hasTable('model_has_permissions'))->toBeTrue();
     expect(Schema::hasTable('model_has_roles'))->toBeTrue();
+    expect(Schema::hasTable('media'))->toBeTrue();
 });
 
 it('rolls back migrations correctly', function () {
@@ -101,6 +73,7 @@ it('rolls back migrations correctly', function () {
     expect(Schema::hasTable('role_has_permissions'))->toBeFalse();
     expect(Schema::hasTable('model_has_permissions'))->toBeFalse();
     expect(Schema::hasTable('model_has_roles'))->toBeFalse();
+    expect(Schema::hasTable('media'))->toBeTrue();
 });
 
 it('seeds database with admin user', function () {

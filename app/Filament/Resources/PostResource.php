@@ -69,18 +69,6 @@ class PostResource extends Resource
                     'lg' => 12,
                 ])
                     ->schema([
-                        Forms\Components\Select::make('type')
-                            ->label(trans('filament-cms::messages.content.posts.sections.type.columns.type'))
-                            ->live()
-                            ->options(
-                                FilamentCMSTypes::getOptions()
-                                    ->whereIn('key', config('filament-cms.types'))
-                                    ->pluck('label', 'key')->toArray()
-                            )
-                            ->default(config('filament-cms.types')[0])
-                            ->columnSpanFull()
-                            ->required()
-                            ->selectablePlaceholder(false),
                         Forms\Components\Grid::make()
                             ->schema(
                                 [
@@ -90,16 +78,8 @@ class PostResource extends Resource
                                             Forms\Components\TextInput::make('title')
                                                 ->label(trans('filament-cms::messages.content.posts.sections.post.columns.title'))
                                                 ->afterStateUpdated(function (Forms\Get $get, Forms\Set $set) {
-
                                                     $titleSlug = Str::of($get('title'))->replace(' ', '-')->lower()->toString();
-
-                                                    if ($get('type') === 'page') {
-                                                        $set('slug', $titleSlug);
-                                                    }
-
-                                                    if ($get('type') === 'post') {
-                                                        $set('slug', 'blog/'.$titleSlug);
-                                                    }
+                                                    $set('slug', 'blog/' . $titleSlug);
                                                 })
                                                 ->lazy()
                                                 ->required(),
@@ -140,7 +120,7 @@ class PostResource extends Resource
                                             ->selectablePlaceholder(false)
                                             ->searchable(),
                                         Forms\Components\Select::make('categories')
-                                            ->hidden(fn (Forms\Get $get) => in_array($get('type'), ['page', 'builder']))
+                                            ->hidden(fn(Forms\Get $get) => in_array($get('type'), ['page', 'builder']))
                                             ->relationship('categories', 'name')
                                             ->label(trans('filament-cms::messages.content.posts.sections.status.columns.categories'))
                                             ->createOptionForm([
@@ -166,9 +146,9 @@ class PostResource extends Resource
                                             ->searchable()
                                             ->multiple()
                                             ->preload()
-                                            ->options(fn (Forms\Get $get) => Category::where('for', $get('type'))->where('type', 'category')->pluck('name', 'id')->toArray()),
+                                            ->options(fn(Forms\Get $get) => Category::where('for', $get('type'))->where('type', 'category')->pluck('name', 'id')->toArray()),
                                         Forms\Components\Select::make('tags')
-                                            ->hidden(fn (Forms\Get $get) => $get('type') !== 'post')
+                                            ->hidden(fn(Forms\Get $get) => $get('type') !== 'post')
                                             ->label(trans('filament-cms::messages.content.posts.sections.status.columns.tags'))
                                             ->searchable()
                                             ->multiple()
@@ -199,7 +179,7 @@ class PostResource extends Resource
                                             ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_published'))
                                             ->default(true)
                                             ->required(),
-                                        Forms\Components\DateTimePicker::make('published_at')->hidden(fn (Forms\Get $get) => in_array($get('type'), ['page', 'builder']))->label(trans('filament-cms::messages.content.posts.sections.status.columns.published_at'))->default(now()->format('Y-m-d H:i:s')),
+                                        Forms\Components\DateTimePicker::make('published_at')->hidden(fn(Forms\Get $get) => in_array($get('type'), ['page', 'builder']))->label(trans('filament-cms::messages.content.posts.sections.status.columns.published_at'))->default(now()->format('Y-m-d H:i:s')),
                                     ]),
                                 Forms\Components\Section::make(trans('filament-cms::messages.content.posts.sections.images.title'))
                                     ->description(trans('filament-cms::messages.content.posts.sections.images.description'))
@@ -249,7 +229,7 @@ class PostResource extends Resource
                         ->size(TextEntrySize::Large),
                     ImageEntry::make('feature_image')
                         ->hiddenLabel()
-                        ->default(fn ($record) => $record->getFirstMediaUrl('feature_image')),
+                        ->default(fn($record) => $record->getFirstMediaUrl('feature_image')),
                     MarkdownEntry::make('body')
                         ->markdown()
                         ->hiddenLabel(),
@@ -259,34 +239,34 @@ class PostResource extends Resource
                 'md' => 2,
                 'lg' => 4,
             ])->schema([
-                Section::make(trans('filament-cms::messages.content.posts.sections.status.title'))
-                    ->description(trans('filament-cms::messages.content.posts.sections.status.description'))
-                    ->schema([
-                        TextEntry::make('author.name')
-                            ->label(trans('filament-cms::messages.content.posts.sections.author.columns.author'))
-                            ->default(fn (Post $post) => $post->author?->name),
-                        TextEntry::make('type')
-                            ->label(trans('filament-cms::messages.content.posts.sections.status.columns.type'))
-                            ->state(function (Post $post) {
-                                return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->label;
-                            })
-                            ->color(function (Post $post) {
-                                return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->color;
-                            })
-                            ->icon(function (Post $post) {
-                                return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->icon;
-                            })
-                            ->badge(),
-                    ])->columnSpan(2),
-                Section::make(trans('filament-cms::messages.content.posts.sections.seo.title'))
-                    ->description(trans('filament-cms::messages.content.posts.sections.seo.description'))
-                    ->schema([
-                        TextEntry::make('short_description')
-                            ->label(trans('filament-cms::messages.content.posts.sections.seo.columns.short_description')),
-                        TextEntry::make('keywords')
-                            ->label(trans('filament-cms::messages.content.posts.sections.seo.columns.keywords')),
-                    ])->columnSpan(2),
-            ]),
+                        Section::make(trans('filament-cms::messages.content.posts.sections.status.title'))
+                            ->description(trans('filament-cms::messages.content.posts.sections.status.description'))
+                            ->schema([
+                                TextEntry::make('author.name')
+                                    ->label(trans('filament-cms::messages.content.posts.sections.author.columns.author'))
+                                    ->default(fn(Post $post) => $post->author?->name),
+                                TextEntry::make('type')
+                                    ->label(trans('filament-cms::messages.content.posts.sections.status.columns.type'))
+                                    ->state(function (Post $post) {
+                                        return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->label;
+                                    })
+                                    ->color(function (Post $post) {
+                                        return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->color;
+                                    })
+                                    ->icon(function (Post $post) {
+                                        return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->icon;
+                                    })
+                                    ->badge(),
+                            ])->columnSpan(2),
+                        Section::make(trans('filament-cms::messages.content.posts.sections.seo.title'))
+                            ->description(trans('filament-cms::messages.content.posts.sections.seo.description'))
+                            ->schema([
+                                TextEntry::make('short_description')
+                                    ->label(trans('filament-cms::messages.content.posts.sections.seo.columns.short_description')),
+                                TextEntry::make('keywords')
+                                    ->label(trans('filament-cms::messages.content.posts.sections.seo.columns.keywords')),
+                            ])->columnSpan(2),
+                    ]),
         ]);
     }
 
@@ -299,7 +279,7 @@ class PostResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->label(trans('filament-cms::messages.content.posts.sections.post.columns.title'))
-                    ->description(fn (Post $post) => Str::of($post->short_description)->limit(50))
+                    ->description(fn(Post $post) => Str::of($post->short_description)->limit(50))
                     ->toggleable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
@@ -352,7 +332,7 @@ class PostResource extends Resource
                         return $query
                             ->when(
                                 $data['type'],
-                                fn (Builder $query, $type): Builder => $query->where('type', '>=', $type),
+                                fn(Builder $query, $type): Builder => $query->where('type', '>=', $type),
                             );
                     }),
                 Tables\Filters\Filter::make('author_id')
@@ -367,7 +347,7 @@ class PostResource extends Resource
                         return $query
                             ->when(
                                 $data['author_id'],
-                                fn (Builder $query, $id): Builder => $query->where('author_id', $id),
+                                fn(Builder $query, $id): Builder => $query->where('author_id', $id),
                             );
                     }),
                 Tables\Filters\Filter::make('published_at')
@@ -379,7 +359,7 @@ class PostResource extends Resource
                         return $query
                             ->when(
                                 $data['published_at'],
-                                fn (Builder $query, $publishedAt): Builder => $query->whereDate('published_at', $publishedAt),
+                                fn(Builder $query, $publishedAt): Builder => $query->whereDate('published_at', $publishedAt),
                             );
                     }),
                 Tables\Filters\Filter::make('is_published')
@@ -391,7 +371,7 @@ class PostResource extends Resource
                         return $query
                             ->when(
                                 $data['is_published'],
-                                fn (Builder $query, $isPublished): Builder => $query->where('is_published', (bool) $isPublished),
+                                fn(Builder $query, $isPublished): Builder => $query->where('is_published', (bool) $isPublished),
                             );
                     }),
                 Tables\Filters\TrashedFilter::make(),
@@ -404,11 +384,11 @@ class PostResource extends Resource
                     ->iconButton()
                     ->tooltip(__('filament-actions::edit.single.label')),
                 Tables\Actions\DeleteAction::make()
-                    ->before(fn (Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
+                    ->before(fn(Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
                     ->iconButton()
                     ->tooltip(__('filament-actions::delete.single.label')),
                 Tables\Actions\ForceDeleteAction::make()
-                    ->before(fn (Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
+                    ->before(fn(Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
                     ->iconButton()
                     ->tooltip(__('filament-actions::force-delete.single.label')),
                 Tables\Actions\RestoreAction::make()
@@ -432,7 +412,7 @@ class PostResource extends Resource
                                 ->options(Category::query()->where('for', 'post')->where('type', 'category')->pluck('name', 'id')->toArray()),
                         ])
                         ->action(function (Collection $records, array $data) {
-                            $records->each(fn ($record) => $record->categories()->sync($data['categories']));
+                            $records->each(fn($record) => $record->categories()->sync($data['categories']));
 
                             Notification::make()
                                 ->title('Success')
@@ -446,7 +426,7 @@ class PostResource extends Resource
                         ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_published'))
                         ->icon('heroicon-o-check-circle')
                         ->action(function (Collection $records) {
-                            $records->each(fn ($record) => $record->update(['is_published' => ! $record->is_published]));
+                            $records->each(fn($record) => $record->update(['is_published' => !$record->is_published]));
 
                             Notification::make()
                                 ->title('Posts Published')
@@ -460,7 +440,7 @@ class PostResource extends Resource
                         ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_trend'))
                         ->icon('heroicon-o-arrow-trending-up')
                         ->action(function (Collection $records) {
-                            $records->each(fn ($record) => $record->update(['is_trend' => ! $record->is_trend]));
+                            $records->each(fn($record) => $record->update(['is_trend' => !$record->is_trend]));
                             Notification::make()
                                 ->title('Posts Trended')
                                 ->body('The selected posts have been trended.')
@@ -471,7 +451,7 @@ class PostResource extends Resource
                 ]),
             ]);
 
-        return $table->recordUrl(fn (Post $record): string => Pages\ViewPost::getUrl([$record->id]));
+        return $table->recordUrl(fn(Post $record): string => Pages\ViewPost::getUrl([$record->id]));
     }
 
     public static function getRelations(): array

@@ -19,7 +19,7 @@ class PatchworkController extends Controller
             ->with('postMeta')
             ->first();
 
-        if (! $page) {
+        if (!$page) {
             abort(404);
         }
 
@@ -33,6 +33,10 @@ class PatchworkController extends Controller
             ->where('slug', request()->slug)->where('type', 'page')
             ->with('postMeta')
             ->first();
+
+        if (!$page) {
+            abort(404);
+        }
 
         return view('cms/preview', compact('page'));
     }
@@ -53,12 +57,16 @@ class PatchworkController extends Controller
     public function blogPreview(Request $request)
     {
 
-        $slug = 'blog/'.request()->slug;
+        $slug = request()->slug;
 
         $post = Post::query()
             ->where('slug', $slug)->where('type', 'post')
             ->with('postMeta')
             ->first();
+
+        if (!$post) {
+            abort(404);
+        }
 
         return view('cms/blog-preview', compact('post'));
     }
