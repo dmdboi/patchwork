@@ -33,6 +33,11 @@ class MenuResource extends Resource
 
     protected static ?string $navigationGroup = 'Settings';
 
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->hasAccess('view', 'menus');
+    }
+
     public static function getNavigationLabel(): string
     {
         return trans('filament-menus::messages.title');

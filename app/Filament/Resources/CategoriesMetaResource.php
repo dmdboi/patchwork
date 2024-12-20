@@ -21,6 +21,11 @@ class CategoriesMetaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->hasAccess('view', 'categories');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

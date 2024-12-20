@@ -45,6 +45,11 @@ class PostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil';
 
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->hasAccess('view', 'posts');
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return trans('filament-cms::messages.content.group');
@@ -506,10 +511,5 @@ class PostResource extends Resource
             'view' => Pages\ViewPost::route('/{record}/show'),
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
-    }
-
-    public static function viewAny(User $user): bool
-    {
-        return $user->hasAccess('view', 'posts');
     }
 }

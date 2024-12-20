@@ -18,6 +18,11 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+use Filament\Facades\Filament;
+use Filament\Navigation\NavigationGroup;
+use Illuminate\Support\ServiceProvider;
+ 
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -66,5 +71,21 @@ class AdminPanelProvider extends PanelProvider
                     \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en']),
                     \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make()
                 ]);
+    }
+
+    public function boot(): void
+    {
+        //
+        Filament::serving(function () {
+            Filament::registerNavigationGroups([
+                NavigationGroup::make()
+                     ->label('Content'),
+                NavigationGroup::make()
+                    ->label('Access'),
+                NavigationGroup::make()
+                    ->label('Settings')
+                    ->collapsed(),
+            ]);
+        });
     }
 }

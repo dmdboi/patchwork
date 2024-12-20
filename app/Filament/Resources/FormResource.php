@@ -23,6 +23,11 @@ class FormResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-identification';
 
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->hasAccess('view', 'forms');
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return trans('filament-cms::messages.content.group');
