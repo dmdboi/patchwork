@@ -238,7 +238,6 @@ class CategoryResource extends Resource
                             fn (Builder $query, $type) => $query->where('type', $type)
                         );
                     }),
-                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
