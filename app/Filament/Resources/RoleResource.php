@@ -3,20 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\RoleResource\Pages;
-use App\Filament\Resources\RoleResource\RelationManagers;
-
-use Filament\Forms;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\Grid;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -54,7 +48,6 @@ class RoleResource extends Resource
                         // Generate a CheckboxList for each resource group
                         return $groupedPermissions->map(function ($group, $resource) use ($permissions) {
                             // Filter permissions for this resource
-            
 
                             $filteredPermissions = $permissions->filter(function ($permission) use ($resource) {
                                 return Str::after($permission->name, ':') === $resource;
@@ -69,7 +62,7 @@ class RoleResource extends Resource
                                 })
                                 ->bulkToggleable();
                         })->values()->toArray();
-                    })
+                    }),
             ]);
     }
 
@@ -83,8 +76,8 @@ class RoleResource extends Resource
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('users_count')
-                ->badge()
-                ->icon('heroicon-s-user')
+                    ->badge()
+                    ->icon('heroicon-s-user')
                     ->label('Users')
                     ->counts('users')
                     ->sortable(),

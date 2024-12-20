@@ -2,7 +2,6 @@
 
 namespace App\Infolists\Components;
 
-use Filament\Infolists\Components\Entry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Contracts\HasLabel as LabelInterface;
 use Illuminate\Contracts\Support\Htmlable;
@@ -32,9 +31,10 @@ class MarkdownEntry extends TextEntry
 
     public function supportedLanguages(array $languages): static
     {
-        foreach ($languages as $language){
+        foreach ($languages as $language) {
             $this->supportedLanguages[] = '```'.$language;
         }
+
         return $this;
     }
 
@@ -89,7 +89,7 @@ class MarkdownEntry extends TextEntry
                 $prefix = e($prefix);
             }
 
-            $state = $prefix . $state;
+            $state = $prefix.$state;
         }
 
         if (filled($suffix)) {
@@ -99,14 +99,11 @@ class MarkdownEntry extends TextEntry
                 $suffix = e($suffix);
             }
 
-            $state = $state . $suffix;
+            $state = $state.$suffix;
         }
 
         return $isHtml ? new HtmlString($state) : $state;
     }
 
-    protected function setUp(): void
-    {
-
-    }
+    protected function setUp(): void {}
 }

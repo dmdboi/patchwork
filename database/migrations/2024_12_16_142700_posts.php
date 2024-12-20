@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,7 +13,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        // Posts 
+        // Posts
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
 
@@ -69,7 +70,6 @@ return new class extends Migration {
             $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
             $table->foreignId('tag_id')->constrained('categories')->onDelete('cascade');
         });
-
 
         // Posts Has Category
         Schema::create('posts_has_category', function (Blueprint $table) {

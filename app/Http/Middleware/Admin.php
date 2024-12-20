@@ -17,7 +17,7 @@ class Admin
     {
 
         // Check if the user is an admin
-        if (!auth()->user()->canAccessPanel('admin')) {
+        if (! auth()->user()->canAccessPanel('admin')) {
             abort(403);
         }
 

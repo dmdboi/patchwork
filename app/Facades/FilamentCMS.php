@@ -2,12 +2,10 @@
 
 namespace App\Facades;
 
-use Illuminate\Support\Facades\Facade;
-
 use App\Services\FilamentCMSAuthors;
 use App\Services\FilamentCMSThemes;
 use App\Services\FilamentCMSTypes;
-
+use Illuminate\Support\Facades\Facade;
 
 /**
  * @method FilamentCMSAuthors authors()

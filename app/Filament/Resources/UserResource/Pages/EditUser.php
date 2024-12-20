@@ -6,7 +6,6 @@ use App\Filament\Resources\UserResource;
 use App\Models\User;
 use Filament\Actions;
 use Filament\Forms\Components\Select;
-use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Spatie\Permission\Models\Role;
 
@@ -29,7 +28,7 @@ class EditUser extends EditRecord
                 ->action(function (array $data, User $record): void {
                     $role = Role::find($data['role']);
                     $record->syncRoles($role);
-                })
+                }),
 
         ];
     }

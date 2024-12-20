@@ -2,19 +2,19 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\MenuResource\Pages;
+use App\Filament\Resources\MenuResource\Relations\MenuItems;
+use App\Models\Menu;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Resources\Resource;
+use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
-use App\Models\Menu;
-use Filament\Tables;
-use Filament\Forms\Components\Grid;
 use Filament\Tables\Filters\Filter;
-use App\Filament\Resources\MenuResource\Pages;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use App\Filament\Resources\MenuResource\Relations\MenuItems;
 
 class MenuResource extends Resource
 {
@@ -22,7 +22,7 @@ class MenuResource extends Resource
 
     protected static ?string $slug = 'menus';
 
-    protected static ?string $recordTitleAttribute = "title";
+    protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $navigationIcon = 'heroicon-o-bars-3';
 
@@ -56,7 +56,7 @@ class MenuResource extends Resource
     public static function getRelations(): array
     {
         return [
-            MenuItems::make()
+            MenuItems::make(),
         ];
     }
 
@@ -64,7 +64,7 @@ class MenuResource extends Resource
     {
         return $form
             ->schema([
-                Grid::make(["default" => 3])->schema([
+                Grid::make(['default' => 3])->schema([
                     Forms\Components\TextInput::make('title')
                         ->label('Title')
                         ->required()
@@ -82,7 +82,7 @@ class MenuResource extends Resource
                         ->default(true)
                         ->label('Active')
                         ->required(),
-                ])
+                ]),
             ]);
     }
 
@@ -93,7 +93,7 @@ class MenuResource extends Resource
             ActionGroup::make([
                 ViewAction::make(),
                 EditAction::make(),
-                DeleteAction::make()
+                DeleteAction::make(),
             ]),
         ]);
 
@@ -117,7 +117,7 @@ class MenuResource extends Resource
             ->filters([
                 Filter::make('activated')
                     ->label('Active')
-                    ->query(fn(Builder $query): Builder => $query->where('activated', true))
+                    ->query(fn (Builder $query): Builder => $query->where('activated', true)),
             ]);
 
     }

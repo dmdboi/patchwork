@@ -20,7 +20,7 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'Access';
 
-    protected static? int $navigationSort = 1;
+    protected static ?int $navigationSort = 1;
 
     public static function canViewAny(): bool
     {
@@ -41,7 +41,7 @@ class UserResource extends Resource
                             ->placeholder('John Doe'),
                         Forms\Components\TextInput::make('email')
                             ->label('Email')
-                            ->required()
+                            ->required(),
                     ]),
                 Section::make('Roles')
                     ->collapsible()
@@ -49,7 +49,7 @@ class UserResource extends Resource
                         Forms\Components\CheckboxList::make('roles')
                             ->hiddenLabel()
                             ->relationship('roles', 'name')
-                            ->disabled()
+                            ->disabled(),
                     ]),
             ]);
     }

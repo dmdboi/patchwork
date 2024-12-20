@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-use App\Services\FilamentPostAuthors;
-
 trait HasPosts
 {
     public function posts()

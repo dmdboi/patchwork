@@ -8,7 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{slug}', [PatchworkController::class, 'page'] );
+Route::get('/{slug}', [PatchworkController::class, 'page']);
 
 // Admin Routes
 Route::middleware(['web', Admin::class])->name('admin.')->group(function () {

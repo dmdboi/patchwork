@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property integer $id
- * @property integer $user_id
+ * @property int $id
+ * @property int $user_id
  * @property string $user_type
- * @property integer $content_id
+ * @property int $content_id
  * @property string $content_type
  * @property string $comment
  * @property float $rate
- * @property boolean $is_active
+ * @property bool $is_active
  * @property string $created_at
  * @property string $updated_at
  */
@@ -30,7 +30,7 @@ class Comment extends Model
         'rate',
         'is_active',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     protected $casts = [

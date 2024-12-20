@@ -19,7 +19,7 @@ class PatchworkController extends Controller
             ->with('postMeta')
             ->first();
 
-        if (!$page) {
+        if (! $page) {
             abort(404);
         }
 
@@ -53,7 +53,7 @@ class PatchworkController extends Controller
     public function blogPreview(Request $request)
     {
 
-        $slug = 'blog/' . request()->slug;
+        $slug = 'blog/'.request()->slug;
 
         $post = Post::query()
             ->where('slug', $slug)->where('type', 'post')

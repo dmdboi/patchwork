@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Livewire\BuilderToolbar;
+use App\Services\Contracts\CmsFormFieldType;
+use App\Services\Contracts\CmsType;
+use App\Services\FilamentCMSFormFields;
+use App\Services\FilamentCMSServices;
+use App\Services\FilamentCMSTypes;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\DatePicker;
@@ -14,27 +20,13 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use ProtoneMedia\Splade\Http\SpladeMiddleware;
-
-use App\Facades\FilamentCMS;
-use App\Livewire\BuilderToolbar;
-use App\Livewire\BuilderToolbarForm;
-use App\Livewire\BuilderToolbarHeader;
-use App\Sections\TomatoAboutFeaturesSection;
-use App\Services\Contracts\CmsFormFieldType;
-use App\Services\Contracts\CmsType;
-use App\Services\Contracts\Section;
-use App\Services\FilamentCMSFormFields;
-use App\Services\FilamentCMSServices;
-use App\Services\FilamentCMSTypes;
 use TomatoPHP\FilamentIcons\Components\IconPicker;
 
-require_once  __DIR__ .'/helpers.php';
+require_once __DIR__.'/helpers.php';
 
 class FilamentCmsServiceProvider extends ServiceProvider
 {
@@ -43,8 +35,8 @@ class FilamentCmsServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(resource_path('lang'), 'filament-cms');
 
-        $this->app->bind('filament-cms', function() {
-            return new FilamentCMSServices();
+        $this->app->bind('filament-cms', function () {
+            return new FilamentCMSServices;
         });
 
         $this->loadViewComponentsAs('tomato', [
@@ -58,7 +50,7 @@ class FilamentCmsServiceProvider extends ServiceProvider
         Livewire::isDiscoverable(BuilderToolbar::class);
 
         FilamentCMSTypes::register([
-           CmsType::make('post')
+            CmsType::make('post')
                 ->label(trans('filament-cms::messages.types.post'))
                 ->color('success')
                 ->icon('heroicon-o-document')
@@ -72,11 +64,11 @@ class FilamentCmsServiceProvider extends ServiceProvider
                         ->icon('heroicon-o-tag')
                         ->label(trans('filament-cms::messages.types.tags')),
                 ]),
-           CmsType::make('page')
-               ->label(trans('filament-cms::messages.types.page'))
-               ->color('success')
-               ->icon('heroicon-o-bars-3-center-left'),
-       ]);
+            CmsType::make('page')
+                ->label(trans('filament-cms::messages.types.page'))
+                ->color('success')
+                ->icon('heroicon-o-bars-3-center-left'),
+        ]);
 
         FilamentCMSFormFields::register([
             CmsFormFieldType::make('text')

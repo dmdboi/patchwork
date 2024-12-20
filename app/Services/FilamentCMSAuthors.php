@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Str;
 use App\Services\Contracts\CmsAuthor;
 
 class FilamentCMSAuthors
@@ -11,10 +10,11 @@ class FilamentCMSAuthors
 
     public static function register(CmsAuthor|array $author)
     {
-        if(is_array($author)) {
-            foreach($author as $type) {
+        if (is_array($author)) {
+            foreach ($author as $type) {
                 self::register($type);
             }
+
             return;
         }
         self::$authorTypes[] = $author;

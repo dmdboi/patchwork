@@ -3,13 +3,12 @@
 namespace App\Filament\Resources\MenuResource\Relations;
 
 use App\Models\Post;
-use Filament\Forms\Form;
 use Filament\Forms;
+use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-
 
 class MenuItems extends RelationManager
 {
@@ -45,7 +44,7 @@ class MenuItems extends RelationManager
         $routeList = Post::query()->orderBy('slug', 'desc')->get();
         $routeList = $routeList->map(function ($item) {
             if ($item['type'] !== 'page') {
-                $item['title'] = '[' . $item['type'] . '] ' . $item['title'];
+                $item['title'] = '['.$item['type'].'] '.$item['title'];
             }
 
             return $item;
@@ -54,7 +53,7 @@ class MenuItems extends RelationManager
         $repeaterSchema = [];
 
         return $form->schema([
-            Forms\Components\Grid::make(["default" => 1])->schema(array_merge([
+            Forms\Components\Grid::make(['default' => 1])->schema(array_merge([
                 Forms\Components\TextInput::make('title')
                     ->label('Title')
                     ->required()
@@ -66,19 +65,19 @@ class MenuItems extends RelationManager
                     ->live(),
                 Forms\Components\TextInput::make('url')
                     ->label('URL')
-                    ->hidden(fn(Forms\Get $get) => $get('is_route') === true)
-                    ->required(fn(Forms\Get $get) => $get('is_route') === false)
+                    ->hidden(fn (Forms\Get $get) => $get('is_route') === true)
+                    ->required(fn (Forms\Get $get) => $get('is_route') === false)
                     ->maxLength(255),
                 Forms\Components\Select::make('route')
                     ->label('Route')
-                    ->hidden(fn(Forms\Get $get) => $get('is_route') === false)
-                    ->required(fn(Forms\Get $get) => $get('is_route') === true)
+                    ->hidden(fn (Forms\Get $get) => $get('is_route') === false)
+                    ->required(fn (Forms\Get $get) => $get('is_route') === true)
                     ->searchable()
                     ->options(collect($routeList)->pluck('title', 'slug')->toArray()),
                 Forms\Components\Toggle::make('new_tab')
                     ->label('Open in new tab')
-                    ->required()
-            ], $repeaterSchema))
+                    ->required(),
+            ], $repeaterSchema)),
         ]);
     }
 
@@ -86,20 +85,20 @@ class MenuItems extends RelationManager
     {
         return $table
             ->headerActions([
-                Tables\Actions\CreateAction::make()
+                Tables\Actions\CreateAction::make(),
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->label('Page'),
                 Tables\Columns\TextColumn::make('route')
-                    ->label('Slug')
+                    ->label('Slug'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make()
+                Tables\Actions\DeleteBulkAction::make(),
             ])
             ->defaultSort('order', 'asc')
             ->reorderable('order');

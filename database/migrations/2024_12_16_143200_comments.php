@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if(config('filament-cms.features.comments')) {
+        if (config('filament-cms.features.comments')) {
             Schema::create('comments', function (Blueprint $table) {
                 $table->id();
 
@@ -22,7 +22,6 @@ return new class extends Migration
                 //Link User
                 $table->unsignedBigInteger('user_id');
                 $table->string('user_type');
-
 
                 //Link Content
                 $table->unsignedBigInteger('content_id');

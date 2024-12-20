@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Str;
 use App\Services\Contracts\CmsType;
 
 class FilamentCMSTypes
@@ -11,10 +10,11 @@ class FilamentCMSTypes
 
     public static function register(CmsType|array $cmsType)
     {
-        if(is_array($cmsType)) {
-            foreach($cmsType as $type) {
+        if (is_array($cmsType)) {
+            foreach ($cmsType as $type) {
                 self::register($type);
             }
+
             return;
         }
 

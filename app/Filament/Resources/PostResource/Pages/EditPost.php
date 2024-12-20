@@ -2,19 +2,14 @@
 
 namespace App\Filament\Resources\PostResource\Pages;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Event;
-use App\Events\PostCreated;
 use App\Events\PostUpdated;
 use App\Filament\Resources\PostResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-use App\Jobs\GitHubMetaGetterJob;
-use App\Jobs\YoutubeMetaGetterJob;
+use Illuminate\Support\Facades\Event;
 
 class EditPost extends EditRecord
 {
-
     protected static string $resource = PostResource::class;
 
     protected function getHeaderActions(): array
@@ -23,13 +18,13 @@ class EditPost extends EditRecord
             Actions\Action::make('editor-button')
                 ->label('Editor')
                 ->icon('heroicon-o-pencil')
-                ->action(fn() => redirect()->to('/admin/editor/' . $this->getRecord()->slug)),
+                ->action(fn () => redirect()->to('/admin/editor/'.$this->getRecord()->slug)),
             Actions\Action::make('preview-button')
                 ->label('Preview')
                 ->icon('heroicon-o-eye')
                 ->color('primary')
-                ->action(fn() => redirect()->to('/preview/' . $this->getRecord()->slug)),
-            Actions\DeleteAction::make()
+                ->action(fn () => redirect()->to('/preview/'.$this->getRecord()->slug)),
+            Actions\DeleteAction::make(),
         ];
     }
 
@@ -37,7 +32,6 @@ class EditPost extends EditRecord
     {
         return $data;
     }
-
 
     public function afterSave()
     {

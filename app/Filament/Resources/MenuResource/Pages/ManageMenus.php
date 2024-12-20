@@ -2,15 +2,13 @@
 
 namespace App\Filament\Resources\MenuResource\Pages;
 
+use App\Filament\Resources\MenuResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use App\Filament\Resources\MenuResource;
-use Filament\Resources\Pages\ManageRecords;
 
 class ManageMenus extends ListRecords
 {
     protected static string $resource = MenuResource::class;
-
 
     public function getTitle(): string
     {
@@ -21,7 +19,7 @@ class ManageMenus extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label('Create Menu')
+                ->label('Create Menu'),
         ];
     }
 }

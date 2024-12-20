@@ -3,9 +3,8 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Widgets\StatsOverview;
-use Filament\Pages\Page;
-
 use Filament\Actions;
+use Filament\Pages\Page;
 
 class Dashboard extends Page
 {
@@ -35,5 +34,4 @@ class Dashboard extends Page
                 ->url('/admin/posts/create'),
         ];
     }
-
 }

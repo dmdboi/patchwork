@@ -2,18 +2,15 @@
 
 namespace App\Filament\Resources\PostResource\Pages;
 
-use Filament\Infolists\Concerns\InteractsWithInfolists;
-use Filament\Resources\Pages\ViewRecord;
-use Illuminate\Support\Facades\Event;
 use App\Events\PostDeleted;
 use App\Filament\Resources\PostResource;
-use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
 use App\Models\Post;
+use Filament\Actions;
+use Filament\Resources\Pages\ViewRecord;
+use Illuminate\Support\Facades\Event;
 
 class ViewPost extends ViewRecord
 {
-
     protected static string $resource = PostResource::class;
 
     protected function getHeaderActions(): array
@@ -21,11 +18,11 @@ class ViewPost extends ViewRecord
         return [
             Actions\EditAction::make(),
             Actions\Action::make('preview-button')
-            ->label('Preview')
-            ->icon('heroicon-o-eye')
-            ->color('primary')
-            ->action(fn() => redirect()->to('/preview/' . $this->getRecord()->slug)),
-            Actions\DeleteAction::make()->before(fn(Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
+                ->label('Preview')
+                ->icon('heroicon-o-eye')
+                ->color('primary')
+                ->action(fn () => redirect()->to('/preview/'.$this->getRecord()->slug)),
+            Actions\DeleteAction::make()->before(fn (Post $record) => Event::dispatch(new PostDeleted($record->toArray()))),
         ];
     }
 }

@@ -2,11 +2,8 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
-use App\Models\Form;
 use App\Services\Contracts\Section;
+use Illuminate\Support\Collection;
 
 class FilamentCMSThemes
 {
@@ -18,6 +15,7 @@ class FilamentCMSThemes
             foreach ($section as $item) {
                 self::register($item);
             }
+
             return;
         } else {
             self::$sections[] = $section;

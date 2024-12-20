@@ -9,8 +9,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * @property integer $id
- * @property integer $parent_id
+ * @property int $id
+ * @property int $parent_id
  * @property string $for
  * @property string $type
  * @property string $name
@@ -18,8 +18,8 @@ use Spatie\Translatable\HasTranslations;
  * @property string $description
  * @property string $icon
  * @property string $color
- * @property boolean $is_active
- * @property boolean $show_in_menu
+ * @property bool $is_active
+ * @property bool $show_in_menu
  * @property string $created_at
  * @property string $updated_at
  * @property Categorable[] $categorables
@@ -29,13 +29,13 @@ use Spatie\Translatable\HasTranslations;
  */
 class Category extends Model implements HasMedia
 {
-    use InteractsWithMedia;
     use HasTranslations;
+    use InteractsWithMedia;
     use SoftDeletes;
 
     public $translatable = [
         'name',
-        'description'
+        'description',
     ];
 
     /**
@@ -53,9 +53,8 @@ class Category extends Model implements HasMedia
         'is_active',
         'show_in_menu',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
-
 
     protected $casts = [
         'is_active' => 'boolean',

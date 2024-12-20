@@ -18,5 +18,5 @@ return [
                 ->label('url'),
             TextInput::make('button')
                 ->label('button'),
-        ])
+        ]),
 ];

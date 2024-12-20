@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\PostResource\Import;
 
-use Filament\Actions\Imports\Importer;
-use Filament\Actions\Imports\ImportColumn;
-use Filament\Actions\Imports\Models\Import;
 use App\Models\Post;
+use Filament\Actions\Imports\ImportColumn;
+use Filament\Actions\Imports\Importer;
+use Filament\Actions\Imports\Models\Import;
 
 class ImportPosts extends Importer
 {
@@ -39,16 +39,16 @@ class ImportPosts extends Importer
             'short_description' => $this->data['short_description'],
             'slug' => $this->data['slug'],
             'type' => $this->data['type'],
-            'body' => $this->data['body']
+            'body' => $this->data['body'],
         ]);
     }
 
     public static function getCompletedNotificationBody(Import $import): string
     {
-        $body = 'Your post import has completed and ' . number_format($import->successful_rows) . ' ' . str('row')->plural($import->successful_rows) . ' imported.';
+        $body = 'Your post import has completed and '.number_format($import->successful_rows).' '.str('row')->plural($import->successful_rows).' imported.';
 
         if ($failedRowsCount = $import->getFailedRowsCount()) {
-            $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to import.';
+            $body .= ' '.number_format($failedRowsCount).' '.str('row')->plural($failedRowsCount).' failed to import.';
         }
 
         return $body;

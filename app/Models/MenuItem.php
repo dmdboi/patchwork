@@ -10,7 +10,7 @@ class MenuItem extends Model
     use HasFactory;
 
     public array $translatable = [
-        'title'
+        'title',
     ];
 
     protected $casts = [
@@ -26,7 +26,7 @@ class MenuItem extends Model
      *
      * @var string
      */
-    protected $table = "menu_items";
+    protected $table = 'menu_items';
 
     /**
      * The attributes that are mass assignable.
@@ -34,22 +34,20 @@ class MenuItem extends Model
      * @var array
      */
     protected $fillable = [
-        "menu_id",
-        "title",
-        "group",
-        "icon",
-        "is_route",
-        "route",
-        "url",
-        "new_tab",
-        "permissions",
-        "order",
+        'menu_id',
+        'title',
+        'group',
+        'icon',
+        'is_route',
+        'route',
+        'url',
+        'new_tab',
+        'permissions',
+        'order',
     ];
-
 
     public function menu()
     {
         return $this->belongsTo(Menu::class, 'menu_id', 'id');
     }
-
 }

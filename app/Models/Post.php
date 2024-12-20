@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use App\Models\Category;
 
 /**
- * @property integer $id
- * @property integer $author_id
+ * @property int $id
+ * @property int $author_id
  * @property string $author_type
  * @property string $type
  * @property string $title
@@ -19,8 +17,8 @@ use App\Models\Category;
  * @property string $short_description
  * @property string $keywords
  * @property string $body
- * @property boolean $is_published
- * @property boolean $is_trend
+ * @property bool $is_published
+ * @property bool $is_trend
  * @property string $published_at
  * @property float $likes
  * @property float $views
@@ -43,14 +41,14 @@ class Post extends Model implements HasMedia
         'is_trend' => 'boolean',
         'likes' => 'float',
         'views' => 'float',
-        'meta'=> 'array',
+        'meta' => 'array',
         'published_at' => 'datetime',
     ];
 
     protected $dates = [
         'published_at',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
@@ -74,7 +72,7 @@ class Post extends Model implements HasMedia
         'meta',
         'meta_url',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
@@ -89,7 +87,6 @@ class Post extends Model implements HasMedia
     {
         return $this->morphTo('author');
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -113,16 +110,14 @@ class Post extends Model implements HasMedia
     }
 
     /**
-     * @param string $key
-     * @param string|null $value
+     * @param  string|null  $value
      * @return Model|string
      */
-    public function meta(string $key, mixed $value=null): mixed
+    public function meta(string $key, mixed $value = null): mixed
     {
-        if($value){
+        if ($value) {
             return $this->postMeta()->updateOrCreate(['key' => $key], ['value' => $value]);
-        }
-        else {
+        } else {
             return $this->postMeta()->where('key', $key)->first()?->value;
         }
     }

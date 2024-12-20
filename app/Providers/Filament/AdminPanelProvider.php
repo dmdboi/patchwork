@@ -2,10 +2,12 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -17,11 +19,6 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
-use Filament\Facades\Filament;
-use Filament\Navigation\NavigationGroup;
-use Illuminate\Support\ServiceProvider;
- 
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -59,14 +56,14 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])->plugins([
-                    \App\FilamentCMSPlugin::make()
-                        ->useCategory()
-                        ->usePost()
-                        ->usePageBuilder()
-                        ->useFormBuilder(),
-                    \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make(),
-                    \Mvenghaus\FilamentScheduleMonitor\FilamentPlugin::make()
-                ]);
+                \App\FilamentCMSPlugin::make()
+                    ->useCategory()
+                    ->usePost()
+                    ->usePageBuilder()
+                    ->useFormBuilder(),
+                \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make(),
+                \Mvenghaus\FilamentScheduleMonitor\FilamentPlugin::make(),
+            ]);
     }
 
     public function boot(): void
@@ -75,7 +72,7 @@ class AdminPanelProvider extends PanelProvider
         Filament::serving(function () {
             Filament::registerNavigationGroups([
                 NavigationGroup::make()
-                     ->label('Content'),
+                    ->label('Content'),
                 NavigationGroup::make()
                     ->label('Access'),
                 NavigationGroup::make()

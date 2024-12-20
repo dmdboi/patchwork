@@ -2,24 +2,19 @@
 
 namespace App\Filament\Resources\PostResource\Pages;
 
-use Illuminate\Support\Facades\Event;
 use App\Events\PostCreated;
 use App\Filament\Resources\PostResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
-use App\Jobs\GitHubMetaGetterJob;
-use App\Jobs\YoutubeMetaGetterJob;
-use App\Models\Post;
+use Illuminate\Support\Facades\Event;
 
 class CreatePost extends CreateRecord
 {
-
     protected static string $resource = PostResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-      
+
         ];
     }
 

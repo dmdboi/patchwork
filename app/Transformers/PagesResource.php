@@ -15,10 +15,10 @@ class PagesResource extends JsonResource
             'short_description' => $this->short_description,
             'body' => $this->body,
             'cover_image' => $this->getMedia('cover')->first()?->getUrl(),
-            'galary' =>  $this->getMedia('gallery')->map(function ($item) {
+            'galary' => $this->getMedia('gallery')->map(function ($item) {
                 return $item->getUrl();
             }),
-            'html_url' => url('/pages/' . $this->slug)
+            'html_url' => url('/pages/'.$this->slug),
         ];
     }
 }

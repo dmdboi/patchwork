@@ -2,25 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use Illuminate\Support\Str;
 use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
+use App\Services\FilamentCMSTypes;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Models\Post;
-use App\Services\FilamentCMSTypes;
+use Illuminate\Support\Str;
 use TomatoPHP\FilamentIcons\Components\IconColumn;
 use TomatoPHP\FilamentIcons\Components\IconPicker;
 
 class CategoryResource extends Resource
 {
-
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -66,7 +62,7 @@ class CategoryResource extends Resource
                                 ->description(trans('filament-cms::messages.content.category.sections.details.description'))
                                 ->schema([
                                     Forms\Components\TextInput::make('name')
-                                        ->afterStateUpdated( fn(Forms\Get $get, Forms\Set $set)=> $set('slug', Str::of($get('name'))->replace(' ', '-')->lower()->toString()))
+                                        ->afterStateUpdated(fn (Forms\Get $get, Forms\Set $set) => $set('slug', Str::of($get('name'))->replace(' ', '-')->lower()->toString()))
                                         ->label(trans('filament-cms::messages.content.category.sections.details.columns.name'))
                                         ->lazy()
                                         ->required(),
@@ -80,7 +76,7 @@ class CategoryResource extends Resource
                                     IconPicker::make('icon')
                                         ->label(trans('filament-cms::messages.content.category.sections.details.columns.icon')),
                                     Forms\Components\ColorPicker::make('color')
-                                        ->label(trans('filament-cms::messages.content.category.sections.details.columns.color'))
+                                        ->label(trans('filament-cms::messages.content.category.sections.details.columns.color')),
                                 ])
                                 ->columns(2),
                             Forms\Components\Section::make(trans('filament-cms::messages.content.posts.sections.images.title'))
@@ -114,23 +110,23 @@ class CategoryResource extends Resource
                                 ->label(trans('filament-cms::messages.content.category.sections.meta.columns.for'))
                                 ->searchable()
                                 ->live()
-                                ->options(fn() => FilamentCMSTypes::getOptions()->pluck('label', 'key')->toArray())
+                                ->options(fn () => FilamentCMSTypes::getOptions()->pluck('label', 'key')->toArray())
                                 ->default('post'),
                             Forms\Components\Select::make('type')
-                                ->hidden(function(Forms\Get $get){
+                                ->hidden(function (Forms\Get $get) {
                                     $for = FilamentCMSTypes::getOptions()->where('key', $get('for'))->first();
-                                    if($for && count($for->sub)){
+                                    if ($for && count($for->sub)) {
                                         return false;
                                     }
                                 })
                                 ->label(trans('filament-cms::messages.content.category.sections.meta.columns.type'))
                                 ->searchable()
-                                ->options(fn(Forms\Get $get) => FilamentCMSTypes::getOptions()->where('key', $get('for'))->first()?->getSub()->pluck('label', 'key')->toArray())
+                                ->options(fn (Forms\Get $get) => FilamentCMSTypes::getOptions()->where('key', $get('for'))->first()?->getSub()->pluck('label', 'key')->toArray())
                                 ->default('category'),
                             Forms\Components\Select::make('parent_id')
                                 ->label(trans('filament-cms::messages.content.category.sections.meta.columns.parent_id'))
                                 ->searchable()
-                                ->options(fn() => Category::query()->pluck('name', 'id')->toArray()),
+                                ->options(fn () => Category::query()->pluck('name', 'id')->toArray()),
                             Forms\Components\Toggle::make('is_active')
                                 ->label(trans('filament-cms::messages.content.category.sections.meta.columns.is_active')),
                             Forms\Components\Toggle::make('show_in_menu')
@@ -140,8 +136,8 @@ class CategoryResource extends Resource
                             'sm' => 1,
                             'md' => 2,
                             'lg' => 4,
-                        ])
-                ])
+                        ]),
+                ]),
             ]);
     }
 
@@ -151,21 +147,21 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('feature_image')
                     ->label(trans('filament-cms::messages.content.posts.sections.images.columns.feature_image'))
-                    ->defaultImageUrl(fn(Category $category)=> 'https://ui-avatars.com/api/?name='.Str::of($category->slug)->replace('-','+').'&color=FFFFFF&background=020617')
+                    ->defaultImageUrl(fn (Category $category) => 'https://ui-avatars.com/api/?name='.Str::of($category->slug)->replace('-', '+').'&color=FFFFFF&background=020617')
                     ->square()
                     ->collection('feature_image'),
                 Tables\Columns\TextColumn::make('name')
-                    ->description(fn(Category $category)=> Str::of($category->description)->limit(50))
+                    ->description(fn (Category $category) => Str::of($category->description)->limit(50))
                     ->label(trans('filament-cms::messages.content.category.sections.details.columns.name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('for')
-                    ->state(function (Category $category){
+                    ->state(function (Category $category) {
                         return FilamentCMSTypes::getOptions()->where('key', $category->for)->first()?->label;
                     })
-                    ->color(function (Category $category){
+                    ->color(function (Category $category) {
                         return FilamentCMSTypes::getOptions()->where('key', $category->for)->first()?->color;
                     })
-                    ->icon(function (Category $category){
+                    ->icon(function (Category $category) {
                         return FilamentCMSTypes::getOptions()->where('key', $category->for)->first()?->icon;
                     })
                     ->badge()
@@ -173,13 +169,13 @@ class CategoryResource extends Resource
                     ->label(trans('filament-cms::messages.content.category.sections.meta.columns.for'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
-                    ->state(function (Category $category){
+                    ->state(function (Category $category) {
                         return FilamentCMSTypes::getOptions()->where('key', $category->for)->first()?->getSub()->where('key', $category->type)->first()?->label;
                     })
-                    ->color(function (Category $category){
+                    ->color(function (Category $category) {
                         return FilamentCMSTypes::getOptions()->where('key', $category->for)->first()?->getSub()->where('key', $category->type)->first()?->color;
                     })
-                    ->icon(function (Category $category){
+                    ->icon(function (Category $category) {
                         return FilamentCMSTypes::getOptions()->where('key', $category->for)->first()?->getSub()->where('key', $category->type)->first()?->icon;
                     })
                     ->badge()
@@ -220,29 +216,29 @@ class CategoryResource extends Resource
                             ->label(trans('filament-cms::messages.content.category.sections.meta.columns.for'))
                             ->searchable()
                             ->live()
-                            ->options(fn() => FilamentCMSTypes::getOptions()->pluck('label', 'key')->toArray()),
+                            ->options(fn () => FilamentCMSTypes::getOptions()->pluck('label', 'key')->toArray()),
                         Forms\Components\Select::make('type')
-                            ->hidden(function(Forms\Get $get){
+                            ->hidden(function (Forms\Get $get) {
                                 $for = FilamentCMSTypes::getOptions()->where('key', $get('for'))->first();
-                                if($for && count($for->sub)){
+                                if ($for && count($for->sub)) {
                                     return false;
                                 }
                             })
                             ->label(trans('filament-cms::messages.content.category.sections.meta.columns.type'))
                             ->searchable()
-                            ->options(fn(Forms\Get $get) => FilamentCMSTypes::getOptions()->where('key', $get('for'))->first()?->getSub()->pluck('label', 'key')->toArray()),
+                            ->options(fn (Forms\Get $get) => FilamentCMSTypes::getOptions()->where('key', $get('for'))->first()?->getSub()->pluck('label', 'key')->toArray()),
 
                     ])
-                    ->query(function (Builder $query, array $data){
+                    ->query(function (Builder $query, array $data) {
                         $query->when(
                             $data['for'],
-                            fn(Builder $query, $for) => $query->where('for', $for)
+                            fn (Builder $query, $for) => $query->where('for', $for)
                         )->when(
                             $data['type'],
-                            fn(Builder $query, $type) => $query->where('type', $type)
+                            fn (Builder $query, $type) => $query->where('type', $type)
                         );
                     }),
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
