@@ -47,7 +47,6 @@ return new class extends Migration
             $table->text('meta_redirect')->nullable();
 
             $table->timestamps();
-            $table->softDeletes();
         });
 
         // Post Metas
