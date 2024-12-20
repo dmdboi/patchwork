@@ -1,3 +1,5 @@
+@props(['menuKey', 'component' => null])
+
 @php
     // Assuming $menuKey is passed to this component
     $menuKey = $menuKey ?? 'footer'; // Replace 'default_menu_key' with your default menu key if needed
@@ -6,7 +8,11 @@
     $menuItems = \App\Models\MenuItem::where('menu_id', $menu->id)->orderBy('order')->get();
 @endphp
 
+@if(!$component)
 <nav class="space-x-2">
+<!-- If no component is passed, render the menu items as links -->
+
+
 @foreach ($menuItems as $item)
     @php
         $url = $item['route'] ? $item['route'] : $item['url'];
@@ -20,3 +26,13 @@
     </a>
 @endforeach
 </nav>
+@else
+<!-- If a component is passed, render the menu items as component -->
+    @component(
+        $component,
+        [
+            'menuItems' => $menuItems,
+        ]
+    )
+    @endcomponent
+@endif

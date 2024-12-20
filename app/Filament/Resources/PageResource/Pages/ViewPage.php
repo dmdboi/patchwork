@@ -2,14 +2,14 @@
 
 namespace App\Filament\Resources\PageResource\Pages;
 
-use Filament\Infolists\Concerns\InteractsWithInfolists;
-use Filament\Resources\Pages\ViewRecord;
-use Illuminate\Support\Facades\Event;
+use App\Models\Post;
 use App\Events\PostDeleted;
 use App\Filament\Resources\PageResource;
+
+use Filament\Resources\Pages\ViewRecord;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
-use App\Models\Post;
+
+use Illuminate\Support\Facades\Event;
 
 class ViewPage extends ViewRecord
 {

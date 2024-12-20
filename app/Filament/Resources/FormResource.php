@@ -30,7 +30,7 @@ class FormResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return trans('filament-cms::messages.content.group');
+        return 'Forms';
     }
 
     public static function getPluralLabel(): ?string
