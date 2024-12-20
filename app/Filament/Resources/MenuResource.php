@@ -1,25 +1,20 @@
 <?php
 
-namespace TomatoPHP\FilamentMenus\Resources;
+namespace App\Filament\Resources;
 
-use App\Forms\Components\Translation;
-use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
-use Spatie\Permission\Models\Permission;
-use TomatoPHP\FilamentIcons\Components\IconPicker;
-use TomatoPHP\FilamentMenus\Models\Menu;
+use App\Models\Menu;
 use Filament\Tables;
 use Filament\Forms\Components\Grid;
 use Filament\Tables\Filters\Filter;
-use Illuminate\Support\Facades\Route;
-use TomatoPHP\FilamentMenus\Resources\MenuResource\Pages;
+use App\Filament\Resources\MenuResource\Pages;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use TomatoPHP\FilamentMenus\Resources\MenuResource\Relations\MenuItems;
+use App\Filament\Resources\MenuResource\Relations\MenuItems;
 
 class MenuResource extends Resource
 {
@@ -40,22 +35,22 @@ class MenuResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return trans('filament-menus::messages.title');
+        return 'Menus';
     }
 
     public static function getPluralLabel(): ?string
     {
-        return trans('filament-menus::messages.title');
+        return 'Menus';
     }
 
     public static function getLabel(): ?string
     {
-        return trans('filament-menus::messages.title');
+        return 'Menu';
     }
 
     public static function getModelLabel(): string
     {
-        return trans('filament-menus::messages.title');
+        return 'Menu';
     }
 
     public static function getRelations(): array
@@ -71,21 +66,21 @@ class MenuResource extends Resource
             ->schema([
                 Grid::make(["default" => 3])->schema([
                     Forms\Components\TextInput::make('title')
-                        ->label(trans('filament-menus::messages.cols.title'))
+                        ->label('Title')
                         ->required()
                         ->maxLength(255),
                     Forms\Components\TextInput::make('key')
-                        ->label(trans('filament-menus::messages.cols.key'))
+                        ->label('Key')
                         ->required()
                         ->maxLength(255),
                     Forms\Components\TextInput::make('location')
-                        ->label(trans('filament-menus::messages.cols.location'))
+                        ->label('Location')
                         ->required()
                         ->default('header')
                         ->maxLength(255),
                     Forms\Components\Toggle::make('activated')
                         ->default(true)
-                        ->label(trans('filament-menus::messages.cols.activated'))
+                        ->label('Active')
                         ->required(),
                 ])
             ]);
@@ -106,23 +101,23 @@ class MenuResource extends Resource
             ->recordAction(null)
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->label(trans('filament-menus::messages.cols.title'))
+                    ->label('Title')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('key')
-                    ->label(trans('filament-menus::messages.cols.component'))
-                    ->view('filament-menus::menu-item')
+                    ->label('Key')
+                    ->view('components/menu-item')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('location')
-                    ->label(trans('filament-menus::messages.cols.location'))
+                    ->label('Location')
                     ->sortable(),
                 Tables\Columns\BooleanColumn::make('activated')
-                    ->label(trans('filament-menus::messages.cols.activated')),
+                    ->label('Active'),
             ])
             ->filters([
                 Filter::make('activated')
-                    ->label(trans('filament-menus::messages.filters.activated'))
-                    ->query(fn (Builder $query): Builder => $query->where('activated', true))
+                    ->label('Active')
+                    ->query(fn(Builder $query): Builder => $query->where('activated', true))
             ]);
 
     }

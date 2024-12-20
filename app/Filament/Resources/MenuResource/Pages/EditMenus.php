@@ -1,10 +1,10 @@
 <?php
 
-namespace TomatoPHP\FilamentMenus\Resources\MenuResource\Pages;
+namespace App\Filament\Resources\MenuResource\Pages;
 
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\EditRecord;
-use TomatoPHP\FilamentMenus\Resources\MenuResource;
+use App\Filament\Resources\MenuResource;
 use Filament\Resources\Pages\ManageRecords;
 
 class EditMenus extends EditRecord
@@ -21,6 +21,6 @@ class EditMenus extends EditRecord
 
     public function getTitle(): string
     {
-        return trans('filament-menus::messages.title');
+        return 'Edit Menu';
     }
 }

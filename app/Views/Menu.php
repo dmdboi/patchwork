@@ -1,6 +1,6 @@
 <?php
 
-namespace TomatoPHP\FilamentMenus\Views;
+namespace App\Filament\Views;
 
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;

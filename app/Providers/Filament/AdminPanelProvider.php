@@ -69,7 +69,6 @@ class AdminPanelProvider extends PanelProvider
                         ->allowSocialMenuSettings(),
                     \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make(),
                     \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en']),
-                    \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make(),
                     \Mvenghaus\FilamentScheduleMonitor\FilamentPlugin::make()
                 ]);
     }

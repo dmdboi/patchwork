@@ -1,11 +1,9 @@
 <?php
 
-namespace TomatoPHP\FilamentMenus\Resources\MenuResource\Pages;
+namespace App\Filament\Resources\MenuResource\Pages;
 
-use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\CreateRecord;
-use TomatoPHP\FilamentMenus\Resources\MenuResource;
-use Filament\Resources\Pages\ManageRecords;
+use App\Filament\Resources\MenuResource;
 
 class CreateMenus extends CreateRecord
 {
@@ -21,6 +19,6 @@ class CreateMenus extends CreateRecord
 
     public function getTitle(): string
     {
-        return trans('filament-menus::messages.title');
+        return 'Create Menu';
     }
 }
