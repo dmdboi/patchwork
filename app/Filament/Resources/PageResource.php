@@ -13,11 +13,9 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\TextEntry\TextEntrySize;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
-use Filament\Resources\Concerns\Translatable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use App\Filament\Resources\PostResource\Pages;
-use App\Filament\Resources\PostResource\RelationManagers;
+use App\Filament\Resources\PageResource\Pages;
 use App\Models\Category;
 use App\Models\Post;
 use Filament\Forms;
@@ -28,13 +26,13 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use App\Services\FilamentCMSTypes;
 
-class PostResource extends Resource
+class PageResource extends Resource
 {
-    use Translatable;
-
     protected static ?string $model = Post::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-pencil';
+    protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
+    
+    protected static ?string $navigationGroup = 'Content';
 
     public static function canViewAny(): bool
     {
@@ -43,22 +41,22 @@ class PostResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return trans('filament-cms::messages.content.group');
+        return 'Content';
     }
 
     public static function getPluralLabel(): ?string
     {
-        return trans('filament-cms::messages.content.posts.title');
+        return 'Pages';
     }
 
     public static function getLabel(): ?string
     {
-        return trans('filament-cms::messages.content.posts.single');
+        return 'Page';
     }
 
     public static function getNavigationLabel(): string
     {
-        return trans('filament-cms::messages.content.posts.title');
+        return 'Pages';
     }
 
     public static function form(Form $form): Form
@@ -458,51 +456,31 @@ class PostResource extends Resource
                                 ->success()
                                 ->send();
                         })
-                        ->deselectRecordsAfterCompletion(),
-                    Tables\Actions\BulkAction::make('trend')
-                        ->requiresConfirmation()
-                        ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_trend'))
-                        ->icon('heroicon-o-arrow-trending-up')
-                        ->action(function (Collection $records) {
-                            $records->each(fn($record) => $record->update(['is_trend' => !$record->is_trend]));
-                            Notification::make()
-                                ->title('Posts Trended')
-                                ->body('The selected posts have been trended.')
-                                ->success()
-                                ->send();
-                        })
                         ->deselectRecordsAfterCompletion()
                 ]),
             ]);
 
-        return $table->recordUrl(fn(Post $record): string => Pages\ViewPost::getUrl([$record->id]));
+        return $table->recordUrl(fn(Post $record): string => Pages\ViewPage::getUrl([$record->id]));
     }
 
     public static function getRelations(): array
     {
-
-        $relations = [];
-
-        if (config('filament-cms.features.comments')) {
-            $relations[] = RelationManagers\PostCommentsRelation::make();
-        }
-
-        return $relations;
+        return [];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPosts::route('/'),
-            'create' => Pages\CreatePost::route('/create'),
-            'view' => Pages\ViewPost::route('/{record}/show'),
-            'edit' => Pages\EditPost::route('/{record}/edit'),
+            'index' => Pages\ListPages::route('/'),
+            'create' => Pages\CreatePage::route('/create'),
+            'view' => Pages\ViewPage::route('/{record}'),
+            'edit' => Pages\EditPage::route('/{record}/edit'),
         ];
     }
 
     public static function getEloquentQuery(): Builder
     {
         // Filter to show only rows with 'type' = 'post'
-        return parent::getEloquentQuery()->where('type', 'post');
+        return parent::getEloquentQuery()->where('type', 'page');
     }
 }
