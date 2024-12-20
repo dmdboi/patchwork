@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
 
 /**
  * @property int $id
@@ -19,7 +18,6 @@ use Spatie\Translatable\HasTranslations;
  */
 class Form extends Model
 {
-    use HasTranslations;
 
     public $translatable = ['title', 'description'];
 
