@@ -33,6 +33,7 @@ return new class extends Migration {
             $table->boolean('is_active')->default(0)->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
         // Form Options

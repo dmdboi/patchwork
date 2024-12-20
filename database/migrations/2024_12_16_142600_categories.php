@@ -30,6 +30,7 @@ return new class extends Migration
             $table->boolean('show_in_menu')->default(0)->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
         // Category Metas
@@ -45,6 +46,7 @@ return new class extends Migration
             $table->json('value')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

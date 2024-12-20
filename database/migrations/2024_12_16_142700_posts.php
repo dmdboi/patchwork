@@ -47,6 +47,7 @@ return new class extends Migration
             $table->text('meta_redirect')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
         // Post Metas
@@ -62,6 +63,7 @@ return new class extends Migration
             $table->json('value')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
         // Posts Has Tags
