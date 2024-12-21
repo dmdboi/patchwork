@@ -1,0 +1,30 @@
+[
+    {
+        "name": "hero",
+        "label": "Hero Section",
+        "view": "hero",
+        "form": [
+            {
+                "type": "TextInput",
+                "name": "title",
+                "label": "title"
+            },
+            {
+                "type": "TextInput",
+                "name": "description",
+                "label": "description"
+            },
+            {
+                "type": "TextInput",
+                "name": "url",
+                "label": "url",
+                "isUrl": true
+            },
+            {
+                "type": "TextInput",
+                "name": "button",
+                "label": "button"
+            }
+        ]
+    }
+]
