@@ -84,6 +84,18 @@ if (! function_exists('menu')) {
     }
 }
 
+if (! function_exists('getPostsByCollection')) {
+    function getPostsByCollection($collection)
+    {
+        return $collection
+            ? Post::where('collection_id', $collection)
+                ->where('is_published', true)
+                ->orderBy('name')
+                ->get()
+            : collect(); // Return an empty collection
+    }
+}
+
 if (! function_exists('hasAccess')) {
     function hasAccess(User $user, string $action, string $resource): bool
     {

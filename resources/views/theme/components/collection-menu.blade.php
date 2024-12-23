@@ -1,11 +1,5 @@
-
-
 @php
-    $collection = $section['data']['collection'];
-
-    if($collection) {
-            $posts = \App\Models\Post::where('collection_id', $collection)->orderBy('name')->get();
-    }
+    $posts = getPostsByCollection($section['data']['collection']);
 @endphp
 
 <nav class="max-w-3xl mx-auto space-x-2 text-center">
