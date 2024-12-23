@@ -23,6 +23,8 @@ return new class extends Migration
 
             $table->string('type')->default('post')->nullable();
 
+            $table->foreignId('collection_id')->nullable()->after('id')->constrained()->onDelete('cascade');
+
             //Info
             $table->json('title');
             $table->string('slug')->unique()->index();

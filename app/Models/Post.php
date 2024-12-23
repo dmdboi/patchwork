@@ -62,6 +62,7 @@ class Post extends Model implements HasMedia
         'author_id',
         'author_type',
         'type',
+        'collection_id',
         'title',
         'slug',
         'short_description',
@@ -111,6 +112,11 @@ class Post extends Model implements HasMedia
     public function postMeta()
     {
         return $this->hasMany('App\Models\PostMeta');
+    }
+
+    public function collection()
+    {
+        return $this->belongsTo('App\Models\Collection');
     }
 
     /**

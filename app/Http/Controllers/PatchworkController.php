@@ -42,6 +42,28 @@ class PatchworkController extends Controller
         return view('cms/page', compact('page'));
     }
 
+    // Blog Endpoint
+    public function blog(Request $request)
+    {
+        $collection = request()->collection;
+        $slug = request()->slug;
+
+        $post = Post::query()
+            ->where('slug', $slug)->where('type', 'post')
+            ->where('is_published', true)
+            ->whereHas('collection', function ($query) use ($collection) {
+                $query->where('slug', $collection);
+            })
+            ->with('postMeta')
+            ->first();
+
+        if (! $post) {
+            abort(404);
+        }
+
+        return view('cms/blog', compact('post'));
+    }
+
     // Preview Endpoint
     public function preview(Request $request)
     {
@@ -72,11 +94,14 @@ class PatchworkController extends Controller
     // Blog Preview
     public function blogPreview(Request $request)
     {
-
+        $collection = request()->collection;
         $slug = request()->slug;
 
         $post = Post::query()
             ->where('slug', $slug)->where('type', 'post')
+            ->whereHas('collection', function ($query) use ($collection) {
+                $query->where('slug', $collection);
+            })
             ->with('postMeta')
             ->first();
 
