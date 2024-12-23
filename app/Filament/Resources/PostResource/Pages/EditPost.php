@@ -19,7 +19,7 @@ class EditPost extends EditRecord
                 ->label('Preview')
                 ->icon('heroicon-o-eye')
                 ->color('primary')
-                ->action(fn() => redirect()->to('/preview/' . $this->getRecord()->collection->slug . '/' . $this->getRecord()->slug)),
+                ->action(fn () => redirect()->to('/preview/'.$this->getRecord()->collection->slug.'/'.$this->getRecord()->slug)),
             Actions\DeleteAction::make(),
         ];
     }

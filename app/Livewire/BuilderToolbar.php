@@ -59,8 +59,8 @@ class BuilderToolbar extends Component implements HasActions, HasForms
             ->hiddenLabel()
             ->icon($this->preview ? 'heroicon-o-eye' : 'heroicon-o-pencil')
             ->color('info')
-            ->action(function () use ($page) {
-                $this->preview = !$this->preview;
+            ->action(function () {
+                $this->preview = ! $this->preview;
             });
     }
 
@@ -98,8 +98,8 @@ class BuilderToolbar extends Component implements HasActions, HasForms
         });
         $this->page->meta('sections', $sections);
 
-        $this->preview = !$this->preview;
-        session()->put('preview_' . $this->page->id, $this->preview);
+        $this->preview = ! $this->preview;
+        session()->put('preview_'.$this->page->id, $this->preview);
 
         Notification::make()
             ->title('Section added')

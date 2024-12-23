@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Events\PostDeleted;
 use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
-use App\Infolists\Components\MarkdownEntry;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -13,19 +12,15 @@ use App\Services\FilamentCMSTypes;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Grid;
-use Filament\Infolists\Components\ImageEntry;
-use Filament\Forms\Components\Section;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\TextEntry\TextEntrySize;
-use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -111,7 +106,7 @@ class PostResource extends Resource
                                             ->selectablePlaceholder(false)
                                             ->searchable(),
                                         Select::make('categories')
-                                            ->hidden(fn(Forms\Get $get) => in_array($get('type'), ['page']))
+                                            ->hidden(fn (Forms\Get $get) => in_array($get('type'), ['page']))
                                             ->relationship('categories', 'name')
                                             ->label('Categories')
                                             ->createOptionForm([
@@ -137,9 +132,9 @@ class PostResource extends Resource
                                             ->searchable()
                                             ->multiple()
                                             ->preload()
-                                            ->options(fn(Forms\Get $get) => Category::where('for', $get('type'))->where('type', 'category')->pluck('name', 'id')->toArray()),
+                                            ->options(fn (Forms\Get $get) => Category::where('for', $get('type'))->where('type', 'category')->pluck('name', 'id')->toArray()),
                                         Select::make('tags')
-                                            ->hidden(fn(Forms\Get $get) => $get('type') !== 'post')
+                                            ->hidden(fn (Forms\Get $get) => $get('type') !== 'post')
                                             ->label('Tags')
                                             ->searchable()
                                             ->multiple()
@@ -178,7 +173,7 @@ class PostResource extends Resource
                                             ->label('Published')
                                             ->default(true)
                                             ->required(),
-                                        DateTimePicker::make('published_at')->hidden(fn(Forms\Get $get) => in_array($get('type'), ['page', 'builder']))->label('Published At')->default(now()->format('Y-m-d H:i:s')),
+                                        DateTimePicker::make('published_at')->hidden(fn (Forms\Get $get) => in_array($get('type'), ['page', 'builder']))->label('Published At')->default(now()->format('Y-m-d H:i:s')),
                                     ]),
                                 Section::make('Images')
                                     ->description('Post images')
@@ -226,7 +221,7 @@ class PostResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->label(trans('filament-cms::messages.content.posts.sections.post.columns.title'))
-                    ->description(fn(Post $post) => Str::of($post->short_description)->limit(50))
+                    ->description(fn (Post $post) => Str::of($post->short_description)->limit(50))
                     ->toggleable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
@@ -279,7 +274,7 @@ class PostResource extends Resource
                         return $query
                             ->when(
                                 $data['type'],
-                                fn(Builder $query, $type): Builder => $query->where('type', '>=', $type),
+                                fn (Builder $query, $type): Builder => $query->where('type', '>=', $type),
                             );
                     }),
                 Tables\Filters\Filter::make('author_id')
@@ -294,7 +289,7 @@ class PostResource extends Resource
                         return $query
                             ->when(
                                 $data['author_id'],
-                                fn(Builder $query, $id): Builder => $query->where('author_id', $id),
+                                fn (Builder $query, $id): Builder => $query->where('author_id', $id),
                             );
                     }),
                 Tables\Filters\Filter::make('published_at')
@@ -306,7 +301,7 @@ class PostResource extends Resource
                         return $query
                             ->when(
                                 $data['published_at'],
-                                fn(Builder $query, $publishedAt): Builder => $query->whereDate('published_at', $publishedAt),
+                                fn (Builder $query, $publishedAt): Builder => $query->whereDate('published_at', $publishedAt),
                             );
                     }),
                 Tables\Filters\Filter::make('is_published')
@@ -318,27 +313,27 @@ class PostResource extends Resource
                         return $query
                             ->when(
                                 $data['is_published'],
-                                fn(Builder $query, $isPublished): Builder => $query->where('is_published', (bool) $isPublished),
+                                fn (Builder $query, $isPublished): Builder => $query->where('is_published', (bool) $isPublished),
                             );
                     }),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\Action::make('preview-button')
-                ->iconButton()
-                ->tooltip('Preview')
-                ->icon('heroicon-o-eye')
-                ->color('primary')
-                ->action(fn(Post $record) => redirect()->to('/preview/' . $record->collection->slug . '/' . $record->slug)),
+                    ->iconButton()
+                    ->tooltip('Preview')
+                    ->icon('heroicon-o-eye')
+                    ->color('primary')
+                    ->action(fn (Post $record) => redirect()->to('/preview/'.$record->collection->slug.'/'.$record->slug)),
                 Tables\Actions\EditAction::make()
                     ->iconButton()
                     ->tooltip(__('filament-actions::edit.single.label')),
                 Tables\Actions\DeleteAction::make()
-                    ->before(fn(Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
+                    ->before(fn (Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
                     ->iconButton()
                     ->tooltip(__('filament-actions::delete.single.label')),
                 Tables\Actions\ForceDeleteAction::make()
-                    ->before(fn(Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
+                    ->before(fn (Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
                     ->iconButton()
                     ->tooltip(__('filament-actions::force-delete.single.label')),
                 Tables\Actions\RestoreAction::make()
@@ -356,7 +351,7 @@ class PostResource extends Resource
                         ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_published'))
                         ->icon('heroicon-o-check-circle')
                         ->action(function (Collection $records) {
-                            $records->each(fn($record) => $record->update(['is_published' => !$record->is_published]));
+                            $records->each(fn ($record) => $record->update(['is_published' => ! $record->is_published]));
 
                             Notification::make()
                                 ->title('Posts Published')
@@ -370,7 +365,7 @@ class PostResource extends Resource
                         ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_trend'))
                         ->icon('heroicon-o-arrow-trending-up')
                         ->action(function (Collection $records) {
-                            $records->each(fn($record) => $record->update(['is_trend' => !$record->is_trend]));
+                            $records->each(fn ($record) => $record->update(['is_trend' => ! $record->is_trend]));
                             Notification::make()
                                 ->title('Posts Trended')
                                 ->body('The selected posts have been trended.')
@@ -381,7 +376,7 @@ class PostResource extends Resource
                 ]),
             ]);
 
-        return $table->recordUrl(fn(Post $record): string => Pages\EditPost::getUrl([$record->id]));
+        return $table->recordUrl(fn (Post $record): string => Pages\EditPost::getUrl([$record->id]));
     }
 
     public static function getRelations(): array

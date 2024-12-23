@@ -15,7 +15,7 @@ return [
                 ->placeholder('Select a collection')
                 ->options(
                     collect(Collection::all())
-                        ->mapWithKeys(fn(Collection $collection) => [$collection->id => $collection->name])
+                        ->mapWithKeys(fn (Collection $collection) => [$collection->id => $collection->name])
                         ->toArray(),
                 )
                 ->required(),
@@ -27,6 +27,6 @@ return [
             TextInput::make('title')->label('title'),
             TextInput::make('description')->label('description'),
             TextInput::make('url')->url()->label('url'),
-            TextInput::make('button')->label('button')
+            TextInput::make('button')->label('button'),
         ]),
 ];

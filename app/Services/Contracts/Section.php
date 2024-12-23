@@ -73,7 +73,7 @@ class Section
 
     public function view(string $view): static
     {
-        $this->view = 'theme.' .$view;
+        $this->view = 'theme.'.$view;
 
         return $this;
     }

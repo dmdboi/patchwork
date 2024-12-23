@@ -86,8 +86,7 @@ class AdminPanelProvider extends PanelProvider
             ]);
         });
 
-
-                // Register themes
-                FilamentCMS::themes()->register();
+        // Register themes
+        FilamentCMS::themes()->register();
     }
 }

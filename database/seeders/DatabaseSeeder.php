@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Blog',
                 'slug' => 'blog',
                 'description' => 'My blog',
-            ]
+            ],
         ]);
 
         // Menu

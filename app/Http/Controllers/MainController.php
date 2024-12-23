@@ -63,5 +63,4 @@ class MainController extends Controller
 
         return view('themes/pages/blog', compact('post'));
     }
-
 }

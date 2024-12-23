@@ -12,11 +12,11 @@ class FilamentCMSThemes
     public static function register()
     {
 
-        $themes = config('filament-cms.themes'); 
+        $themes = config('filament-cms.themes');
 
-        foreach($themes as $theme) {
+        foreach ($themes as $theme) {
 
-            $path = app_path('Views/Themes/' . $theme . '.php');
+            $path = app_path('Views/Themes/'.$theme.'.php');
 
             if (file_exists($path)) {
                 self::addSections(require $path);
