@@ -57,7 +57,7 @@ class BuilderToolbar extends Component implements HasActions, HasForms
 
         return Action::make('previewPage')
             ->hiddenLabel()
-            ->icon($this->preview ? 'heroicon-o-eye' : 'heroicon-o-pencil')
+            ->icon($this->preview ? 'heroicon-o-pencil' : 'heroicon-o-eye')
             ->color('info')
             ->action(function () {
                 $this->preview = ! $this->preview;

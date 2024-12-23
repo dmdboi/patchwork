@@ -50,4 +50,14 @@ class MenuItem extends Model
     {
         return $this->belongsTo(Menu::class, 'menu_id', 'id');
     }
+
+    public function getUrlAttribute()
+    {
+        return $this->attributes['route'] ?? $this->attributes['url'];
+    }
+
+    public function getIsActiveAttribute()
+    {
+        return url()->current() === $this->url;
+    }
 }
