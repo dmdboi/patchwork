@@ -1,7 +1,10 @@
 <x-layout>
-    <div class="mx-6 my-2 border-b border-black">
-        <a href="/admin/pages/{{ $page->id }}/edit" class="block py-2 text-blue-500 underline">Back to Admin</a>
-    </div>
+    <!-- Toolbar -->
+    <x-toolbar>
+        <x-slot:left>
+            <livewire:back-to-admin-button :post="$page" />
+        </x-slot:left>
+    </x-toolbar>
 
     <x-sections-renderer :page="$page" />
 </x-layout>

@@ -1,8 +1,10 @@
 <x-layout>
-
-    <div class="mx-6 my-2">
-        <a href="/admin/forms" class="block py-2 text-blue-500 underline">Back to Admin</a>
-    </div>
+    <!-- Toolbar -->
+    <x-toolbar>
+        <x-slot:left>
+            <livewire:back-to-admin-button >
+        </x-slot:left>
+    </x-toolbar>
 
     <div class="flex items-center justify-center max-w-2xl m-6 mx-auto">
         <div class="w-full p-4 space-y-4 border border-black">

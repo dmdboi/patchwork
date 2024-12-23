@@ -1,8 +1,10 @@
 <x-layout>
-
-    <div class="mx-6 my-2">
-        <a href="/admin/posts/{{ $post->id }}/edit" class="block py-2 text-blue-500 underline">Back to Admin</a>
-    </div>
+    <!-- Toolbar -->
+    <x-toolbar>
+        <x-slot:left>
+            <livewire:back-to-admin-button :post="$post" />
+        </x-slot:left>
+    </x-toolbar>
 
     <div class="flex items-center justify-center m-6">
         <div class="p-4 border border-black">

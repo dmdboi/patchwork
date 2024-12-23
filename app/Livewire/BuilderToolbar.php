@@ -35,35 +35,6 @@ class BuilderToolbar extends Component implements HasActions, HasForms
         $this->form->fill([
             'sections' => $this->page->meta('sections') ?? [],
         ]);
-
-        // Load the page, if it's not already loaded
-        if (session()->has('preview_'.$this->page->id)) {
-            $this->preview = session()->get('preview_'.$this->page->id);
-        } else {
-            session()->put('preview_'.$this->page->id, $this->preview);
-        }
-
-        // If the user is not logged in, show the preview
-        if (! auth()->user()) {
-            $this->preview = true;
-        }
-    }
-
-    public function editPageAction()
-    {
-        $page = $this->page;
-
-        return Action::make('editPage')
-            ->label('Back to Admin')
-            ->icon('heroicon-o-arrow-left')
-            ->color('info')
-            ->action(function (array $data) use ($page) {
-                if ($page->type == 'post') {
-                    return redirect()->to('/admin/posts/'.$page->id.'/edit');
-                }
-
-                return redirect()->to('/admin/pages/'.$page->id.'/edit');
-            });
     }
 
     public function savePageAction()
@@ -85,12 +56,11 @@ class BuilderToolbar extends Component implements HasActions, HasForms
         $page = $this->page;
 
         return Action::make('previewPage')
-            ->label($this->preview ? 'Show Builder' : 'Preview Page')
+            ->hiddenLabel()
             ->icon($this->preview ? 'heroicon-o-eye' : 'heroicon-o-pencil')
             ->color('info')
             ->action(function () use ($page) {
-                $this->preview = ! $this->preview;
-                session()->put('preview_'.$page->id, $this->preview);
+                $this->preview = !$this->preview;
             });
     }
 
@@ -128,8 +98,8 @@ class BuilderToolbar extends Component implements HasActions, HasForms
         });
         $this->page->meta('sections', $sections);
 
-        $this->preview = ! $this->preview;
-        session()->put('preview_'.$this->page->id, $this->preview);
+        $this->preview = !$this->preview;
+        session()->put('preview_' . $this->page->id, $this->preview);
 
         Notification::make()
             ->title('Section added')
