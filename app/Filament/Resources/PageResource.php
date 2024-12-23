@@ -375,12 +375,12 @@ class PageResource extends Resource
                 Tables\Actions\Action::make('editor-button')
                     ->iconButton()
                     ->tooltip('Edit in Editor')
-                    ->icon('heroicon-o-pencil')
+                    ->icon('heroicon-o-wrench-screwdriver')
                     ->color('primary')
                     ->action(fn(Post $record) => redirect()->to('/admin/editor/' . $record->slug)),
                 Tables\Actions\EditAction::make()
                     ->iconButton()
-                    ->tooltip('Edit metadata'),
+                    ->tooltip('Edit Metadata'),
                 Tables\Actions\DeleteAction::make()
                     ->before(fn(Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
                     ->iconButton()

@@ -217,58 +217,6 @@ class PostResource extends Resource
             ]);
     }
 
-    public static function infolist(Infolist $infolist): Infolist
-    {
-        return $infolist->schema([
-            \Filament\Infolists\Components\Section::make(trans('filament-cms::messages.content.posts.sections.post.title'))
-                ->description(trans('filament-cms::messages.content.posts.sections.post.description'))
-                ->schema([
-                    TextEntry::make('title')
-                        ->hiddenLabel()
-                        ->size(TextEntrySize::Large),
-                    MarkdownEntry::make('body')
-                        ->markdown()
-                        ->hiddenLabel(),
-                    ImageEntry::make('feature_image')
-                        ->hiddenLabel()
-                        ->default(fn($record) => $record->getFirstMediaUrl('feature_image')),
-                ]),
-            \Filament\Infolists\Components\Grid::make([
-                'sm' => 1,
-                'md' => 2,
-                'lg' => 4,
-            ])->schema([
-                        \Filament\Infolists\Components\Section::make(trans('filament-cms::messages.content.posts.sections.status.title'))
-                            ->description(trans('filament-cms::messages.content.posts.sections.status.description'))
-                            ->schema([
-                                TextEntry::make('author.name')
-                                    ->label(trans('filament-cms::messages.content.posts.sections.author.columns.author'))
-                                    ->default(fn(Post $post) => $post->author?->name),
-                                TextEntry::make('type')
-                                    ->label(trans('filament-cms::messages.content.posts.sections.status.columns.type'))
-                                    ->state(function (Post $post) {
-                                        return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->label;
-                                    })
-                                    ->color(function (Post $post) {
-                                        return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->color;
-                                    })
-                                    ->icon(function (Post $post) {
-                                        return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->icon;
-                                    })
-                                    ->badge(),
-                            ])->columnSpan(2),
-                        \Filament\Infolists\Components\Section::make(trans('filament-cms::messages.content.posts.sections.seo.title'))
-                            ->description(trans('filament-cms::messages.content.posts.sections.seo.description'))
-                            ->schema([
-                                TextEntry::make('short_description')
-                                    ->label(trans('filament-cms::messages.content.posts.sections.seo.columns.short_description')),
-                                TextEntry::make('keywords')
-                                    ->label(trans('filament-cms::messages.content.posts.sections.seo.columns.keywords')),
-                            ])->columnSpan(2),
-                    ]),
-        ]);
-    }
-
     public static function table(Table $table): Table
     {
         $importActions = [];
@@ -376,9 +324,12 @@ class PostResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()
-                    ->iconButton()
-                    ->tooltip(__('filament-actions::view.single.label')),
+                Tables\Actions\Action::make('preview-button')
+                ->iconButton()
+                ->tooltip('Preview')
+                ->icon('heroicon-o-eye')
+                ->color('primary')
+                ->action(fn(Post $record) => redirect()->to('/preview/' . $record->collection->slug . '/' . $record->slug)),
                 Tables\Actions\EditAction::make()
                     ->iconButton()
                     ->tooltip(__('filament-actions::edit.single.label')),
@@ -400,26 +351,6 @@ class PostResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
-                    Tables\Actions\BulkAction::make('category')
-                        ->label(trans('filament-cms::messages.content.posts.sections.status.columns.categories'))
-                        ->icon('heroicon-o-rectangle-stack')
-                        ->form([
-                            Select::make('categories')
-                                ->label(trans('filament-cms::messages.content.posts.sections.status.columns.categories'))
-                                ->searchable()
-                                ->multiple()
-                                ->options(Category::query()->where('for', 'post')->where('type', 'category')->pluck('name', 'id')->toArray()),
-                        ])
-                        ->action(function (Collection $records, array $data) {
-                            $records->each(fn($record) => $record->categories()->sync($data['categories']));
-
-                            Notification::make()
-                                ->title('Success')
-                                ->body('Posts categories has been changed')
-                                ->success()
-                                ->send();
-                        })
-                        ->deselectRecordsAfterCompletion(),
                     Tables\Actions\BulkAction::make('publish')
                         ->requiresConfirmation()
                         ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_published'))
@@ -450,7 +381,7 @@ class PostResource extends Resource
                 ]),
             ]);
 
-        return $table->recordUrl(fn(Post $record): string => Pages\ViewPost::getUrl([$record->id]));
+        return $table->recordUrl(fn(Post $record): string => Pages\EditPost::getUrl([$record->id]));
     }
 
     public static function getRelations(): array
