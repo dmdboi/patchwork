@@ -277,24 +277,14 @@ class PageResource extends Resource
             ->headerActions($importActions)
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->label(trans('filament-cms::messages.content.posts.sections.post.columns.title'))
+                    ->label('Title')
                     ->description(fn(Post $post) => Str::of($post->short_description)->limit(50))
                     ->toggleable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('type')
-                    ->sortable()
-                    ->label(trans('filament-cms::messages.content.posts.sections.status.columns.type'))
+                    Tables\Columns\TextColumn::make('slug')
+                    ->label('Slug')
+                    ->description(fn(Post $post) => Str::of($post->short_description)->limit(50))
                     ->toggleable()
-                    ->state(function (Post $post) {
-                        return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->label;
-                    })
-                    ->color(function (Post $post) {
-                        return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->color;
-                    })
-                    ->icon(function (Post $post) {
-                        return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->icon;
-                    })
-                    ->badge()
                     ->searchable(),
                 Tables\Columns\ToggleColumn::make('is_published')
                     ->toggleable()
