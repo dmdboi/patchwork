@@ -5,6 +5,7 @@ use App\Services\Contracts\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 
+
 return [
     Section::make('collection-menu')
         ->label('Collection Menu')
@@ -13,10 +14,11 @@ return [
             Select::make('collection')
                 ->label('Collection')
                 ->placeholder('Select a collection')
-                ->options([]
-                    // collect(Collection::all())
-                    //     ->mapWithKeys(fn (Collection $collection) => [$collection->id => $collection->name])
-                    //     ->toArray(),
+                ->options(
+                    fn() => Collection::query()
+                        ->get()
+                        ->mapWithKeys(fn(Collection $collection) => [$collection->id => $collection->name])
+                        ->toArray()
                 )
                 ->required(),
         ]),
