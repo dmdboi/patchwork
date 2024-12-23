@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Collection;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -34,6 +35,7 @@ class PostFactory extends Factory
             'body' => $this->faker->text,
             'is_published' => $this->faker->boolean,
             'published_at' => $this->faker->dateTime(),
+            'collection_id' => Collection::first()->id,
         ];
     }
 }

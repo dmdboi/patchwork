@@ -18,6 +18,7 @@ it('creates required tables with migrations', function () {
     expect(Schema::hasTable('jobs'))->toBeTrue();
     expect(Schema::hasTable('job_batches'))->toBeTrue();
     expect(Schema::hasTable('failed_jobs'))->toBeTrue();
+    expect(Schema::hasTable('collections'))->toBeTrue();
     expect(Schema::hasTable('categories'))->toBeTrue();
     expect(Schema::hasTable('categories_metas'))->toBeTrue();
     expect(Schema::hasTable('posts'))->toBeTrue();
@@ -55,6 +56,7 @@ it('rolls back migrations correctly', function () {
     expect(Schema::hasTable('jobs'))->toBeFalse();
     expect(Schema::hasTable('job_batches'))->toBeFalse();
     expect(Schema::hasTable('failed_jobs'))->toBeFalse();
+    expect(Schema::hasTable('collections'))->toBeFalse();
     expect(Schema::hasTable('categories'))->toBeFalse();
     expect(Schema::hasTable('categories_metas'))->toBeFalse();
     expect(Schema::hasTable('posts'))->toBeFalse();
@@ -78,11 +80,7 @@ it('rolls back migrations correctly', function () {
 
 it('seeds database with admin user', function () {
     // Run the migrations
-    $this->artisan('migrate');
-
-    // Seed the database
-    $this->artisan('db:seed');
-    $this->artisan('db:seed --class=RolesAndPermissionsSeeder');
+    $this->artisan('migrate --seed');
 
     // Assert that the admin user is present
     $this->assertDatabaseHas('users', [

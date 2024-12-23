@@ -46,20 +46,19 @@ class DatabaseSeeder extends Seeder
         // Collection
         Collection::firstOrCreate([
             'slug' => 'blog',
-            [
-                'name' => 'Blog',
-                'slug' => 'blog',
-                'description' => 'My blog',
-            ],
+        ], [
+            'name' => 'Blog',
+            'slug' => 'blog'
         ]);
 
         // Menu
         Menu::firstOrCreate([
-            'slug' => 'main',
+            'key' => 'main',
         ], [
-            'name' => 'Main',
-            'slug' => 'main',
-            'description' => 'Main menu',
+            'title' => 'Main',
+            'key' => 'main',
+            'is_active' => true,
+            'location' => 'header',
         ]);
     }
 }

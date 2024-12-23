@@ -13,10 +13,10 @@ return [
             Select::make('collection')
                 ->label('Collection')
                 ->placeholder('Select a collection')
-                ->options(
-                    collect(Collection::all())
-                        ->mapWithKeys(fn (Collection $collection) => [$collection->id => $collection->name])
-                        ->toArray(),
+                ->options([]
+                    // collect(Collection::all())
+                    //     ->mapWithKeys(fn (Collection $collection) => [$collection->id => $collection->name])
+                    //     ->toArray(),
                 )
                 ->required(),
         ]),

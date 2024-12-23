@@ -9,7 +9,6 @@ use function Pest\Livewire\livewire;
 
 beforeEach(function () {
     $this->artisan('migrate:fresh --seed');
-    $this->artisan('db:seed --class=RolesAndPermissionsSeeder');
 
     $this->actingAs(User::query()->where('email', 'admin@example.com')->first());
 });
@@ -19,12 +18,6 @@ it('can list posts', function () {
 
     livewire(PostResource\Pages\ListPosts::class)
         ->assertCanSeeTableRecords($posts);
-});
-
-it('can render page', function () {
-    $this->get(PostResource::getUrl('view', [
-        'record' => Post::factory()->create(),
-    ]))->assertSuccessful();
 });
 
 it('can create', function () {
@@ -46,4 +39,11 @@ it('can create', function () {
         'slug' => Str::slug($newData->title),
         'body' => $newData->body,
     ]);
+});
+
+
+it('can render page', function () {
+    $this->get(PostResource::getUrl('edit', [
+        'record' => Post::factory()->create(),
+    ]))->assertSuccessful();
 });
