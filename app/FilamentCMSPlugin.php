@@ -15,8 +15,6 @@ class FilamentCMSPlugin implements Plugin
 {
     public static bool $allowUrlImport = true;
 
-    public static bool $allowYoutubeImport = false;
-
     public static bool $allowExport = false;
 
     public static bool $allowImport = false;
@@ -154,13 +152,6 @@ class FilamentCMSPlugin implements Plugin
     public function allowUrlImport(bool $allowUrlImport = true): static
     {
         self::$allowUrlImport = $allowUrlImport;
-
-        return $this;
-    }
-
-    public function allowYoutubeImport(bool $allowYoutubeImport = true): static
-    {
-        self::$allowYoutubeImport = $allowYoutubeImport;
 
         return $this;
     }

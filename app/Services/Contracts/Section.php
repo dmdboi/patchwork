@@ -73,7 +73,7 @@ class Section
 
     public function view(string $view): static
     {
-        $this->view = 'themes.'.config('filament-cms.theme').'.'.$view;
+        $this->view = 'themes.' .$view;
 
         return $this;
     }

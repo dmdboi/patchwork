@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Collection;
+use App\Models\Menu;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -43,10 +44,22 @@ class DatabaseSeeder extends Seeder
         $adminUser->assignRole($adminRole);
 
         // Collection
-        Collection::create([
-            'name' => 'Blog',
+        Collection::firstOrCreate([
             'slug' => 'blog',
-            'description' => 'My blog',
+            [
+                'name' => 'Blog',
+                'slug' => 'blog',
+                'description' => 'My blog',
+            ]
+        ]);
+
+        // Menu
+        Menu::firstOrCreate([
+            'slug' => 'main',
+        ], [
+            'name' => 'Main',
+            'slug' => 'main',
+            'description' => 'Main menu',
         ]);
     }
 }

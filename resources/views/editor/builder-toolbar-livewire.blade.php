@@ -1,4 +1,4 @@
-<div class="bg-gray-100">
+<div>
 
     <!-- Toolbar -->
     <div class="flex justify-between px-6 py-6 bg-white border-b dark:border-gray-700">

@@ -1,7 +1,7 @@
 @props(['title' => 'Hello World', 'description', 'url', 'button'])
 
 <div>
-    <div class="bg-white">
+    <div>
         <div class="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center">
                 <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">{{ $section['data']['title'] }}</h1>

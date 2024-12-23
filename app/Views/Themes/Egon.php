@@ -6,7 +6,7 @@ use Filament\Forms\Components\TextInput;
 return [
     Section::make('hero')
         ->label('Hero Section')
-        ->view('hero')
+        ->view('Egon.hero')
         ->form([
             TextInput::make('title')->label('title'),
             TextInput::make('description')->label('description'),

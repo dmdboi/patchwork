@@ -140,6 +140,6 @@ class BuilderToolbar extends Component implements HasActions, HasForms
 
     public function render(): View
     {
-        return view('cms.builder-toolbar-livewire');
+        return view('editor.builder-toolbar-livewire');
     }
 }

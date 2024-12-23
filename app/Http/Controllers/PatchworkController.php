@@ -21,7 +21,7 @@ class PatchworkController extends Controller
             return view('welcome');
         }
 
-        return view('cms/page', compact('page'));
+        return view('themes/Default/page', compact('page'));
     }
 
     // Page Endpoint
@@ -39,7 +39,7 @@ class PatchworkController extends Controller
             abort(404);
         }
 
-        return view('cms/page', compact('page'));
+        return view('themes/Default/page', compact('page'));
     }
 
     // Blog Endpoint
@@ -61,7 +61,7 @@ class PatchworkController extends Controller
             abort(404);
         }
 
-        return view('cms/blog', compact('post'));
+        return view('themes/Default/blog', compact('post'));
     }
 
     // Preview Endpoint
@@ -76,7 +76,7 @@ class PatchworkController extends Controller
             abort(404);
         }
 
-        return view('cms/preview', compact('page'));
+        return view('themes/Default/preview', compact('page'));
     }
 
     // Editor Endpoint
@@ -88,7 +88,7 @@ class PatchworkController extends Controller
             ->with('postMeta')
             ->first();
 
-        return view('cms/editor', compact('page'));
+        return view('editor/editor', compact('page'));
     }
 
     // Blog Preview
@@ -109,7 +109,7 @@ class PatchworkController extends Controller
             abort(404);
         }
 
-        return view('cms/blog-preview', compact('post'));
+        return view('themes/Default/blog-preview', compact('post'));
     }
 
     // Form Preview
@@ -122,6 +122,6 @@ class PatchworkController extends Controller
             ->where('id', $id)
             ->first();
 
-        return view('cms/form-preview', compact('form'));
+        return view('themes/Default/form-preview', compact('form'));
     }
 }

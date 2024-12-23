@@ -20,14 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
-        // Fetch theme name from config
-        $theme = config('filament-cms.theme');
-
-        // Get the theme's sections from Views/Themes/{theme}.php
-        $sections = require app_path("Views/Themes/{$theme}.php");
-
-        // Register the theme's sections
-        FilamentCMS::themes()->register($sections);
+        // Register themes
+        FilamentCMS::themes()->register();
     }
 }

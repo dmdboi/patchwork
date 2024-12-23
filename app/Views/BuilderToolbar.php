@@ -17,6 +17,6 @@ class BuilderToolbar extends Component
 
     public function render(): View
     {
-        return view('cms.builder-toolbar');
+        return view('editor.builder-toolbar');
     }
 }

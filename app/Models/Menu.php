@@ -26,7 +26,7 @@ class Menu extends Model
         'location',
         'title',
         'items',
-        'activated',
+        'is_active',
     ];
 
     protected $casts = [

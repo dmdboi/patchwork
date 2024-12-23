@@ -78,7 +78,7 @@ class MenuResource extends Resource
                         ->required()
                         ->default('header')
                         ->maxLength(255),
-                    Forms\Components\Toggle::make('activated')
+                    Forms\Components\Toggle::make('is_active')
                         ->default(true)
                         ->label('Active')
                         ->required(),
@@ -111,13 +111,13 @@ class MenuResource extends Resource
                 Tables\Columns\TextColumn::make('location')
                     ->label('Location')
                     ->sortable(),
-                Tables\Columns\BooleanColumn::make('activated')
+                Tables\Columns\BooleanColumn::make('is_active')
                     ->label('Active'),
             ])
             ->filters([
-                Filter::make('activated')
+                Filter::make('is_active')
                     ->label('Active')
-                    ->query(fn (Builder $query): Builder => $query->where('activated', true)),
+                    ->query(fn (Builder $query): Builder => $query->where('is_active', true)),
             ]);
 
     }
