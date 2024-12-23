@@ -15,7 +15,7 @@ class CollectionMenu extends Component
      */
     public function __construct()
     {
-
+   
     }
 
     /**
