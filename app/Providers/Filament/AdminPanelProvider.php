@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Facades\FilamentCMS;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -74,11 +75,19 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make()
                     ->label('Content'),
                 NavigationGroup::make()
+                    ->label('Media'),
+                NavigationGroup::make()
+                    ->label('Forms'),
+                NavigationGroup::make()
                     ->label('Access'),
                 NavigationGroup::make()
                     ->label('Settings')
                     ->collapsed(),
             ]);
         });
+
+
+                // Register themes
+                FilamentCMS::themes()->register();
     }
 }

@@ -2,7 +2,7 @@
 
 @php
     // Assuming $menuKey is passed to this component
-    $menuKey = $menuKey ?? 'footer'; // Replace 'default_menu_key' with your default menu key if needed
+    $menuKey = $menuKey ?? 'header'; // Replace 'default_menu_key' with your default menu key if needed
     $menu = \App\Models\Menu::where('key', $menuKey)->first();
 
     $menuItems = \App\Models\MenuItem::where('menu_id', $menu->id)->orderBy('order')->get();

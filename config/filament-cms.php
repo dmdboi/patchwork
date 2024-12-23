@@ -3,7 +3,6 @@
 return [
     'themes' => [
         'Default',
-        'Egon'
     ],
 
     'types' => [

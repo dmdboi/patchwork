@@ -23,7 +23,7 @@ class Menu extends Component
         if (view()->exists($this->view)) {
             return view($this->view);
         } else {
-            return view('components/menu');
+            return view('themes/Default/menu');
         }
     }
 }

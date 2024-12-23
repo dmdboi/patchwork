@@ -88,7 +88,7 @@ class PatchworkController extends Controller
             ->with('postMeta')
             ->first();
 
-        return view('editor/editor', compact('page'));
+        return view('admin/editor', compact('page'));
     }
 
     // Blog Preview

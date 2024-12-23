@@ -106,7 +106,6 @@ class MenuResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('key')
                     ->label('Key')
-                    ->view('components/menu-item')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('location')
                     ->label('Location')
