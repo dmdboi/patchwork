@@ -16,5 +16,5 @@ Route::middleware(['web', Admin::class])->name('admin.')->group(function () {
 
 // Public Routes
 Route::get('/', [MainController::class, 'index']);
-Route::get('/{page}', [MainController::class, 'page']);
+Route::get('/{slug}', [MainController::class, 'page']);
 Route::get('/{collection}/{slug}', [MainController::class, 'blog']);

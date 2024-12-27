@@ -17,11 +17,11 @@ class MainController extends Controller
             ->with('postMeta')
             ->first();
 
-        if (! $page) {
+        if (!$page) {
             return view('welcome');
         }
 
-        return view('themes/pages/page', compact('page'));
+        return view('theme/pages/page', compact('page'));
     }
 
     // Page Endpoint
@@ -35,7 +35,7 @@ class MainController extends Controller
             ->with('postMeta')
             ->first();
 
-        if (! $page) {
+        if (!$page) {
             abort(404);
         }
 
