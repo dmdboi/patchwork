@@ -225,13 +225,13 @@ class PostResource extends Resource
             ->headerActions($importActions)
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->label(trans('filament-cms::messages.content.posts.sections.post.columns.title'))
+                    ->label('Title')
                     ->description(fn (Post $post) => Str::of($post->short_description)->limit(50))
                     ->toggleable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->sortable()
-                    ->label(trans('filament-cms::messages.content.posts.sections.status.columns.type'))
+                    ->label('Type')
                     ->toggleable()
                     ->state(function (Post $post) {
                         return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->label;
@@ -247,11 +247,11 @@ class PostResource extends Resource
                 Tables\Columns\ToggleColumn::make('is_published')
                     ->toggleable()
                     ->sortable()
-                    ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_published'))
+                    ->label('Published')
                     ->onColor('success'),
                 Tables\Columns\TextColumn::make('published_at')
                     ->toggleable()
-                    ->label(trans('filament-cms::messages.content.posts.sections.status.columns.published_at'))
+                    ->label('Published At')
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -336,14 +336,14 @@ class PostResource extends Resource
                 Tables\Actions\DeleteAction::make()
                     ->before(fn (Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
                     ->iconButton()
-                    ->tooltip(__('filament-actions::delete.single.label')),
+                    ->tooltip('Delete'),
                 Tables\Actions\ForceDeleteAction::make()
                     ->before(fn (Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
                     ->iconButton()
-                    ->tooltip(__('filament-actions::force-delete.single.label')),
+                    ->tooltip('Force delete'),
                 Tables\Actions\RestoreAction::make()
                     ->iconButton()
-                    ->tooltip(__('filament-actions::restore.single.label')),
+                    ->tooltip('Restore'),
             ])
             ->defaultSort('created_at', 'desc')
             ->bulkActions([
@@ -353,7 +353,7 @@ class PostResource extends Resource
                     Tables\Actions\RestoreBulkAction::make(),
                     Tables\Actions\BulkAction::make('publish')
                         ->requiresConfirmation()
-                        ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_published'))
+                        ->label('Published')
                         ->icon('heroicon-o-check-circle')
                         ->action(function (Collection $records) {
                             $records->each(fn ($record) => $record->update(['is_published' => ! $record->is_published]));
@@ -361,19 +361,6 @@ class PostResource extends Resource
                             Notification::make()
                                 ->title('Posts Published')
                                 ->body('The selected posts have been published.')
-                                ->success()
-                                ->send();
-                        })
-                        ->deselectRecordsAfterCompletion(),
-                    Tables\Actions\BulkAction::make('trend')
-                        ->requiresConfirmation()
-                        ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_trend'))
-                        ->icon('heroicon-o-arrow-trending-up')
-                        ->action(function (Collection $records) {
-                            $records->each(fn ($record) => $record->update(['is_trend' => ! $record->is_trend]));
-                            Notification::make()
-                                ->title('Posts Trended')
-                                ->body('The selected posts have been trended.')
                                 ->success()
                                 ->send();
                         })

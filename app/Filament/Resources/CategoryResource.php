@@ -30,22 +30,22 @@ class CategoryResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return trans('filament-cms::messages.content.group');
+        return 'Content';
     }
 
     public static function getPluralLabel(): ?string
     {
-        return trans('filament-cms::messages.content.category.title');
+        return 'Categories';
     }
 
     public static function getLabel(): ?string
     {
-        return trans('filament-cms::messages.content.category.single');
+        return 'Category';
     }
 
     public static function getNavigationLabel(): string
     {
-        return trans('filament-cms::messages.content.category.title');
+        return 'Categories';
     }
 
     public static function form(Form $form): Form
@@ -60,39 +60,39 @@ class CategoryResource extends Resource
                 ])->schema([
                     Forms\Components\Grid::make()
                         ->schema([
-                            Forms\Components\Section::make(trans('filament-cms::messages.content.category.sections.details.title'))
-                                ->description(trans('filament-cms::messages.content.category.sections.details.description'))
+                            Forms\Components\Section::make('Details')
+                                ->description('Enter the details of the category.')
                                 ->schema([
                                     Forms\Components\TextInput::make('name')
                                         ->afterStateUpdated(fn (Forms\Get $get, Forms\Set $set) => $set('slug', Str::of($get('name'))->replace(' ', '-')->lower()->toString()))
-                                        ->label(trans('filament-cms::messages.content.category.sections.details.columns.name'))
+                                        ->label('Name')
                                         ->lazy()
                                         ->required(),
                                     Forms\Components\TextInput::make('slug')
-                                        ->label(trans('filament-cms::messages.content.category.sections.details.columns.slug'))
+                                        ->label('Slug')
                                         ->required()
                                         ->maxLength(255),
                                     Forms\Components\Textarea::make('description')
                                         ->columnSpanFull()
-                                        ->label(trans('filament-cms::messages.content.category.sections.details.columns.description')),
+                                        ->label('Description'),
                                     IconPicker::make('icon')
-                                        ->label(trans('filament-cms::messages.content.category.sections.details.columns.icon')),
+                                        ->label('Icon'),
                                     Forms\Components\ColorPicker::make('color')
-                                        ->label(trans('filament-cms::messages.content.category.sections.details.columns.color')),
+                                        ->label('Color'),
                                 ])
                                 ->columns(2),
-                            Forms\Components\Section::make(trans('filament-cms::messages.content.posts.sections.images.title'))
-                                ->description(trans('filament-cms::messages.content.posts.sections.images.description'))
+                            Forms\Components\Section::make('Images')
+                                ->description('Upload images for the category.')
                                 ->schema([
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('feature_image')
-                                        ->label(trans('filament-cms::messages.content.posts.sections.images.columns.feature_image'))
+                                        ->label('Feature Image')
                                         ->collection('feature_image')
                                         ->image()
                                         ->maxFiles(1)
                                         ->maxSize(2048)
                                         ->maxWidth(1920),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')
-                                        ->label(trans('filament-cms::messages.content.posts.sections.images.columns.cover_image'))
+                                        ->label('Cover Image')
                                         ->collection('cover_image')
                                         ->image()
                                         ->maxFiles(1)
@@ -105,11 +105,11 @@ class CategoryResource extends Resource
                             'md' => 4,
                             'lg' => 8,
                         ]),
-                    Forms\Components\Section::make(trans('filament-cms::messages.content.category.sections.meta.title'))
-                        ->description(trans('filament-cms::messages.content.category.sections.meta.description'))
+                    Forms\Components\Section::make('Meta')
+                        ->description('Enter the meta details of the category.')
                         ->schema([
                             Forms\Components\Select::make('for')
-                                ->label(trans('filament-cms::messages.content.category.sections.meta.columns.for'))
+                                ->label('For')
                                 ->searchable()
                                 ->live()
                                 ->options(fn () => FilamentCMSTypes::getOptions()->pluck('label', 'key')->toArray())
@@ -121,18 +121,18 @@ class CategoryResource extends Resource
                                         return false;
                                     }
                                 })
-                                ->label(trans('filament-cms::messages.content.category.sections.meta.columns.type'))
+                                ->label('Type')
                                 ->searchable()
                                 ->options(fn (Forms\Get $get) => FilamentCMSTypes::getOptions()->where('key', $get('for'))->first()?->getSub()->pluck('label', 'key')->toArray())
                                 ->default('category'),
                             Forms\Components\Select::make('parent_id')
-                                ->label(trans('filament-cms::messages.content.category.sections.meta.columns.parent_id'))
+                                ->label('Parent')
                                 ->searchable()
                                 ->options(fn () => Category::query()->pluck('name', 'id')->toArray()),
                             Forms\Components\Toggle::make('is_active')
-                                ->label(trans('filament-cms::messages.content.category.sections.meta.columns.is_active')),
+                                ->label('Active'),
                             Forms\Components\Toggle::make('show_in_menu')
-                                ->label(trans('filament-cms::messages.content.category.sections.meta.columns.show_in_menu')),
+                                ->label('Show in menu'),
                         ])
                         ->columnSpan([
                             'sm' => 1,
@@ -148,13 +148,13 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('feature_image')
-                    ->label(trans('filament-cms::messages.content.posts.sections.images.columns.feature_image'))
+                    ->label('Feature Image')
                     ->defaultImageUrl(fn (Category $category) => 'https://ui-avatars.com/api/?name='.Str::of($category->slug)->replace('-', '+').'&color=FFFFFF&background=020617')
                     ->square()
                     ->collection('feature_image'),
                 Tables\Columns\TextColumn::make('name')
                     ->description(fn (Category $category) => Str::of($category->description)->limit(50))
-                    ->label(trans('filament-cms::messages.content.category.sections.details.columns.name'))
+                    ->label('Name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('for')
                     ->state(function (Category $category) {
@@ -168,7 +168,7 @@ class CategoryResource extends Resource
                     })
                     ->badge()
                     ->sortable()
-                    ->label(trans('filament-cms::messages.content.category.sections.meta.columns.for'))
+                    ->label('For')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->state(function (Category $category) {
@@ -182,25 +182,25 @@ class CategoryResource extends Resource
                     })
                     ->badge()
                     ->sortable()
-                    ->label(trans('filament-cms::messages.content.category.sections.meta.columns.type'))
+                    ->label('Type')
                     ->searchable(),
                 IconColumn::make('icon')
-                    ->label(trans('filament-cms::messages.content.category.sections.details.columns.icon'))
+                    ->label('Icon')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\ColorColumn::make('color')
-                    ->label(trans('filament-cms::messages.content.category.sections.details.columns.color'))
+                    ->label('Color')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\ToggleColumn::make('is_active')
                     ->sortable()
-                    ->label(trans('filament-cms::messages.content.category.sections.meta.columns.is_active')),
+                    ->label('Active'),
                 Tables\Columns\ToggleColumn::make('show_in_menu')
                     ->sortable()
-                    ->label(trans('filament-cms::messages.content.category.sections.meta.columns.show_in_menu')),
+                    ->label('Show in menu'),
                 Tables\Columns\TextColumn::make('parent.name')
                     ->sortable()
-                    ->label(trans('filament-cms::messages.content.category.sections.meta.columns.parent_id'))
+                    ->label('Parent')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -215,7 +215,7 @@ class CategoryResource extends Resource
                 Tables\Filters\Filter::make('for')
                     ->form([
                         Forms\Components\Select::make('for')
-                            ->label(trans('filament-cms::messages.content.category.sections.meta.columns.for'))
+                            ->label('For')
                             ->searchable()
                             ->live()
                             ->options(fn () => FilamentCMSTypes::getOptions()->pluck('label', 'key')->toArray()),
@@ -226,7 +226,7 @@ class CategoryResource extends Resource
                                     return false;
                                 }
                             })
-                            ->label(trans('filament-cms::messages.content.category.sections.meta.columns.type'))
+                            ->label('Type')
                             ->searchable()
                             ->options(fn (Forms\Get $get) => FilamentCMSTypes::getOptions()->where('key', $get('for'))->first()?->getSub()->pluck('label', 'key')->toArray()),
 
@@ -244,19 +244,19 @@ class CategoryResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make()
                     ->iconButton()
-                    ->tooltip(__('filament-actions::view.single.label')),
+                    ->tooltip('View'),
                 Tables\Actions\EditAction::make()
                     ->iconButton()
-                    ->tooltip(__('filament-actions::edit.single.label')),
+                    ->tooltip('Edit'),
                 Tables\Actions\DeleteAction::make()
                     ->iconButton()
-                    ->tooltip(__('filament-actions::delete.single.label')),
+                    ->tooltip('Delete'),
                 Tables\Actions\ForceDeleteAction::make()
                     ->iconButton()
-                    ->tooltip(__('filament-actions::force-delete.single.label')),
+                    ->tooltip('Force delete'),
                 Tables\Actions\RestoreAction::make()
                     ->iconButton()
-                    ->tooltip(__('filament-actions::restore.single.label')),
+                    ->tooltip('Restore'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

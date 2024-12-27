@@ -32,17 +32,9 @@ class FilamentCmsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-
-        $this->loadTranslationsFrom(resource_path('lang'), 'filament-cms');
-
         $this->app->bind('filament-cms', function () {
             return new FilamentCMSServices;
         });
-
-        $this->loadViewComponentsAs('tomato', [
-            \App\Views\BuilderToolbar::class,
-        ]);
-
     }
 
     public function boot(): void
@@ -51,21 +43,21 @@ class FilamentCmsServiceProvider extends ServiceProvider
 
         FilamentCMSTypes::register([
             CmsType::make('post')
-                ->label(trans('filament-cms::messages.types.post'))
+                ->label('Post')
                 ->color('success')
                 ->icon('heroicon-o-document')
                 ->sub([
                     CmsType::make('category')
                         ->color('info')
                         ->icon('heroicon-o-folder')
-                        ->label(trans('filament-cms::messages.types.category')),
+                        ->label('Category'),
                     CmsType::make('tags')
                         ->color('warning')
                         ->icon('heroicon-o-tag')
-                        ->label(trans('filament-cms::messages.types.tags')),
+                        ->label('Tags'),
                 ]),
             CmsType::make('page')
-                ->label(trans('filament-cms::messages.types.page'))
+                ->label('Page')
                 ->color('success')
                 ->icon('heroicon-o-bars-3-center-left'),
         ]);

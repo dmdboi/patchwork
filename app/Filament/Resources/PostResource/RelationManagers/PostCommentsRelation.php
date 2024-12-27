@@ -19,22 +19,22 @@ class PostCommentsRelation extends RelationManager
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
-        return trans('filament-cms::messages.content.comments.title');
+        return 'Comments';
     }
 
     public static function getLabel(): ?string
     {
-        return trans('filament-cms::messages.content.comments.title');
+        return 'Comments';
     }
 
     public static function getModelLabel(): ?string
     {
-        return trans('filament-cms::messages.content.comments.single');
+        return 'Comment';
     }
 
     public static function getPluralLabel(): ?string
     {
-        return trans('filament-cms::messages.content.comments.title');
+        return 'Comments';
     }
 
     public function form(Form $form): Form
@@ -42,18 +42,18 @@ class PostCommentsRelation extends RelationManager
         return $form
             ->schema([
                 Forms\Components\Select::make('user_type')
-                    ->label(trans('filament-cms::messages.content.comments.columns.user_type'))
+                    ->label('User Type')
                     ->options(count(FilamentCMSAuthors::getOptions()) ? FilamentCMSAuthors::getOptions()->pluck('name', 'model')->toArray() : [User::class => 'Users'])
                     ->afterStateUpdated(fn (Forms\Get $get, Forms\Set $set) => $set('user_id', null))
                     ->preload()
                     ->live()
                     ->searchable(),
                 Forms\Components\Select::make('user_id')
-                    ->label(trans('filament-cms::messages.content.comments.columns.user_id'))
+                    ->label('User ID')
                     ->options(fn (Forms\Get $get) => $get('user_type') ? $get('user_type')::pluck('name', 'id')->toArray() : [])
                     ->searchable(),
                 Forms\Components\Textarea::make('comment')
-                    ->label(trans('filament-cms::messages.content.comments.columns.comment'))
+                    ->label('Comment')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\ToggleButtons::make('rate')
@@ -72,7 +72,7 @@ class PostCommentsRelation extends RelationManager
                         '5' => 'heroicon-s-star',
                     ])
                     ->inline()
-                    ->label(trans('filament-cms::messages.content.comments.columns.rate'))
+                    ->label('Rate')
                     ->required(),
             ]);
     }
@@ -89,24 +89,23 @@ class PostCommentsRelation extends RelationManager
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label(trans('filament-cms::messages.content.comments.columns.user_id')),
+                    ->label('User ID'),
                 Tables\Columns\TextColumn::make('comment')
-                    ->label(trans('filament-cms::messages.content.comments.columns.comment'))
+                    ->label('Comment')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('rate')
-                    ->label(trans('filament-cms::messages.content.comments.columns.rate'))
-                    ->view('filament-cms::components.tables.columns.rate')
+                    ->label('Rate')
                     ->sortable(),
                 Tables\Columns\ToggleColumn::make('is_active')
-                    ->label(trans('filament-cms::messages.content.comments.columns.is_active'))
+                    ->label('Active')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(trans('filament-cms::messages.content.comments.columns.created_at'))
+                    ->label('Created At')
                     ->description(fn (Comment $comment) => $comment->created_at->diffForHumans())
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(trans('filament-cms::messages.content.comments.columns.updated_at'))
+                    ->label('Updated At')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -117,16 +116,16 @@ class PostCommentsRelation extends RelationManager
             ])
             ->filters([
                 Tables\Filters\Filter::make('user_id')
-                    ->label(trans('filament-cms::messages.content.comments.columns.user_id'))
+                    ->label('User ID')
                     ->form([
                         Forms\Components\Select::make('user_type')
-                            ->label(trans('filament-cms::messages.content.comments.columns.user_type'))
+                            ->label('User Type')
                             ->options(count(FilamentCMSAuthors::getOptions()) ? FilamentCMSAuthors::getOptions()->pluck('name', 'model')->toArray() : [User::class => 'Users'])
                             ->afterStateUpdated(fn (Forms\Get $get, Forms\Set $set) => $set('user_id', null))
                             ->live()
                             ->searchable(),
                         Forms\Components\Select::make('user_id')
-                            ->label(trans('filament-cms::messages.content.comments.columns.user_id'))
+                            ->label('User ID')
                             ->hidden(fn (Forms\Get $get) => ! $get('user_type'))
                             ->disabled(fn (Forms\Get $get) => ! $get('user_type'))
                             ->options(fn (Forms\Get $get) => $get('user_type') ? $get('user_type')::pluck('name', 'id')->toArray() : [])

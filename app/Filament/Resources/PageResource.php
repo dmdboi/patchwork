@@ -75,28 +75,28 @@ class PageResource extends Resource
                         Forms\Components\Grid::make()
                             ->schema(
                                 [
-                                    Forms\Components\Section::make(trans('filament-cms::messages.content.posts.sections.post.title'))
-                                        ->description(trans('filament-cms::messages.content.posts.sections.post.description'))
+                                    Forms\Components\Section::make('Title')
+                                        ->description('Enter details of the Page')
                                         ->schema([
                                             Forms\Components\TextInput::make('title')
-                                                ->label(trans('filament-cms::messages.content.posts.sections.post.columns.title'))
+                                                ->label('Title')
                                                 ->lazy()
                                                 ->required(),
                                             Forms\Components\TextInput::make('slug')
-                                                ->label(trans('filament-cms::messages.content.posts.sections.post.columns.slug'))
+                                                ->label('Slug')
                                                 ->required()
                                                 ->maxLength(255),
                                             Forms\Components\MarkdownEditor::make('body')
-                                                ->label(trans('filament-cms::messages.content.posts.sections.post.columns.body'))
+                                                ->label('Body')
                                                 ->toolbarButtons(config('filament-cms.editor.options'))
                                                 ->columnSpanFull(),
                                         ])
                                         ->columns(2),
-                                    Forms\Components\Section::make(trans('filament-cms::messages.content.posts.sections.seo.title'))
-                                        ->description(trans('filament-cms::messages.content.posts.sections.seo.description'))
+                                    Forms\Components\Section::make('SEO')
+                                        ->description('Enter SEO details')
                                         ->schema([
-                                            Forms\Components\TextInput::make('short_description')->label(trans('filament-cms::messages.content.posts.sections.seo.columns.short_description')),
-                                            Forms\Components\Textarea::make('keywords')->autosize()->label(trans('filament-cms::messages.content.posts.sections.seo.columns.keywords')),
+                                            Forms\Components\TextInput::make('short_description')->label('Short description'),
+                                            Forms\Components\Textarea::make('keywords')->autosize()->label('Keywords'),
                                         ]),
                                 ]
                             )
@@ -107,11 +107,11 @@ class PageResource extends Resource
                             ]),
                         Forms\Components\Grid::make()
                             ->schema([
-                                Forms\Components\Section::make(trans('filament-cms::messages.content.posts.sections.meta.title'))
-                                    ->description(trans('filament-cms::messages.content.posts.sections.status.description'))
+                                Forms\Components\Section::make('Metadata')
+                                    ->description('Enter metadata of the Page')
                                     ->schema([
                                         Forms\Components\Select::make('author_id')
-                                            ->label(trans('filament-cms::messages.content.posts.sections.author.columns.author'))
+                                            ->label('Author')
                                             ->options(User::all()->pluck('name', 'id')->toArray())
                                             ->default(
                                                 auth()->id()
@@ -121,7 +121,7 @@ class PageResource extends Resource
                                         Forms\Components\Select::make('categories')
                                             ->hidden(fn (Forms\Get $get) => in_array($get('type'), ['page', 'builder']))
                                             ->relationship('categories', 'name')
-                                            ->label(trans('filament-cms::messages.content.posts.sections.status.columns.categories'))
+                                            ->label('Categories')
                                             ->createOptionForm([
                                                 Forms\Components\TextInput::make('name')
                                                     ->label('Name')
@@ -148,7 +148,7 @@ class PageResource extends Resource
                                             ->options(fn (Forms\Get $get) => Category::where('for', $get('type'))->where('type', 'category')->pluck('name', 'id')->toArray()),
                                         Forms\Components\Select::make('tags')
                                             ->hidden(fn (Forms\Get $get) => $get('type') !== 'post')
-                                            ->label(trans('filament-cms::messages.content.posts.sections.status.columns.tags'))
+                                            ->label('Tags')
                                             ->searchable()
                                             ->multiple()
                                             ->preload()
@@ -175,30 +175,30 @@ class PageResource extends Resource
                                             ])
                                             ->options(Category::where('for', 'post')->where('type', 'tag')->pluck('name', 'id')->toArray()),
                                         Forms\Components\Toggle::make('is_published')
-                                            ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_published'))
+                                            ->label('Published')
                                             ->default(true)
                                             ->required(),
-                                        Forms\Components\DateTimePicker::make('published_at')->hidden(fn (Forms\Get $get) => in_array($get('type'), ['page', 'builder']))->label(trans('filament-cms::messages.content.posts.sections.status.columns.published_at'))->default(now()->format('Y-m-d H:i:s')),
+                                        Forms\Components\DateTimePicker::make('published_at')->hidden(fn (Forms\Get $get) => in_array($get('type'), ['page', 'builder']))->label('Published At')->default(now()->format('Y-m-d H:i:s')),
                                     ]),
-                                Forms\Components\Section::make(trans('filament-cms::messages.content.posts.sections.images.title'))
-                                    ->description(trans('filament-cms::messages.content.posts.sections.images.description'))
+                                Forms\Components\Section::make('Images')
+                                    ->description('Upload images for the Page')
                                     ->schema([
                                         Forms\Components\SpatieMediaLibraryFileUpload::make('feature_image')
-                                            ->label(trans('filament-cms::messages.content.posts.sections.images.columns.feature_image'))
+                                            ->label('Feature Image')
                                             ->collection('feature_image')
                                             ->image()
                                             ->maxFiles(1)
                                             ->maxSize(2048)
                                             ->maxWidth(1920),
                                         Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')
-                                            ->label(trans('filament-cms::messages.content.posts.sections.images.columns.cover_image'))
+                                            ->label('Cover Image')
                                             ->collection('cover_image')
                                             ->image()
                                             ->maxFiles(1)
                                             ->maxSize(2048)
                                             ->maxWidth(1920),
                                         Forms\Components\SpatieMediaLibraryFileUpload::make('images')
-                                            ->label(trans('filament-cms::messages.content.posts.sections.images.columns.images'))
+                                            ->label('Images')
                                             ->collection('images')
                                             ->multiple()
                                             ->image()
@@ -220,8 +220,8 @@ class PageResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist->schema([
-            Section::make(trans('filament-cms::messages.content.posts.sections.post.title'))
-                ->description(trans('filament-cms::messages.content.posts.sections.post.description'))
+            Section::make('Title')
+                ->description('Enter details of the Page')
                 ->schema([
                     TextEntry::make('title')
                         ->hiddenLabel()
@@ -238,14 +238,14 @@ class PageResource extends Resource
                 'md' => 2,
                 'lg' => 4,
             ])->schema([
-                Section::make(trans('filament-cms::messages.content.posts.sections.status.title'))
-                    ->description(trans('filament-cms::messages.content.posts.sections.status.description'))
+                Section::make('Metadata')
+                    ->description('Enter metadata of the Page')
                     ->schema([
                         TextEntry::make('author.name')
-                            ->label(trans('filament-cms::messages.content.posts.sections.author.columns.author'))
+                            ->label('Author')
                             ->default(fn (Post $post) => $post->author?->name),
                         TextEntry::make('type')
-                            ->label(trans('filament-cms::messages.content.posts.sections.status.columns.type'))
+                            ->label('Type')
                             ->state(function (Post $post) {
                                 return FilamentCMSTypes::getOptions()->where('key', $post->type)->first()?->label;
                             })
@@ -257,13 +257,13 @@ class PageResource extends Resource
                             })
                             ->badge(),
                     ])->columnSpan(2),
-                Section::make(trans('filament-cms::messages.content.posts.sections.seo.title'))
-                    ->description(trans('filament-cms::messages.content.posts.sections.seo.description'))
+                Section::make('SEO')
+                    ->description('Enter SEO details')
                     ->schema([
                         TextEntry::make('short_description')
-                            ->label(trans('filament-cms::messages.content.posts.sections.seo.columns.short_description')),
+                            ->label('Short description'),
                         TextEntry::make('keywords')
-                            ->label(trans('filament-cms::messages.content.posts.sections.seo.columns.keywords')),
+                            ->label('Keywords'),
                     ])->columnSpan(2),
             ]),
         ]);
@@ -289,11 +289,11 @@ class PageResource extends Resource
                 Tables\Columns\ToggleColumn::make('is_published')
                     ->toggleable()
                     ->sortable()
-                    ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_published'))
+                    ->label('Published')
                     ->onColor('success'),
                 Tables\Columns\TextColumn::make('published_at')
                     ->toggleable()
-                    ->label(trans('filament-cms::messages.content.posts.sections.status.columns.published_at'))
+                    ->label('Published At')
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -384,14 +384,14 @@ class PageResource extends Resource
                 Tables\Actions\DeleteAction::make()
                     ->before(fn (Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
                     ->iconButton()
-                    ->tooltip(__('filament-actions::delete.single.label')),
+                    ->tooltip('Delete'),
                 Tables\Actions\ForceDeleteAction::make()
                     ->before(fn (Post $record) => Event::dispatch(new PostDeleted($record->toArray())))
                     ->iconButton()
-                    ->tooltip(__('filament-actions::force-delete.single.label')),
+                    ->tooltip('Force delete'),
                 Tables\Actions\RestoreAction::make()
                     ->iconButton()
-                    ->tooltip(__('filament-actions::restore.single.label')),
+                    ->tooltip('Restore'),
             ])
             ->defaultSort('created_at', 'desc')
             ->bulkActions([
@@ -400,11 +400,11 @@ class PageResource extends Resource
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
                     Tables\Actions\BulkAction::make('category')
-                        ->label(trans('filament-cms::messages.content.posts.sections.status.columns.categories'))
+                        ->label('Category')
                         ->icon('heroicon-o-rectangle-stack')
                         ->form([
                             Forms\Components\Select::make('categories')
-                                ->label(trans('filament-cms::messages.content.posts.sections.status.columns.categories'))
+                                ->label('Categories')
                                 ->searchable()
                                 ->multiple()
                                 ->options(Category::query()->where('for', 'post')->where('type', 'category')->pluck('name', 'id')->toArray()),
@@ -421,7 +421,7 @@ class PageResource extends Resource
                         ->deselectRecordsAfterCompletion(),
                     Tables\Actions\BulkAction::make('publish')
                         ->requiresConfirmation()
-                        ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_published'))
+                        ->label('Published')
                         ->icon('heroicon-o-check-circle')
                         ->action(function (Collection $records) {
                             $records->each(fn ($record) => $record->update(['is_published' => ! $record->is_published]));

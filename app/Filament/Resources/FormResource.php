@@ -30,24 +30,24 @@ class FormResource extends Resource
 
     public static function getPluralLabel(): ?string
     {
-        return trans('filament-cms::messages.forms.title');
+        return 'Forms';
     }
 
     public static function getLabel(): ?string
     {
-        return trans('filament-cms::messages.forms.single');
+        return 'Form';
     }
 
     public static function getNavigationLabel(): string
     {
-        return trans('filament-cms::messages.forms.title');
+        return 'Forms';
     }
 
     public static function form(Form $form): Form
     {
         $formSchema = [
             Forms\Components\Select::make('type')
-                ->label(trans('filament-cms::messages.forms.columns.type'))
+                ->label('Type')
                 ->searchable()
                 ->options([
                     'page' => 'Page',
@@ -56,7 +56,7 @@ class FormResource extends Resource
                 ])
                 ->default('page'),
             Forms\Components\Select::make('method')
-                ->label(trans('filament-cms::messages.forms.columns.method'))
+                ->label('Method')
                 ->searchable()
                 ->options([
                     'POST' => 'POST',
@@ -67,28 +67,28 @@ class FormResource extends Resource
                 ])
                 ->default('POST'),
             Forms\Components\TextInput::make('title')
-                ->label(trans('filament-cms::messages.forms.columns.title')),
+                ->label('Title'),
             Forms\Components\TextInput::make('key')
-                ->label(trans('filament-cms::messages.forms.columns.key'))
+                ->label('Key')
                 ->default(Str::random(6))
                 ->unique(ignoreRecord: true)
                 ->required()
                 ->maxLength(255),
             Forms\Components\Textarea::make('description')
-                ->label(trans('filament-cms::messages.forms.columns.description'))
+                ->label('Description')
                 ->columnSpanFull(),
             Forms\Components\TextInput::make('endpoint')
-                ->label(trans('filament-cms::messages.forms.columns.endpoint'))
+                ->label('Endpoint')
                 ->columnSpanFull()
                 ->maxLength(255)
                 ->default('/'),
             Forms\Components\Toggle::make('is_active')
-                ->label(trans('filament-cms::messages.forms.columns.is_active')),
+                ->label('Active'),
         ];
 
         return $form
             ->schema(fn ($record) => $record ? [
-                Forms\Components\Section::make(trans('filament-cms::messages.forms.section.information'))
+                Forms\Components\Section::make('Form Details')
                     ->collapsible()
                     ->collapsed(fn ($record) => $record)
                     ->schema($formSchema),
@@ -100,22 +100,22 @@ class FormResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('type')
-                    ->label(trans('filament-cms::messages.forms.columns.type'))
+                    ->label('Type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
-                    ->label(trans('filament-cms::messages.forms.columns.title'))
+                    ->label('Title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('key')
-                    ->label(trans('filament-cms::messages.forms.columns.key'))
+                    ->label('Key')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('endpoint')
-                    ->label(trans('filament-cms::messages.forms.columns.endpoint'))
+                    ->label('Endpoint')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('method')
-                    ->label(trans('filament-cms::messages.forms.columns.method'))
+                    ->label('Method')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
-                    ->label(trans('filament-cms::messages.forms.columns.is_active'))
+                    ->label('Active')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

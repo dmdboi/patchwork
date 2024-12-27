@@ -2,17 +2,16 @@
 
 namespace App\Filament\Resources\FormResource\RelationManagers;
 
-use App\Models\FormOption;
 use App\Services\FilamentCMSFormBuilder;
 use App\Services\FilamentCMSFormFields;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use TomatoPHP\FilamentTranslationComponent\Components\Translation;
 
 class FormFieldsRelation extends RelationManager
 {
@@ -20,22 +19,22 @@ class FormFieldsRelation extends RelationManager
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
-        return trans('filament-cms::messages.forms.fields.title');
+        return 'Forms';
     }
 
     public static function getLabel(): ?string
     {
-        return trans('filament-cms::messages.forms.fields.title');
+        return 'Forms';
     }
 
     public static function getModelLabel(): ?string
     {
-        return trans('filament-cms::messages.forms.fields.single');
+        return 'Form';
     }
 
     public static function getPluralLabel(): ?string
     {
-        return trans('filament-cms::messages.forms.fields.title');
+        return 'Forms';
     }
 
     public function form(Form $form): Form
@@ -44,16 +43,16 @@ class FormFieldsRelation extends RelationManager
             ->schema([
                 Forms\Components\Tabs::make()
                     ->schema([
-                        Forms\Components\Tabs\Tab::make(trans('filament-cms::messages.forms.fields.tabs.general'))
+                        Forms\Components\Tabs\Tab::make('General')
                             ->icon('heroicon-s-information-circle')
                             ->schema([
                                 Forms\Components\Select::make('type')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.type'))
+                                    ->label('Type')
                                     ->searchable()
                                     ->options(FilamentCMSFormFields::getOptions()->pluck('label', 'name')->toArray())
                                     ->default('text'),
                                 Forms\Components\TextInput::make('name')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.name'))
+                                    ->label('Name')
                                     ->live()
                                     ->afterStateUpdated(function (Forms\Get $get, Forms\Set $set, $state) {
                                         if (str($state)->contains('email')) {
@@ -85,105 +84,64 @@ class FormFieldsRelation extends RelationManager
                                     ->required()
                                     ->maxLength(255),
                                 Forms\Components\TextInput::make('group')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.group'))
+                                    ->label('Group')
                                     ->maxLength(255),
                                 Forms\Components\TextInput::make('default')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.default')),
+                                    ->label('Default'),
                             ])->columns(2),
-                        //                        Forms\Components\Tabs\Tab::make('Reactive')
-                        //                            ->schema([
-                        //                                Forms\Components\Toggle::make('is_reactive')
-                        //                                    ->live(),
-                        //                                Forms\Components\Select::make('reactive_field')
-                        //                                    ->hidden(fn(Forms\Get $get) => !$get('is_reactive'))
-                        //                                    ->searchable()
-                        //                                    ->options(function(){
-                        //                                        return FormOption::query()->where('form_id', $this->getOwnerRecord()->id)->pluck('name', 'name')->toArray();
-                        //                                    }),
-                        //                                Forms\Components\Repeater::make('reactive_where')
-                        //                                    ->hidden(fn(Forms\Get $get) => !$get('is_reactive'))
-                        //                                    ->schema([
-                        //                                        Forms\Components\Select::make('field')
-                        //                                            ->searchable()
-                        //                                            ->options(function(){
-                        //                                                return FormOption::query()->where('form_id', $this->getOwnerRecord()->id)->pluck('name', 'name')->toArray();
-                        //                                            }),
-                        //                                        Forms\Components\Select::make('operator')
-                        //                                            ->options([
-                        //                                                '=' => '=',
-                        //                                                '!=' => '!=',
-                        //                                                '>' => '>',
-                        //                                                '<' => '<',
-                        //                                                '>=' => '>=',
-                        //                                                '<=' => '<='
-                        //                                            ]),
-                        //                                        Forms\Components\TextInput::make('value')
-                        //                                            ->maxLength(255)
-                        //                                    ])->columns(3),
-                        //                            ]),
-                        Forms\Components\Tabs\Tab::make(trans('filament-cms::messages.forms.fields.tabs.relation'))
+                        Forms\Components\Tabs\Tab::make('Relation')
                             ->icon('heroicon-s-squares-plus')
                             ->schema([
                                 Forms\Components\Toggle::make('is_relation')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.is_relation'))
+                                    ->label('Is Relation')
                                     ->columnSpanFull()
                                     ->live(),
                                 Forms\Components\TextInput::make('relation_name')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.relation_name'))
+                                    ->label('Relation Name')
                                     ->hidden(fn (Forms\Get $get) => ! $get('is_relation'))
                                     ->maxLength(255),
                                 Forms\Components\TextInput::make('relation_column')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.relation_column'))
+                                    ->label('Relation Column')
                                     ->hidden(fn (Forms\Get $get) => ! $get('is_relation'))
                                     ->maxLength(255),
                             ])->columns(2),
-                        Forms\Components\Tabs\Tab::make(trans('filament-cms::messages.forms.fields.tabs.options'))
+                        Forms\Components\Tabs\Tab::make('Options')
                             ->icon('heroicon-s-rectangle-group')
                             ->schema([
                                 Forms\Components\Select::make('sub_form')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.sub_form'))
+                                    ->label('Sub Form')
                                     ->searchable()
                                     ->options(\App\Models\Form::query()->where('id', '!=', $this->getOwnerRecord()->id)->pluck('key', 'id')->toArray()),
                                 Forms\Components\Toggle::make('is_multi')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.is_multi')),
+                                    ->label('Is Multi'),
                                 Forms\Components\Toggle::make('has_options')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.has_options'))
+                                    ->label('Has Options')
                                     ->live(),
                                 Forms\Components\Repeater::make('options')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.options'))
+                                    ->label('Options')
                                     ->schema([
-                                        Translation::make('label')->label(trans('filament-cms::messages.forms.fields.columns.label')),
-                                        Forms\Components\TextInput::make('value')->label(trans('filament-cms::messages.forms.fields.columns.value')),
+                                        Forms\Components\TextInput::make('label')->label('Lalue'),
+                                        Forms\Components\TextInput::make('value')->label('Value'),
                                     ])
                                     ->hidden(fn (Forms\Get $get) => ! $get('has_options')),
                             ]),
-                        Forms\Components\Tabs\Tab::make(trans('filament-cms::messages.forms.fields.tabs.labels'))
-                            ->icon('heroicon-s-language')
-                            ->schema([
-                                Translation::make('label')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.label')),
-                                Translation::make('placeholder')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.placeholder')),
-                                Translation::make('hint')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.hint')),
-                            ]),
-                        Forms\Components\Tabs\Tab::make(trans('filament-cms::messages.forms.fields.tabs.validation'))
+                        Forms\Components\Tabs\Tab::make('Validation')
                             ->icon('heroicon-s-variable')
                             ->schema([
                                 Forms\Components\Toggle::make('is_required')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.is_required'))
+                                    ->label('Required')
                                     ->live(),
-                                Translation::make('required_message')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.required_message'))
+                                TextInput::make('required_message')
+                                    ->label('Required Message')
                                     ->hidden(fn (Forms\Get $get) => ! $get('is_required')),
                                 Forms\Components\Toggle::make('has_validation')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.has_validation'))
+                                    ->label('Has Validation')
                                     ->live(),
                                 Forms\Components\Repeater::make('validation')
-                                    ->label(trans('filament-cms::messages.forms.fields.columns.validation'))
+                                    ->label('Validation')
                                     ->schema([
-                                        Forms\Components\TextInput::make('rule')->label(trans('filament-cms::messages.forms.fields.columns.rule')),
-                                        Translation::make('message')->label(trans('filament-cms::messages.forms.fields.columns.message')),
+                                        Forms\Components\TextInput::make('rule')->label('Rule'),
+                                        Forms\Components\TextInput::make('rule')->label('Message'),
                                     ])
                                     ->hidden(fn (Forms\Get $get) => ! $get('has_validation')),
                             ]),
@@ -202,7 +160,7 @@ class FormFieldsRelation extends RelationManager
                         $record->save();
                     }),
                 Tables\Actions\Action::make('preview')
-                    ->label(trans('filament-cms::messages.forms.fields.actions.preview'))
+                    ->label('Preview')
                     ->icon('heroicon-s-eye')
                     ->color('info')
                     ->form(function () {
@@ -220,17 +178,17 @@ class FormFieldsRelation extends RelationManager
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('type')
-                    ->label(trans('filament-cms::messages.forms.fields.columns.type'))
+                    ->label('Type')
                     ->badge()
                     ->icon(fn ($record) => FilamentCMSFormFields::getOptions()->where('name', $record->type)->first()->icon)
                     ->color(fn ($record) => FilamentCMSFormFields::getOptions()->where('name', $record->type)->first()->color)
                     ->state(fn ($record) => FilamentCMSFormFields::getOptions()->where('name', $record->type)->first()->label)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
-                    ->label(trans('filament-cms::messages.forms.fields.columns.name'))
+                    ->label('Name')
                     ->searchable(),
                 Tables\Columns\ToggleColumn::make('is_required')
-                    ->label(trans('filament-cms::messages.forms.fields.columns.is_required'))
+                    ->label('Required')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
