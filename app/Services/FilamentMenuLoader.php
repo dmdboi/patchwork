@@ -34,23 +34,14 @@ class FilamentMenuLoader
         $navItems = [];
 
         foreach ($this->menu as $menu) {
-            if (class_exists(FilamentShieldPlugin::class) && count($menu->permissions)) {
-                if (auth()->user()->hasAnyPermission($menu->permissions)) {
-                    $menuItem = NavigationItem::make()
-                        ->label($menu->title[app()->getLocale()])
-                        ->isActiveWhen(fn (): bool => url()->current() === ($menu->is_route ? route($menu->route) : $menu->url))
-                        ->icon($menu->icon)
-                        ->badge($menu->badge ? $menu->badge[app()->getLocale()] : null, $menu->badge_color)
-                        ->url($menu->is_route ? route($menu->route) : $menu->url);
-                }
-            } else {
-                $menuItem = NavigationItem::make()
-                    ->label($menu->title[app()->getLocale()])
-                    ->isActiveWhen(fn (): bool => url()->current() === ($menu->is_route ? route($menu->route) : $menu->url))
-                    ->icon($menu->icon)
-                    ->badge($menu->badge ? $menu->badge[app()->getLocale()] : null, $menu->badge_color)
-                    ->url($menu->is_route ? route($menu->route) : $menu->url);
-            }
+
+            $menuItem = NavigationItem::make()
+                ->label($menu->title[app()->getLocale()])
+                ->isActiveWhen(fn(): bool => url()->current() === ($menu->is_route ? route($menu->route) : $menu->url))
+                ->icon($menu->icon)
+                ->badge($menu->badge ? $menu->badge[app()->getLocale()] : null, $menu->badge_color)
+                ->url($menu->is_route ? route($menu->route) : $menu->url);
+
 
             if ($menu->new_tab) {
                 $menuItem->shouldOpenUrlInNewTab();
