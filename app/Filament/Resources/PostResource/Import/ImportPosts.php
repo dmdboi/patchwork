@@ -14,21 +14,28 @@ class ImportPosts extends Importer
     public static function getColumns(): array
     {
         return [
+            ImportColumn::make('author.id')
+                ->label('Author'),
             ImportColumn::make('title')
-                ->label(trans('filament-cms::messages.content.posts.sections.post.columns.title'))
-                ->rules(['required', 'max:255']),
-            ImportColumn::make('short_description')
-                ->label(trans('filament-cms::messages.content.posts.sections.seo.columns.short_description'))
-                ->rules(['nullable', 'max:255']),
+                ->label('Title'),
             ImportColumn::make('slug')
-                ->label(trans('filament-cms::messages.content.posts.sections.post.columns.slug'))
-                ->rules(['required', 'max:255', 'unique:posts,slug']),
-            ImportColumn::make('type')
-                ->label(trans('filament-cms::messages.content.posts.sections.status.columns.type'))
-                ->rules(['required', 'max:255']),
+                ->label('Slug'),
+            ImportColumn::make('short_description')
+                ->label('Short Description'),
             ImportColumn::make('body')
-                ->label(trans('filament-cms::messages.content.posts.sections.post.columns.body'))
-                ->rules(['required']),
+                ->label('Body'),
+            ImportColumn::make('type')
+                ->label('Type'),
+            ImportColumn::make('is_published')
+                ->label('Is Published'),
+            ImportColumn::make('published_at')
+                ->label('Published At'),
+            ImportColumn::make('created_at')
+                ->label('Created At'),
+            ImportColumn::make('collection.id')
+                ->label('Collection'),
+            ImportColumn::make('category.id')
+                ->label('Category'),
         ];
     }
 
@@ -40,6 +47,12 @@ class ImportPosts extends Importer
             'slug' => $this->data['slug'],
             'type' => $this->data['type'],
             'body' => $this->data['body'],
+            'is_published' => $this->data['is_published'],
+            'published_at' => $this->data['published_at'],
+            'created_at' => $this->data['created_at'],
+            'author_id' => $this->data['author.id'],
+            'collection_id' => $this->data['collection.id'],
+            'category_id' => $this->data['category.id'],
         ]);
     }
 

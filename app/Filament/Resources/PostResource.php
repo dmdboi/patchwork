@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Events\PostDeleted;
+use App\Filament\Resources\PostResource\Import;
+use App\Filament\Resources\PostResource\Export;
 use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Category;
@@ -214,7 +216,10 @@ class PostResource extends Resource
 
     public static function table(Table $table): Table
     {
-        $importActions = [];
+        $importActions = [
+            Tables\Actions\ImportAction::make()->importer(Import\ImportPosts::class),
+            Tables\Actions\ExportAction::make()->exporter(Export\ExportPosts::class)
+        ];
 
         $table = $table
             ->headerActions($importActions)

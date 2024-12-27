@@ -14,37 +14,37 @@ class ExportPosts extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('author.name')
-                ->label(trans('filament-cms::messages.content.posts.sections.author.columns.author')),
+            ExportColumn::make('author.id')
+                ->label('Author'),
             ExportColumn::make('title')
-                ->label(trans('filament-cms::messages.content.posts.sections.post.columns.title')),
+                ->label('Title'),
             ExportColumn::make('slug')
-                ->label(trans('filament-cms::messages.content.posts.sections.post.columns.slug')),
+                ->label('Slug'),
             ExportColumn::make('short_description')
-                ->label(trans('filament-cms::messages.content.posts.sections.seo.columns.short_description')),
+                ->label('Short Description'),
             ExportColumn::make('body')
-                ->label(trans('filament-cms::messages.content.posts.sections.post.columns.body')),
+                ->label('Body'),
             ExportColumn::make('type')
-                ->label(trans('filament-cms::messages.content.posts.sections.status.columns.type')),
+                ->label('Type'),
             ExportColumn::make('is_published')
-                ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_published')),
+                ->label('Is Published'),
             ExportColumn::make('published_at')
-                ->label(trans('filament-cms::messages.content.posts.sections.status.columns.published_at')),
-            ExportColumn::make('is_trend')
-                ->label(trans('filament-cms::messages.content.posts.sections.status.columns.is_trend')),
-            ExportColumn::make('views')
-                ->label(trans('filament-cms::messages.content.posts.sections.status.columns.views')),
-            ExportColumn::make('likes')
-                ->label(trans('filament-cms::messages.content.posts.sections.status.columns.likes')),
+                ->label('Published At'),
+            ExportColumn::make('created_at')
+                ->label('Created At'),
+            ExportColumn::make('collection.id')
+                ->label('Collection'),
+            ExportColumn::make('category.id')
+                ->label('Category'),
         ];
     }
 
     public static function getCompletedNotificationBody(Export $export): string
     {
-        $body = 'Your posts export has completed and '.number_format($export->successful_rows).' '.str('row')->plural($export->successful_rows).' exported.';
+        $body = 'Your posts export has completed and ' . number_format($export->successful_rows) . ' ' . str('row')->plural($export->successful_rows) . ' exported.';
 
         if ($failedRowsCount = $export->getFailedRowsCount()) {
-            $body .= ' '.number_format($failedRowsCount).' '.str('row')->plural($failedRowsCount).' failed to export.';
+            $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to export.';
         }
 
         return $body;
