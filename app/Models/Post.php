@@ -43,6 +43,7 @@ class Post extends Model implements HasMedia
     protected $casts = [
         'is_published' => 'boolean',
         'is_trend' => 'boolean',
+        'has_markdown_file' => 'boolean',
         'likes' => 'float',
         'views' => 'float',
         'meta' => 'array',
@@ -76,6 +77,7 @@ class Post extends Model implements HasMedia
         'meta_redirect',
         'meta',
         'meta_url',
+        'has_markdown_file',
         'created_at',
         'updated_at',
     ];
@@ -116,7 +118,7 @@ class Post extends Model implements HasMedia
 
     public function collection()
     {
-        return $this->belongsTo('App\Models\Collection');
+        return $this->belongsTo(Collection::class);
     }
 
     /**

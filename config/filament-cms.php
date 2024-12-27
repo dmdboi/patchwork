@@ -10,6 +10,8 @@ return [
         'page',
     ],
 
+    'markdown' => false,
+
     'editor' => [
         'options' => [
             'attachFiles',

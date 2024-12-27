@@ -171,6 +171,10 @@ class PostResource extends Resource
                                             )
                                             ->selectablePlaceholder(false)
                                             ->searchable(),
+                                        Toggle::make('has_markdown_file')
+                                            ->label('Has Markdown File')
+                                            ->default(false)
+                                            ->required(),
                                         Toggle::make('is_published')
                                             ->label('Published')
                                             ->default(true)

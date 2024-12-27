@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PatchworkController extends Controller
 {
@@ -47,10 +48,15 @@ class PatchworkController extends Controller
                 $query->where('slug', $collection);
             })
             ->with('postMeta')
+            ->with('collection')
             ->first();
 
-        if (! $post) {
+        if (!$post) {
             abort(404);
+        }
+
+        if($post && $post->getAttribute('has_markdown_file')) {
+            $post->body = getMarkdownFile($post);
         }
 
         return view('theme/pages/blog-preview', compact('post'));
